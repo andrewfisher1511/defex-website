@@ -1,0 +1,181 @@
+---
+/**
+ * SiteHeader — sticky, Canvas bg, hairline bottom border. Navy lockup left,
+ * nav centre/right, appUrl-conditional "Sign in" outline button. Mobile:
+ * hamburger toggles a full-height Canvas panel with staggered link reveals.
+ */
+import Brand from './Brand.astro';
+import { site } from '../lib/site.ts';
+
+const nav = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'DEFEX App', href: '/defex-app' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-border bg-canvas/95 backdrop-blur supports-[backdrop-filter]:bg-canvas/80"
+>
+  <div
+    class="mx-auto flex h-[68px] max-w-site items-center justify-between px-[var(--site-gutter)]"
+  >
+    <a href="/" class="shrink-0" aria-label="DEFEX Engineering — home">
+      <Brand class="hidden min-[481px]:inline-flex" />
+      <Brand markOnly class="inline-flex min-[481px]:hidden" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'text-base font-medium underline-offset-[6px] transition-colors',
+              isActive(item.href)
+                ? 'text-blue underline decoration-2'
+                : 'text-ink-body hover:text-blue',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      {
+        site.appUrl && (
+          <a
+            href={site.appUrl}
+            class="btn btn-press ml-1 inline-flex min-h-11 items-center rounded-button border border-navy px-4 text-base font-medium text-navy hover:bg-blueprint"
+          >
+            Sign in
+          </a>
+        )
+      }
+    </nav>
+
+    <!-- Mobile toggle -->
+    <button
+      id="nav-toggle"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-button text-navy lg:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <svg
+        id="nav-icon-open"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <line x1="3" y1="7" x2="21" y2="7"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="17" x2="21" y2="17"></line>
+      </svg>
+      <svg
+        id="nav-icon-close"
+        class="hidden"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <line x1="5" y1="5" x2="19" y2="19"></line>
+        <line x1="19" y1="5" x2="5" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile panel -->
+  <div
+    id="mobile-nav"
+    class="fixed inset-x-0 bottom-0 top-[69px] z-40 hidden flex-col gap-1 overflow-y-auto border-t border-border bg-canvas px-[var(--site-gutter)] py-6 lg:hidden"
+  >
+    <nav class="flex flex-col" aria-label="Mobile">
+      {
+        nav.map((item, i) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            data-mobile-link
+            style={`--i:${i}`}
+            class:list={[
+              'mobile-link flex min-h-[52px] items-center border-b border-border text-2xl font-medium',
+              isActive(item.href) ? 'text-blue' : 'text-navy',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    {
+      site.appUrl && (
+        <a
+          href={site.appUrl}
+          class="btn btn-press mt-6 inline-flex min-h-11 items-center justify-center rounded-button border border-navy px-5 text-base font-medium text-navy"
+        >
+          Sign in
+        </a>
+      )
+    }
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('mobile-nav');
+  const iconOpen = document.getElementById('nav-icon-open');
+  const iconClose = document.getElementById('nav-icon-close');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setOpen(open: boolean) {
+    if (!toggle || !panel || !iconOpen || !iconClose) return;
+    panel.classList.toggle('hidden', !open);
+    panel.classList.toggle('flex', open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open && !reduce) {
+      panel.querySelectorAll<HTMLElement>('[data-mobile-link]').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        el.style.transition = 'opacity 250ms ease, transform 250ms ease';
+        window.setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }, 60 + i * 45);
+      });
+    }
+  }
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    setOpen(!open);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+  panel
+    ?.querySelectorAll('a')
+    .forEach((a) => a.addEventListener('click', () => setOpen(false)));
+</script>

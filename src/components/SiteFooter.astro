@@ -1,0 +1,80 @@
+---
+/**
+ * SiteFooter — Navy surface. White lockup, contact block (nullable slots render
+ * nothing), nav column, Concrete credential line, copyright + Privacy.
+ */
+import Brand from './Brand.astro';
+import { site, credentialLine, currentYear } from '../lib/site.ts';
+
+const nav = [
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'DEFEX App', href: '/defex-app' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<footer class="bg-navy text-concrete">
+  <div
+    class="mx-auto max-w-site px-[var(--site-gutter)] py-14 md:py-16"
+  >
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <!-- Brand + contact -->
+      <div>
+        <Brand tone="white" markSize={38} />
+        <p class="mt-5 max-w-xs text-base leading-relaxed text-concrete/90">
+          {site.tagline}
+        </p>
+        <div class="mt-6 flex flex-col gap-1.5 text-base">
+          <a href={site.phoneHref} class="text-white hover:text-blue">
+            {site.phone}
+          </a>
+          <a href={`mailto:${site.email}`} class="text-white hover:text-blue">
+            {site.email}
+          </a>
+          {site.postal && <p class="text-concrete/90">{site.postal}</p>}
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav aria-label="Footer">
+        <p class="text-xs font-semibold uppercase tracking-[0.1em] text-concrete/70">
+          Site
+        </p>
+        <ul class="mt-4 flex flex-col gap-2.5 text-base">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} class="text-concrete hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Practitioner -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.1em] text-concrete/70">
+          Practice
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-concrete/90">
+          Remedial consulting engineers.<br />{site.serviceArea}.
+        </p>
+      </div>
+    </div>
+
+    <hr class="my-8 border-0 border-t border-concrete/25" />
+
+    <p class="text-sm leading-relaxed text-concrete/80">{credentialLine}</p>
+
+    <div
+      class="mt-4 flex flex-col gap-2 text-sm text-concrete/70 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {currentYear} DEFEX Engineering</p>
+      <a href="/privacy" class="hover:text-white">Privacy</a>
+    </div>
+  </div>
+</footer>

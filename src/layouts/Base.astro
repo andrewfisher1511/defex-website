@@ -1,0 +1,95 @@
+---
+/**
+ * Base — the single page shell. Head (Seo, favicons, font preload), skip link,
+ * sticky header, main, footer, and the scroll-reveal IntersectionObserver.
+ */
+import '../styles/theme.css';
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  structuredData?: Record<string, unknown>;
+  mainClass?: string;
+}
+const {
+  title,
+  description,
+  ogImage,
+  structuredData,
+  mainClass = '',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#1a1a2e" />
+
+    <link
+      rel="icon"
+      href="/favicon.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/favicon-dark.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <link
+      rel="preload"
+      href="/fonts/InterVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <Seo
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      structuredData={structuredData}
+    />
+  </head>
+
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <SiteHeader />
+    <main id="main" class={mainClass}>
+      <slot />
+    </main>
+    <SiteFooter />
+
+    <script>
+      // Scroll-reveal: reveal once at threshold 0.15. Disabled under reduced motion.
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = document.querySelectorAll<HTMLElement>('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

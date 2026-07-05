@@ -1,0 +1,19 @@
+---
+/**
+ * Eyebrow — 13px ALL CAPS, tracking 0.1em, weight 600. Steel on light,
+ * Concrete on dark surfaces.
+ */
+interface Props {
+  tone?: 'light' | 'dark';
+  as?: 'p' | 'span' | 'div';
+  class?: string;
+}
+const { tone = 'light', as: Tag = 'p', class: className = '' } = Astro.props;
+const color = tone === 'dark' ? 'text-concrete' : 'text-steel';
+---
+
+<Tag
+  class={`text-xs font-semibold uppercase tracking-[0.1em] ${color} ${className}`}
+>
+  <slot />
+</Tag>
