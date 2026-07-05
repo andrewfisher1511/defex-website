@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site.ts';
+---
+
+<Base
+  title="Privacy — DEFEX Engineering"
+  description="How DEFEX Engineering handles personal information."
+  ogImage="default"
+>
+  <section class="bg-canvas">
+    <div class="mx-auto max-w-site px-[var(--site-gutter)] py-16 md:py-24">
+      <div class="max-w-[68ch]">
+        <h1 class="text-4xl font-light tracking-[-0.02em] text-navy md:text-5xl">
+          Privacy.
+        </h1>
+        <div class="prose mt-8 flex flex-col gap-4 text-base leading-relaxed text-ink-body">
+          <p>
+            This policy explains how DEFEX Engineering handles personal
+            information. It is written with regard to the Australian Privacy
+            Principles.
+          </p>
+          <p>
+            <strong>What is collected.</strong> When you contact the practice — through
+            the enquiry form or by email — the practice collects the details you
+            provide, such as your name, email address, phone number, the suburb
+            of the building, and the content of your message. When engagements
+            proceed, further information relevant to the building and the work is
+            collected in the ordinary course of providing engineering services.
+            The hosting and email providers used by the practice also keep basic
+            technical logs, such as IP addresses and request times, as part of
+            running the service securely.
+          </p>
+          <p>
+            <strong>Why it is collected.</strong> Information is used to respond to
+            your enquiry, to prepare proposals, and to deliver and administer
+            engagements. It is not used for any unrelated purpose.
+          </p>
+          <p>
+            <strong>What is not done.</strong> Personal information is not sold, and
+            it is not shared for anyone else's marketing. This website runs no
+            advertising trackers and no third-party analytics; it calls only its
+            own server. Information is disclosed to others only where it is
+            necessary to deliver an engagement, or where the law requires it.
+          </p>
+          <p>
+            <strong>Where it is held.</strong> Information is stored with reputable
+            hosting and email providers, and is kept only for as long as there is
+            a genuine business or legal reason to keep it.
+          </p>
+          <p>
+            <strong>Access and correction.</strong> You can ask to see the personal
+            information the practice holds about you, ask for it to be corrected,
+            or raise a privacy concern, by emailing
+            <a href={`mailto:${site.email}`}>{site.email}</a>. The practice will
+            respond within a reasonable time.
+          </p>
+          <p class="text-steel">
+            This policy is issued by DEFEX Engineering and is current as at July
+            2026.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
