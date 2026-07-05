@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ProjectCase from '../components/ProjectCase.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base
+  title="Projects — DEFEX Engineering"
+  description="Representative remedial engagements across Sydney: strata remediation, façade investigation, waterproofing rectification and expert reporting."
+  ogImage="projects"
+>
+  <section class="bg-canvas">
+    <div class="mx-auto max-w-site px-[var(--site-gutter)] pt-16 md:pt-24">
+      <PageHeader
+        eyebrow="Projects"
+        heading="Representative engagements."
+        lede="Selected project experience, described in general terms. Addresses and parties are withheld as a matter of course."
+      />
+    </div>
+  </section>
+
+  <section class="bg-canvas">
+    <div
+      class="mx-auto flex max-w-site flex-col gap-16 px-[var(--site-gutter)] pb-16 pt-12 md:gap-24 md:pb-24 md:pt-16"
+    >
+      {projects.map((entry, i) => <ProjectCase entry={entry} index={i} />)}
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Discuss a comparable building."
+    buttonLabel="Contact DEFEX"
+    buttonHref="/contact"
+  />
+</Base>

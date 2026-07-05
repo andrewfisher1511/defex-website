@@ -1,0 +1,64 @@
+---
+/**
+ * ProjectCase — one full-width case study. Image / text alternate sides on
+ * desktop (even index = image left); stacks image-first on mobile. Chips are
+ * blueprint-tint full-pills. Image 4:3, 12px radius.
+ */
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { getProjectImage } from '../lib/images.ts';
+import Reveal from './Reveal.astro';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  index: number;
+}
+const { entry, index } = Astro.props;
+const { Content } = await render(entry);
+const img = getProjectImage(entry.data.image);
+const imageRight = index % 2 === 1;
+---
+
+<article class="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+  <Reveal class:list={['order-1', imageRight ? 'md:order-2' : 'md:order-1']}>
+    <div class="overflow-hidden rounded-card border border-border">
+      <Picture
+        src={img}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        alt={`${entry.data.title} — representative project imagery.`}
+        width={720}
+        densities={[1, 2]}
+        loading="lazy"
+        class="aspect-[4/3] w-full object-cover"
+      />
+    </div>
+  </Reveal>
+
+  <Reveal
+    index={1}
+    class:list={['order-2', imageRight ? 'md:order-1' : 'md:order-2']}
+  >
+    <p class="text-xs font-semibold uppercase tracking-[0.1em] text-steel">
+      {entry.data.sector} · {entry.data.region}
+    </p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      {
+        entry.data.scopeTags.map((tag) => (
+          <span class="inline-flex items-center rounded-full border border-blueprint-border bg-blueprint px-3 py-1 text-xs font-medium text-blueprint-ink">
+            {tag}
+          </span>
+        ))
+      }
+    </div>
+    <h2
+      class="mt-4 text-2xl font-semibold tracking-[-0.02em] text-navy md:text-3xl"
+    >
+      {entry.data.title}
+    </h2>
+    <div class="prose mt-4 max-w-[60ch] text-base leading-relaxed text-ink-body">
+      <Content />
+    </div>
+  </Reveal>
+</article>
