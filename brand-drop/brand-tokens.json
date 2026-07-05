@@ -2,85 +2,95 @@
   "$meta": {
     "brand": "DEFEX Engineering",
     "tagline": "Defects Resolved.",
-    "version": "1.0 — palette Option B (Steel & blueprint), locked",
-    "source": "DEFEX-Brand workspace · tokens/*.css · DEFEX Brand Kit.dc.html",
+    "version": "2.1-website",
+    "source": "Reconciled from v1.0 (marketing palette) + v2.0 (app design-system). Canonical block is WEBSITE_BUILD_SPEC.md §2; where this file and the spec disagree, the spec wins.",
     "notes": [
-      "One accent colour only: Electric Blue. If it looks too blue, it is.",
-      "No emoji in product UI. Icons: Lucide, ~2px stroke.",
-      "Australian English, day-first dates, AUD with tabular numerals.",
-      "Wordmark: DEFEX with X in Electric Blue; ENGINEERING justified edge-to-edge beneath (flush D-to-X).",
-      "Mark: Option A 'Engineered' — X in rounded frame, blue diamond centre, uniform arms."
+      "One accent colour only: Electric Blue (#2563EB). The hero gradient is sanctioned on the home hero ONLY; everywhere else uses flat fills.",
+      "No emoji. Icons: Lucide-style ~2px stroke, used sparingly.",
+      "Australian English, day-first dates, tabular numerals for figures.",
+      "Wordmark: DEFEX with X in Electric Blue; ENGINEERING justified edge-to-edge beneath.",
+      "Mark: Option A 'Engineered' — X in rounded frame, blue diamond centre, uniform arms.",
+      "Inter is self-hosted (latin subset, weights 300–700). No runtime external font request."
     ]
   },
   "color": {
-    "brand": {
-      "blue": { "value": "#2563EB", "usage": "Electric Blue — actions, links, active nav, focus, progress, the diamond. PMS 2727 C" },
-      "navy": { "value": "#1A1A2E", "usage": "Navy Ink — wordmark, headings, dark surfaces. PMS 533 C" },
-      "steel": { "value": "#5C6B7F", "usage": "Secondary text, captions. PMS Cool Gray 9" },
-      "canvas": { "value": "#F9FAFB", "usage": "Page backgrounds, paper" },
-      "concrete": { "value": "#C9CFD8", "usage": "Hairlines on dark, muted fills" },
-      "blueprint": { "value": "#EFF4FE", "usage": "Table headers, info panels, selected states" },
-      "blueprintBorder": { "value": "#D7E3FB" },
-      "blueprintInk": { "value": "#6E84A8", "usage": "Table-header text on blueprint tint" }
-    },
-    "neutral": {
-      "inkBody": { "value": "#1C222B" },
-      "inkMuted": { "value": "#44505F" },
-      "grey400": { "value": "#98A2B3" },
-      "border": { "value": "#E4E7EC" },
-      "rowLine": { "value": "#F0F2F5" },
-      "surfacePage": { "value": "#FFFFFF" }
-    },
-    "blueScale": {
-      "50": "hsl(217 91% 97%)", "100": "hsl(217 91% 93%)", "200": "hsl(217 91% 85%)",
-      "300": "hsl(217 91% 73%)", "400": "hsl(217 91% 63%)", "500": "hsl(217 91% 54%)",
-      "600": "hsl(217 91% 45%)", "700": "hsl(217 91% 37%)", "800": "hsl(217 91% 28%)",
-      "900": "hsl(217 91% 20%)"
-    },
-    "severity": {
-      "severe": { "bg": "#FDECEC", "fg": "#B91C1C" },
-      "major": { "bg": "#FEF0E6", "fg": "#C2570A" },
-      "moderate": { "bg": "#FFF6E0", "fg": "#A16207" },
-      "closed": { "bg": "#E8F6EE", "fg": "#15803D" },
-      "usage": "Report schedules / status only, always with a text label. Never decorative."
-    }
+    "blue": { "value": "#2563EB", "usage": "Actions, links, active nav, focus ring, the X-mark diamond. The only accent." },
+    "navy": { "value": "#1A1A2E", "usage": "Headings, wordmark, dark surfaces (footer, CTA band, hero overlay base)" },
+    "steel": { "value": "#5C6B7F", "usage": "Secondary text, captions, eyebrows on light" },
+    "canvas": { "value": "#F9FAFB", "usage": "Page background" },
+    "concrete": { "value": "#C9CFD8", "usage": "Hairlines on dark surfaces, muted fills" },
+    "blueprint": { "value": "#EFF4FE", "usage": "Tinted panels, selected states" },
+    "blueprintBorder": { "value": "#D7E3FB", "usage": "Borders on blueprint panels" },
+    "blueprintInk": { "value": "#6E84A8", "usage": "Ink on blueprint tint" },
+    "inkBody": { "value": "#1C222B", "usage": "Body text" },
+    "inkMuted": { "value": "#44505F", "usage": "Muted body text" },
+    "border": { "value": "#E4E7EC", "usage": "Hairlines on light" },
+    "surface": { "value": "#FFFFFF", "usage": "Cards, panels" }
+  },
+  "blueScale": {
+    "50": "hsl(217 91% 97%)", "100": "hsl(217 91% 93%)", "200": "hsl(217 91% 85%)",
+    "300": "hsl(217 91% 73%)", "400": "hsl(217 91% 63%)", "500": "hsl(217 91% 54%)",
+    "600": "hsl(217 91% 45%)", "700": "hsl(217 91% 37%)", "800": "hsl(217 91% 28%)",
+    "900": "hsl(217 91% 20%)",
+    "primaryHover": "hsl(217 91% 45%)"
+  },
+  "gradients": {
+    "hero": "linear-gradient(135deg, hsl(217 91% 25% / 0.85), hsl(217 91% 54% / 0.40))",
+    "overlay": "linear-gradient(180deg, hsl(217 91% 25% / 0.85), hsl(217 91% 25% / 0.10))",
+    "usage": "Home hero only, over hero-architecture.jpg. Nowhere else."
   },
   "typography": {
-    "family": "Inter",
+    "family": "Inter Variable (self-hosted, latin subset)",
     "weights": [300, 400, 500, 600, 700],
+    "openType": ["cv02", "cv03", "cv04", "cv11"],
     "scalePx": [12, 13, 14, 15, 18, 24, 30, 37, 46],
     "rules": {
-      "headings": "Navy Ink, tracking -0.02em; hero/display in Light 300, uppercase on marketing",
-      "uiLabels": "Medium 500",
-      "tableHeaders": "Semibold 600, small UPPERCASE, wide tracking",
-      "kpiAndTitles": "Bold 700",
-      "numerals": "Tabular lining for money, hours, claims",
-      "reportBody": "Inter 10pt"
+      "headings": "Navy Ink, tracking -0.02em",
+      "displayHero": "weight 300, generous size (tagline H1 is weight 600 for authority)",
+      "eyebrow": "13px, ALL CAPS, tracking 0.1em, weight 600, Steel (Concrete on dark)",
+      "body": "15–18px, inkBody, line-height 1.6",
+      "numerals": "Tabular lining for figures"
     }
   },
-  "spacing": { "grid": "8pt", "cardPaddingPx": [16, 24], "sectionGapPx": [24, 32], "minTapTargetPx": 44 },
-  "radius": { "cardPx": 12, "buttonInputPx": 8, "tilePx": 16, "chipBadge": "full pill" },
+  "spacing": {
+    "grid": "8pt",
+    "containerMaxPx": 1200,
+    "gutterPx": { "mobile": 24, "desktop": 32 },
+    "sectionRhythmPx": { "mobile": 64, "desktop": 112 },
+    "minTapTargetPx": 44
+  },
+  "radius": { "buttonInputPx": 8, "cardPx": 12, "screenshotFramePx": 16 },
   "effects": {
-    "shadowCard": "faint, 3–8% black; border-first elevation",
+    "shadowCard": "faint, ≤8% black; border-first elevation",
     "shadowBrand": "soft blue lift on interactive-card hover",
     "focusRing": "2px solid #2563EB, 2px offset",
     "press": "scale(0.97)",
-    "motion": "0.2s ease global; entrances cubic-bezier(0.16, 1, 0.3, 1) 0.3–0.8s; respect prefers-reduced-motion",
-    "heroOverlay": "navy→blue gradient over architectural photography for white text"
+    "motion": "200ms ease global; entrances cubic-bezier(0.16,1,0.3,1) 300ms, translate-y 12px + fade, staggered ≤3; disabled under prefers-reduced-motion; duration window 150–300ms"
   },
   "voice": {
-    "style": "Plain, competent, Australian. Direct, specific, never salesy. No exclamation marks.",
-    "casing": "Marketing eyebrows ALL-CAPS wide-tracked; app copy Sentence case",
+    "style": "Plain, competent, Australian. Direct, specific, never salesy. No exclamation marks. No emoji. No banned superlatives (leading, best, trusted, premier).",
+    "casing": "Marketing eyebrows ALL-CAPS wide-tracked; body Sentence case",
     "spelling": "Australian English (organise, colour, metre)"
   },
   "company": {
     "tradingName": "DEFEX Engineering",
-    "abn": "TBC — placeholder XXX XXX XXX XXX",
+    "tagline": "Defects Resolved.",
     "phone": "0432 261 722",
     "email": "andrew@defex.engineering",
-    "web": "www.defex.engineering",
-    "address": "PO Box 106 Gymea NSW 2227",
-    "credentials": "BEng(Civil), MIEAust, CPEng, NER · NSW Registered Professional Engineer · NSW Registered Design Practitioner",
-    "piInsurance": "CONFIRM WITH ANDREW before claiming"
+    "web": "defex.engineering",
+    "serviceArea": "Sydney metro, occasionally Greater NSW",
+    "principal": {
+      "name": "Andrew Fisher",
+      "credentials": "BEng(Civil), MIEAust, CPEng",
+      "registrations": ["NSW Registered Professional Engineer", "NSW Registered Design Practitioner"]
+    },
+    "unconfirmed_render_nothing": {
+      "legalEntity": null,
+      "abn": null,
+      "postal": null,
+      "piInsurance": null,
+      "appUrl": null,
+      "social.linkedin": null
+    }
   }
 }
