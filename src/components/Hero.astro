@@ -1,0 +1,67 @@
+---
+/**
+ * Hero — home hero ONLY. Full-bleed architectural photo under the sanctioned
+ * navy→blue gradient (spec §2.2), white text. The image is the LCP element:
+ * eager + fetchpriority high. The tagline H1 renders weight 600 for authority
+ * (the one display-weight exception).
+ */
+import { Picture } from 'astro:assets';
+import { heroImage } from '../lib/images.ts';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  support: string;
+}
+const { eyebrow, heading, support } = Astro.props;
+---
+
+<section
+  class="relative flex min-h-[70vh] items-center overflow-hidden md:min-h-[80vh]"
+>
+  <Picture
+    src={heroImage}
+    formats={['avif', 'webp']}
+    fallbackFormat="jpg"
+    alt="A contemporary Sydney apartment façade of concrete, glass and metal balustrades."
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    pictureAttributes={{ class: 'absolute inset-0 h-full w-full' }}
+    class="h-full w-full object-cover"
+  />
+  <!-- Sanctioned home-hero gradient (navy base + directional wash) -->
+  <div
+    class="absolute inset-0"
+    style="background:var(--gradient-overlay)"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="absolute inset-0"
+    style="background:var(--gradient-hero)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative mx-auto w-full max-w-site px-[var(--site-gutter)] py-20 md:py-28"
+  >
+    <div class="max-w-[640px]">
+      <Eyebrow tone="dark" class="text-concrete">{eyebrow}</Eyebrow>
+      <h1
+        class="mt-4 text-4xl font-semibold tracking-[-0.02em] text-white md:text-5xl"
+      >
+        {heading}
+      </h1>
+      <p class="mt-5 text-lg text-white/90">{support}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href="/contact">Discuss a defect</Button>
+        <Button href="/services" variant="ghost">Our services</Button>
+      </div>
+    </div>
+  </div>
+</section>
