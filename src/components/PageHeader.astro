@@ -1,0 +1,32 @@
+---
+/**
+ * PageHeader — the standard inner-page header: eyebrow, H1, optional lede.
+ * Reused across Services, Projects, DEFEX App, About and Contact.
+ */
+import Eyebrow from './Eyebrow.astro';
+import Reveal from './Reveal.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  lede?: string;
+  class?: string;
+}
+const { eyebrow, heading, lede, class: className = '' } = Astro.props;
+---
+
+<header class={className}>
+  <Reveal class="max-w-3xl">
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h1
+      class="mt-4 text-4xl font-light tracking-[-0.02em] text-navy md:text-5xl"
+    >
+      {heading}
+    </h1>
+    {
+      lede && (
+        <p class="mt-6 text-lg leading-relaxed text-ink-muted">{lede}</p>
+      )
+    }
+  </Reveal>
+</header>

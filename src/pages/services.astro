@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ServiceSection from '../components/ServiceSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const services = (await getCollection('services')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base
+  title="Services — DEFEX Engineering"
+  description="Defect investigation, remedial and declared designs, specifications and tender, AS 4000 superintendency, expert reporting, façade and waterproofing assessment."
+  ogImage="services"
+>
+  <section class="bg-canvas">
+    <div class="mx-auto max-w-site px-[var(--site-gutter)] pt-16 md:pt-24">
+      <PageHeader
+        eyebrow="Services"
+        heading="Remedial engineering, end to end."
+        lede="DEFEX provides the consulting spine of a remedial project: establishing what is wrong, designing the fix, and administering the contract that delivers it. Engage one service or the full sequence."
+      />
+    </div>
+  </section>
+
+  <section class="bg-canvas">
+    <div
+      class="mx-auto max-w-site px-[var(--site-gutter)] pb-16 pt-8 md:pb-24 md:pt-10"
+    >
+      <div class="lg:grid lg:grid-cols-[1fr_220px] lg:gap-16">
+        <div>
+          {
+            services.map((entry, i) => (
+              <ServiceSection entry={entry} first={i === 0} />
+            ))
+          }
+        </div>
+
+        <!-- Sticky in-page nav (desktop) -->
+        <aside class="hidden lg:block">
+          <nav
+            id="service-rail"
+            aria-label="On this page"
+            class="sticky top-24 border-l border-border pl-5"
+          >
+            <p class="text-xs font-semibold uppercase tracking-[0.1em] text-steel">
+              On this page
+            </p>
+            <ul class="mt-4 flex flex-col gap-3">
+              {
+                services.map((s) => (
+                  <li>
+                    <a
+                      href={`#${s.data.slug}`}
+                      data-rail-link={s.data.slug}
+                      class="block text-xs leading-snug text-steel transition-colors hover:text-blue"
+                    >
+                      {s.data.title}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Not sure which service you need?"
+    body="Describe the problem — the right starting point is usually a short conversation."
+    buttonLabel="Contact DEFEX"
+    buttonHref="/contact"
+  />
+</Base>
+
+<script>
+  // Scroll-spy: highlight the active section in the right rail.
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('[data-rail-link]')
+  );
+  const sections = links
+    .map((l) => document.getElementById(l.dataset.railLink || ''))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (links.length && 'IntersectionObserver' in window) {
+    const setActive = (id: string) => {
+      links.forEach((l) => {
+        const on = l.dataset.railLink === id;
+        l.classList.toggle('text-blue', on);
+        l.classList.toggle('font-medium', on);
+        l.classList.toggle('text-steel', !on);
+      });
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]?.target.id) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-88px 0px -60% 0px', threshold: 0 }
+    );
+    sections.forEach((s) => io.observe(s));
+  }
+</script>
