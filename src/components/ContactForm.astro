@@ -1,0 +1,163 @@
+---
+/**
+ * ContactForm — a real <form> enhanced progressively. JS posts to
+ * /api/contact; on any non-200 or network error it reveals the mailto
+ * fallback (§5.6). The phone and email stay visible on the page regardless,
+ * so the user is never trapped. <noscript> shows the mailto guidance instead.
+ */
+import { site } from '../lib/site.ts';
+
+const fieldBase =
+  'mt-1.5 block w-full min-h-11 rounded-button border border-border bg-surface px-3.5 text-base text-ink-body placeholder:text-steel/70 focus:border-blue';
+const labelBase = 'text-xs font-medium text-ink-muted';
+---
+
+<div>
+  <form id="contact-form" class="flex flex-col gap-5" novalidate>
+    <div>
+      <label class={labelBase} for="cf-name">Name<span class="text-blue">*</span></label>
+      <input class={fieldBase} id="cf-name" name="name" type="text" required autocomplete="name" />
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div>
+        <label class={labelBase} for="cf-email">Email<span class="text-blue">*</span></label>
+        <input class={fieldBase} id="cf-email" name="email" type="email" required autocomplete="email" />
+      </div>
+      <div>
+        <label class={labelBase} for="cf-phone">Phone</label>
+        <input class={fieldBase} id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+      </div>
+    </div>
+
+    <div>
+      <label class={labelBase} for="cf-suburb">Building suburb</label>
+      <input class={fieldBase} id="cf-suburb" name="suburb" type="text" autocomplete="address-level2" />
+    </div>
+
+    <div>
+      <label class={labelBase} for="cf-message"
+        >What's happening with the building?<span class="text-blue">*</span></label
+      >
+      <textarea
+        class={`${fieldBase} min-h-[140px] resize-y py-2.5`}
+        id="cf-message"
+        name="message"
+        required
+        rows="6"></textarea>
+    </div>
+
+    <!-- Honeypot: must stay empty. Hidden from users and assistive tech. -->
+    <div class="absolute left-[-9999px]" aria-hidden="true">
+      <label>Leave this field empty
+        <input type="text" name="hp" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+    <input type="hidden" name="t" id="cf-t" value="0" />
+
+    <div class="flex items-center gap-4">
+      <button
+        type="submit"
+        id="cf-submit"
+        class="btn btn-press inline-flex min-h-11 items-center justify-center rounded-button bg-blue px-6 text-base font-medium text-white hover:bg-primary-hover"
+      >
+        Send enquiry
+      </button>
+      <span id="cf-sending" class="hidden text-sm text-steel">Sending…</span>
+    </div>
+  </form>
+
+  <!-- Success -->
+  <p
+    id="cf-success"
+    class="hidden rounded-card border border-blueprint-border bg-blueprint p-5 text-base text-navy"
+    role="status"
+  >
+    Thanks — your enquiry has been sent. Andrew will be in touch.
+  </p>
+
+  <!-- Failure / unconfigured → mailto fallback -->
+  <div
+    id="cf-fallback"
+    class="hidden rounded-card border border-border bg-surface p-5 text-base text-ink-body"
+    role="alert"
+  >
+    <p>The form couldn't send just now. Email Andrew directly:</p>
+    <a
+      id="cf-mailto"
+      href={`mailto:${site.email}`}
+      class="mt-2 inline-block font-medium text-blue hover:underline"
+      >{site.email}</a
+    >
+  </div>
+
+  <noscript>
+    <div class="mt-4 rounded-card border border-border bg-surface p-5 text-base text-ink-body">
+      <p>
+        This form needs JavaScript to send. Email Andrew directly at
+        <a href={`mailto:${site.email}`} class="font-medium text-blue hover:underline"
+          >{site.email}</a
+        >
+        or call
+        <a href={site.phoneHref} class="font-medium text-blue hover:underline">{site.phone}</a>.
+      </p>
+    </div>
+  </noscript>
+</div>
+
+<script define:vars={{ email: site.email }}>
+  const form = document.getElementById('contact-form');
+  const tField = document.getElementById('cf-t');
+  const submit = document.getElementById('cf-submit');
+  const sending = document.getElementById('cf-sending');
+  const success = document.getElementById('cf-success');
+  const fallback = document.getElementById('cf-fallback');
+  const mailto = document.getElementById('cf-mailto');
+
+  // Time gate: record render time so the function can reject sub-3s submits.
+  if (tField) tField.value = String(Date.now());
+
+  function showFallback(name, message) {
+    if (!fallback || !mailto) return;
+    const subject = `Website enquiry — ${name || ''}`.trim();
+    mailto.href =
+      `mailto:${email}?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(message || '')}`;
+    fallback.classList.remove('hidden');
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    fallback?.classList.add('hidden');
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // Basic client-side guard (server re-validates).
+    if (!data.name || !data.email || !data.message) {
+      form.reportValidity?.();
+      return;
+    }
+
+    submit?.setAttribute('disabled', 'true');
+    sending?.classList.remove('hidden');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        form.classList.add('hidden');
+        success?.classList.remove('hidden');
+        success?.focus?.();
+      } else {
+        showFallback(String(data.name), String(data.message));
+      }
+    } catch {
+      showFallback(String(data.name), String(data.message));
+    } finally {
+      submit?.removeAttribute('disabled');
+      sending?.classList.add('hidden');
+    }
+  });
+</script>
