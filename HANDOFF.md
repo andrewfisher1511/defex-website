@@ -4,47 +4,37 @@
 **Builder:** Claude Code (Opus 4.8, 1M context)
 **Repo state:** clean; tasks T0–T13 committed (`T{n}:` prefixes).
 **Build status:** ✅ `npm run build` green — facts gate passes, budget 255 kB (< 1 MB), 8 pages.
+**Deploy status:** ✅ **LIVE on Cloudflare Pages preview** (no custom domain, per spec).
 
 ---
 
-## ⚠️ Read this first: the preview URL
+## ✅ Preview URL (live)
 
-**There is no `*.pages.dev` preview URL yet.** The one step this unattended run
-could **not** complete is the Cloudflare Pages deploy, because this environment
-has **no Cloudflare credentials** (`CLOUDFLARE_API_TOKEN` is unset and wrangler
-is not logged in). The deploy fails fast with:
+- **Preview (branch alias):** https://preview.defex-website.pages.dev
+- **This deployment (immutable):** https://7efc04b4.defex-website.pages.dev
+- **Project:** `defex-website` · account "DEFEX Webpage" · production branch `main`
+- **No custom domain attached** (correct — `defex.engineering` is a launch step).
 
-> In a non-interactive environment, it's necessary to set a CLOUDFLARE_API_TOKEN…
+The `functions/api/contact.ts` Pages Function deployed with it and is live.
 
-Everything that produces the deploy — a complete, gate-passing `dist/` plus the
-Pages Function — **is done and committed.** Publishing is now a single command.
+### Live verification (run against the preview URL)
 
-### To deploy the preview (one step, needs credentials)
+- All 8 pages return **200** (inner pages resolve at trailing slash; `/services`
+  → `/services/` is Astro's normal 308 redirect). `/nope` → **404**.
+- Home: **no "Sign in"**, no "ABN", no "insurance"; ProfessionalService JSON-LD present.
+- DEFEX App: **no "Open DEFEX"** (appUrl null); the DEF-014 typographic panel renders.
+- `og/home.png` serves as `image/png`.
+- Contact function: valid submission → **503 unconfigured** (the graceful mailto
+  fallback path — Resend not configured yet); honeypot → **400**.
 
-From the repo root, either log in interactively:
+### To redeploy after content edits
 
 ```
-npx wrangler login          # opens a browser once
-npm run build               # regenerate dist/ (optional if unchanged)
+npm run build
 npx wrangler pages deploy dist --project-name=defex-website --branch=preview --commit-dirty=true
 ```
 
-…or, non-interactively, set a scoped API token first:
-
-```
-export CLOUDFLARE_API_TOKEN=...   # token with "Cloudflare Pages: Edit"
-export CLOUDFLARE_ACCOUNT_ID=...
-npx wrangler pages deploy dist --project-name=defex-website --branch=preview --commit-dirty=true
-```
-
-This auto-creates the `defex-website` project on first run, uploads `dist/` as
-static assets, and bundles `functions/api/contact.ts` as a Pages Function.
-**Attach NO custom domain** (per spec). Wrangler prints the `*.pages.dev` URL on
-success — **record it here** once deployed.
-
-> `functions/` sits at the repo root and is picked up automatically by
-> `wrangler pages deploy` run from the repo root. Deploy from the repo root, not
-> from inside `dist/`.
+Run from the repo root (so `functions/` is bundled), not from inside `dist/`.
 
 ---
 
@@ -91,14 +81,16 @@ success — **record it here** once deployed.
 | 5 | Contact form 503 fallback graceful; validation + honeypot | ✅ 7 direct-invocation tests pass (`node --experimental-strip-types scripts/test-contact.ts`). |
 | 6 | No testimonials in dist; no third-party requests | ✅ |
 | 7 | Copy matches §5 verbatim; AU English; no banned words | ✅ |
-| 8 | Preview URL live and recorded | ❌ **Blocked on credentials** — see top of this file. |
+| 8 | Preview URL live and recorded | ✅ https://preview.defex-website.pages.dev (verified 200 across all pages + function). |
 
 ---
 
 ## Deviations & judgement calls
 
-1. **Deploy not performed** — no Cloudflare credentials in the unattended env.
-   `dist/` is complete and green; deploy is a one-command step (see top).
+1. **Deploy** — the unattended run reached the deploy with no Cloudflare
+   credentials; it was completed afterwards once Andrew ran `wrangler login`
+   (account "DEFEX Webpage"). Project `defex-website` created, `dist/` + the
+   Pages Function deployed to the **preview** branch. No custom domain attached.
 2. **`<Picture>` (AVIF + WebP + JPG/PNG fallback)** used for hero, screenshots
    and project images, to satisfy §3's "AVIF/WebP with fallbacks" (plain
    `<Image>` emits a single format).
@@ -125,7 +117,7 @@ success — **record it here** once deployed.
 
 ## Andrew's morning QA checklist (spec §14)
 
-> Note: item 1 requires the preview URL, which needs the one-step deploy above.
+> Preview is live: **https://preview.defex-website.pages.dev**
 
 1. Open the `pages.dev` URL on your phone first — hero, nav, tap targets, form.
 2. Read every page's copy once for factual comfort (it was locked, but you own
