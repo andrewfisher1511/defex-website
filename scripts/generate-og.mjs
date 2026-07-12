@@ -102,12 +102,13 @@ function avatar() {
 }
 
 const OG_TITLES = {
-  home: 'Defects Resolved.',
-  services: 'Services',
-  projects: 'Projects',
-  'defex-app': 'The DEFEX Platform',
-  about: 'About',
-  contact: 'Contact',
+  home: 'Remedial engineering.',
+  services: 'Remedial engineering, end to end.',
+  projects: 'Representative engagements.',
+  'defex-app': 'DEFEX — field to issued document.',
+  about: 'A deliberately small practice.',
+  contact: 'Discuss a defect.',
+  blog: 'Notes from site.',
   default: 'Defects Resolved.',
 };
 

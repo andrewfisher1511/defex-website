@@ -5,6 +5,7 @@
   "compilerOptions": {
     "strict": true,
     "strictNullChecks": true,
+    "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {

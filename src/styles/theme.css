@@ -20,8 +20,17 @@
   /* ---- Colour: neutral ---- */
   --color-ink-body: #1c222b;
   --color-ink-muted: #44505f;
+  --color-grey: #98a2b3;
   --color-border: #e4e7ec;
+  --color-row-line: #f0f2f5;
+  --color-nav-wash: #f2f4f7;
   --color-surface: #ffffff;
+
+  /* ---- Colour: status (rev2 — form validation + success states only) ---- */
+  --color-error: #b91c1c;
+  --color-error-bg: #fdecec;
+  --color-success: #15803d;
+  --color-success-bg: #e8f6ee;
 
   /* ---- Blue scale (hover / states) ---- */
   --color-blue-50: hsl(217 91% 97%);
@@ -62,7 +71,7 @@
   --text-5xl--line-height: 1.05;
 
   /* ---- Container ---- */
-  --container-site: 1200px;
+  --container-site: 1400px;
 
   /* ---- Radius ---- */
   --radius-button: 8px;

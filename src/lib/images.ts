@@ -20,6 +20,7 @@ export const projectImages: Record<string, ImageMetadata> = {
   'project-2': project2,
   'project-3': project3,
   hero: heroArchitecture,
+  'hero-architecture': heroArchitecture,
 };
 
 export const heroImage = heroArchitecture;

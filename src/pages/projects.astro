@@ -1,41 +1,198 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
-import ProjectCase from '../components/ProjectCase.astro';
 import CtaBand from '../components/CtaBand.astro';
+import ProjectCarousel from '../components/ProjectCarousel.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { getProjectImage } from '../lib/images.ts';
 
-const projects = (await getCollection('projects')).sort(
-  (a, b) => a.data.order - b.data.order
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const clientTypes = [
+  'Owners corporations',
+  'Strata managers',
+  'Private owners',
+  'Insurers',
+  'Builders',
+  'Legal practitioners',
+];
+
+const rendered = await Promise.all(
+  projects.map(async (p) => {
+    const { Content } = await render(p);
+    const gallery = await Promise.all(
+      p.data.gallery.map(async (g) => {
+        const img = await getImage({ src: getProjectImage(g.image), width: 900, format: 'webp' });
+        return { src: img.src, caption: g.caption };
+      })
+    );
+    return { entry: p, Content, gallery };
+  })
 );
 ---
 
 <Base
   title="Projects — DEFEX Engineering"
-  description="Representative remedial engagements across Sydney: strata remediation, façade investigation, waterproofing rectification and expert reporting."
+  description="Representative remedial engagements across Sydney: strata remediation, podium waterproofing and expert reporting for owners corporations, strata managers and insurers."
   ogImage="projects"
 >
-  <section class="bg-canvas">
-    <div class="mx-auto max-w-site px-[var(--site-gutter)] pt-16 md:pt-24">
-      <PageHeader
-        eyebrow="Projects"
-        heading="Representative engagements."
-        lede="Selected project experience, described in general terms. Addresses and parties are withheld as a matter of course."
-      />
+  <PageHeader
+    variant="white"
+    eyebrow="PROJECTS"
+    heading="Representative engagements."
+    headingSize={76}
+    lede="Selected project experience, described in general terms. Addresses and parties are withheld as a matter of course."
+    padBottom={88}
+  >
+    <div data-hero-seq="3" class="projects-header__acts">
+      <span class="projects-header__acts-label">ACTS FOR</span>
+      {clientTypes.map((t) => <span class="projects-header__pill">{t}</span>)}
     </div>
-  </section>
+  </PageHeader>
 
-  <section class="bg-canvas">
-    <div
-      class="mx-auto flex max-w-site flex-col gap-16 px-[var(--site-gutter)] pb-16 pt-12 md:gap-24 md:pb-24 md:pt-16"
-    >
-      {projects.map((entry, i) => <ProjectCase entry={entry} index={i} />)}
-    </div>
-  </section>
+  {
+    rendered.map(({ entry, Content, gallery }, i) => (
+      <section class:list={['case', { 'is-canvas': i % 2 === 1, 'has-border': i > 0 }]}>
+        <div class:list={['case__inner', { 'is-reversed': i % 2 === 1 }]}>
+          <ProjectCarousel id={`case-${i}`} images={gallery} alt={`${entry.data.title} imagery`} />
+          <div>
+            <p class="case__eyebrow" data-reveal>{entry.data.eyebrow}</p>
+            <div class="case__tags" data-reveal data-delay="40">
+              {entry.data.tags.map((tag) => (
+                <span class="case__tag">{tag}</span>
+              ))}
+            </div>
+            <h2 class="case__title" data-reveal data-delay="80">
+              {entry.data.title}
+            </h2>
+            <div class="case__body" data-reveal data-delay="120">
+              <Content />
+            </div>
+          </div>
+        </div>
+      </section>
+    ))
+  }
 
   <CtaBand
-    heading="Discuss a comparable building."
-    buttonLabel="Contact DEFEX"
+    heading="A building presenting the same way?"
+    body="Describe the symptoms — references for comparable work are available on request."
+    buttonLabel="Discuss a defect"
     buttonHref="/contact"
   />
+
+  <Lightbox />
 </Base>
+
+<style>
+  .projects-header__acts {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+  }
+  .projects-header__acts-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--color-grey);
+    white-space: nowrap;
+  }
+  .projects-header__pill {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    white-space: nowrap;
+  }
+
+  .case {
+    background: #fff;
+    padding: 104px var(--site-gutter);
+  }
+  .case.is-canvas {
+    background: var(--color-canvas);
+  }
+  .case.has-border {
+    border-top: 1px solid var(--color-border);
+  }
+  .case__inner {
+    max-width: var(--container-site);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 520px minmax(0, 1fr);
+    gap: 96px;
+    align-items: center;
+  }
+  .case__inner.is-reversed {
+    grid-template-columns: minmax(0, 1fr) 520px;
+  }
+  .case__inner.is-reversed > :global(:first-child) {
+    order: 2;
+  }
+  .case__eyebrow {
+    margin: 0 0 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--color-blueprint-ink);
+  }
+  .case__tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .case__tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-navy);
+    background: var(--color-blueprint);
+    border: 1px solid var(--color-blueprint-border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+  .case__title {
+    margin: 0 0 24px;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+  .case__body :global(p) {
+    margin: 0 0 20px;
+    max-width: 62ch;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-ink-body);
+    text-wrap: pretty;
+  }
+  .case__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 1100px) {
+    .case__inner,
+    .case__inner.is-reversed {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .case__inner.is-reversed > :global(:first-child) {
+      order: 0;
+    }
+  }
+  @media (max-width: 899px) {
+    .case {
+      padding: 64px var(--site-gutter);
+    }
+  }
+</style>

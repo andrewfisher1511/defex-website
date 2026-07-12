@@ -1,0 +1,27 @@
+---
+interface Props {
+  name: 'linkedin' | 'facebook' | 'instagram';
+  size?: number;
+}
+const { name, size = 18 } = Astro.props;
+
+const PATHS: Record<string, string> = {
+  linkedin:
+    '<path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>',
+  facebook:
+    '<path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14C16.5 3.09 15.47 3 14.31 3c-2.45 0-4.13 1.5-4.13 4.24v2.36H7.42v3.2h2.76V21h3.32z"/>',
+};
+const isInstagram = name === 'instagram';
+---
+
+{
+  isInstagram ? (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5" />
+      <circle cx="12" cy="12" r="4.1" />
+      <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true" set:html={PATHS[name]} />
+  )
+}

@@ -3,36 +3,17 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Eyebrow from '../components/Eyebrow.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import Reveal from '../components/Reveal.astro';
+import CredentialChip from '../components/CredentialChip.astro';
+import DefectDiagnostics from '../components/DefectDiagnostics.astro';
 import ScreenshotFrame from '../components/ScreenshotFrame.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../lib/site.ts';
 import { getScreenshot } from '../lib/images.ts';
 
-const services = (await getCollection('services')).sort(
-  (a, b) => a.data.order - b.data.order
-);
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 
-const whatWeDo = [
-  {
-    title: 'Investigate',
-    line: 'Diagnostic inspection and testing that establishes cause, not just symptoms.',
-    href: '/services#investigation',
-  },
-  {
-    title: 'Design',
-    line: 'Remedial designs and declared designs prepared under the Design and Building Practitioners Act.',
-    href: '/services#remedial-design',
-  },
-  {
-    title: 'Deliver',
-    line: 'Specifications, tendering, superintendency and contract administration through to completion.',
-    href: '/services#specification-tender',
-  },
-];
-
-// JSON-LD (Home only, spec §9). Null facts omit their key entirely.
 const structuredData: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -57,150 +38,278 @@ const structuredData: Record<string, unknown> = {
   structuredData={structuredData}
 >
   <Hero
-    eyebrow="Remedial consulting engineers — Sydney"
-    heading="Defects Resolved."
-    support="Forensic remedial engineering for Sydney strata, owners and managers."
-  />
+    eyebrow="SYDNEY · REMEDIAL CONSULTING ENGINEERS"
+    heading="Remedial engineering."
+    sub="Defects resolved — investigated, designed and superintended by the engineer who signs."
+    height={820}
+    showScrollCue
+  >
+    <Fragment slot="buttons">
+      <a href="/contact" class="btn-blue">Discuss a defect <Icon name="arrow-right" size={16} /></a>
+      <a href="/services" class="btn-outline-onphoto">View services</a>
+    </Fragment>
+  </Hero>
 
-  <!-- What we do -->
-  <section class="bg-canvas">
-    <div class="mx-auto max-w-site px-[var(--site-gutter)] py-16 md:py-28">
-      <Reveal class="max-w-3xl">
-        <Eyebrow>The practice</Eyebrow>
-        <SectionHeading class="mt-3" weight="light"
-          >From first inspection to issued certificate.</SectionHeading
-        >
-        <p class="mt-5 text-lg leading-relaxed text-ink-muted">
-          DEFEX Engineering investigates building defects, designs their
-          rectification, and administers the contracts that deliver the work.
-          The practice is led and carried out by one registered engineer — the
-          person who inspects your building is the person who signs the report,
-          prepares the design, and superintends the repair.
-        </p>
+  <!-- Practice strip -->
+  <section class="practice-strip">
+    <div class="practice-strip__inner">
+      <div>
+        <Reveal><Eyebrow>THE PRACTICE</Eyebrow></Reveal>
+        <Reveal delay={80}>
+          <p class="practice-strip__lead">
+            A deliberately small Sydney practice — the engineer who inspects the building is the engineer
+            who writes the report, prepares the design and superintends the works.
+          </p>
+        </Reveal>
+        <Reveal delay={160}>
+          <a href="/about" class="practice-strip__link">About the practice <Icon name="arrow-right" size={16} /></a>
+        </Reveal>
+      </div>
+      <Reveal delay={120} class="practice-strip__chips">
+        <CredentialChip icon="award" label={site.principal.credentials} />
+        <CredentialChip icon="shield-check" label={site.principal.registrations[0]} />
+        <CredentialChip icon="pencil-ruler" label={site.principal.registrations[1]} />
       </Reveal>
+    </div>
+  </section>
 
-      <div class="mt-12 grid gap-5 md:grid-cols-3">
+  <!-- Services grid -->
+  <section class="services-grid">
+    <div class="services-grid__inner">
+      <Reveal><Eyebrow>SERVICES</Eyebrow></Reveal>
+      <Reveal delay={60} class="services-grid__header">
+        <h2 class="services-grid__heading">Remedial engineering, end to end</h2>
+        <a href="/services" class="services-grid__all">All services <Icon name="arrow-right" size={16} /></a>
+      </Reveal>
+      <div class="services-grid__cards">
         {
-          whatWeDo.map((card, i) => (
-            <Reveal index={i}>
-              <a
-                href={card.href}
-                class="group flex h-full flex-col rounded-card border border-border bg-surface p-6 transition-shadow hover:shadow-brand"
-              >
-                <h3 class="text-2xl font-semibold text-navy">{card.title}</h3>
-                <p class="mt-3 text-base leading-relaxed text-ink-muted">
-                  {card.line}
-                </p>
-                <span
-                  aria-hidden="true"
-                  class="mt-5 text-lg text-blue transition-transform group-hover:translate-x-1"
-                  >→</span
-                >
-              </a>
-            </Reveal>
+          services.map((s, i) => (
+            <a
+              href={`/services#${s.data.slug}`}
+              class="service-card"
+              data-reveal
+              data-delay={(i % 3) * 60}
+            >
+              <span class="service-card__num">{String(s.data.order).padStart(2, '0')}</span>
+              <span class="service-card__title">{s.data.title}</span>
+              <span class="service-card__summary">{s.data.summary}</span>
+            </a>
           ))
         }
       </div>
     </div>
   </section>
 
-  <!-- Services strip -->
-  <section class="border-t border-border bg-surface">
-    <div class="mx-auto max-w-site px-[var(--site-gutter)] py-16 md:py-28">
-      <Reveal>
-        <Eyebrow>Services</Eyebrow>
-        <SectionHeading class="mt-3" weight="light"
-          >Six things, done properly.</SectionHeading
-        >
-      </Reveal>
-      <Reveal>
-        <ul class="mt-10 grid gap-x-10 gap-y-4 sm:grid-cols-2">
-          {
-            services.map((s) => (
-              <li class="border-b border-border">
-                <a
-                  href={`/services#${s.data.slug}`}
-                  class="flex min-h-[52px] items-center justify-between gap-4 text-lg text-ink-body transition-colors hover:text-blue"
-                >
-                  <span>{s.data.title}</span>
-                  <span aria-hidden="true" class="text-steel">→</span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-        <a
-          href="/services"
-          class="mt-8 inline-block text-base font-medium text-blue hover:underline"
-          >All services →</a
-        >
-      </Reveal>
-    </div>
-  </section>
+  <DefectDiagnostics />
 
-  <!-- Platform (navy) -->
-  <section class="bg-navy">
-    <div class="mx-auto max-w-site px-[var(--site-gutter)] py-16 md:py-28">
-      <div class="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-        <Reveal>
-          <Eyebrow tone="dark">The DEFEX platform</Eyebrow>
-          <h2
-            class="mt-3 text-3xl font-light tracking-[-0.02em] text-white md:text-4xl"
-          >
-            Built by the engineer who uses it.
-          </h2>
-          <p class="mt-5 text-lg leading-relaxed text-concrete">
-            Every DEFEX engagement runs on DEFEX — our in-house platform that
-            carries a defect from site capture to issued document. Photographs
-            stay tied to the defect they evidence, defects stay keyed to the
-            Australian Standards they breach, and reports are assembled from the
-            record rather than rewritten from memory. It is why the paperwork is
-            fast, and why it holds up.
-          </p>
-          <a
-            href="/defex-app"
-            class="mt-6 inline-block text-base font-medium text-blue hover:underline"
-            >About the platform →</a
-          >
+  <!-- Platform teaser -->
+  <section class="platform-teaser">
+    <div class="platform-teaser__inner">
+      <div>
+        <Reveal><Eyebrow>THE PLATFORM</Eyebrow></Reveal>
+        <Reveal delay={60}>
+          <h2 class="platform-teaser__heading">Carried by DEFEX, field to issued document</h2>
         </Reveal>
-        <Reveal index={1}>
-          <ScreenshotFrame
-            image={getScreenshot('defex-command-board')}
-            alt="DEFEX Command board showing project control across active engagements."
-            onDark
-            displayWidth={520}
-          />
+        <Reveal delay={120}>
+          <p class="platform-teaser__body">
+            The in-house platform this practice is built on — every engagement runs from site capture to
+            issued document without anything being lost or retyped in between.
+          </p>
+        </Reveal>
+        <Reveal delay={160}>
+          <a href="/defex-app" class="platform-teaser__link">See how DEFEX works <Icon name="arrow-right" size={16} /></a>
         </Reveal>
       </div>
-    </div>
-  </section>
-
-  <!-- Principal strip -->
-  <section class="border-t border-border bg-canvas">
-    <div class="mx-auto max-w-site px-[var(--site-gutter)] py-16 md:py-24">
-      <Reveal class="max-w-3xl">
-        <SectionHeading weight="light"
-          >A registered practitioner, personally accountable.</SectionHeading
-        >
-        <p class="mt-5 text-lg leading-relaxed text-ink-muted">
-          DEFEX Engineering is led by Andrew Fisher — BEng(Civil), MIEAust,
-          CPEng, NSW Registered Professional Engineer and NSW Registered Design
-          Practitioner. Engagements are accepted across Sydney, and occasionally
-          Greater NSW.
-        </p>
-        <a
-          href="/about"
-          class="mt-6 inline-block text-base font-medium text-blue hover:underline"
-          >About Andrew →</a
-        >
+      <Reveal delay={100}>
+        <ScreenshotFrame
+          image={getScreenshot('defex-command-board')}
+          alt="DEFEX Command project board showing project control across active engagements."
+          displayWidth={900}
+        />
       </Reveal>
     </div>
   </section>
 
-  <CtaBand
-    heading="Have a defect that needs resolving?"
-    body="Call or email to discuss the building, the symptoms, and the sensible next step."
-    buttonLabel="Contact DEFEX"
-    buttonHref="/contact"
-  />
+  <CtaBand heading="Talk to the engineer directly." contactLine buttonLabel="Contact DEFEX" buttonHref="/contact" />
 </Base>
+
+<style>
+  .practice-strip {
+    background: #fff;
+    padding: 96px var(--site-gutter);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .practice-strip__inner {
+    max-width: var(--container-site);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 460px;
+    gap: 96px;
+    align-items: center;
+  }
+  .practice-strip__lead {
+    margin: 0 0 28px;
+    max-width: 60ch;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--color-navy);
+    text-wrap: pretty;
+  }
+  .practice-strip__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-blue);
+    min-height: 44px;
+  }
+  .practice-strip__link:hover {
+    color: var(--color-primary-hover);
+  }
+  .practice-strip__chips {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .services-grid {
+    background: var(--color-canvas);
+    padding: 120px var(--site-gutter);
+  }
+  .services-grid__inner {
+    max-width: var(--container-site);
+    margin: 0 auto;
+  }
+  .services-grid__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 20px 0 56px;
+    flex-wrap: wrap;
+  }
+  .services-grid__heading {
+    margin: 0;
+    font-size: 37px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-navy);
+  }
+  .services-grid__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-blue);
+    min-height: 44px;
+    white-space: nowrap;
+  }
+  .services-grid__all:hover {
+    color: var(--color-primary-hover);
+  }
+  .services-grid__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-frame);
+    padding: 32px;
+    color: var(--color-ink-body);
+    transition: all 0.2s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    border-color: var(--color-blueprint-border);
+    color: var(--color-ink-body);
+  }
+  .service-card__num {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--color-blue);
+    font-variant-numeric: tabular-nums;
+  }
+  .service-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  .service-card__summary {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-steel);
+  }
+
+  .platform-teaser {
+    background: #fff;
+    padding: 120px var(--site-gutter);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .platform-teaser__inner {
+    max-width: var(--container-site);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 440px minmax(0, 1fr);
+    gap: 96px;
+    align-items: center;
+  }
+  .platform-teaser__heading {
+    margin: 24px 0;
+    font-size: 37px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+  .platform-teaser__body {
+    margin: 0 0 32px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-ink-muted);
+    text-wrap: pretty;
+  }
+  .platform-teaser__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-blue);
+    min-height: 44px;
+  }
+  .platform-teaser__link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  @media (max-width: 1100px) {
+    .practice-strip__inner,
+    .platform-teaser__inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .services-grid__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 899px) {
+    .practice-strip,
+    .services-grid,
+    .platform-teaser {
+      padding: 64px var(--site-gutter);
+    }
+    .services-grid__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,169 @@
+---
+/**
+ * ProjectCarousel — 480px case-study image with prev/next + maximize
+ * overlays and a caption bar. Clicking the image or maximize opens the
+ * page-wide Lightbox (via a CustomEvent so multiple carousels can share it).
+ */
+import Icon from './Icon.astro';
+
+interface GalleryItem {
+  src: string;
+  caption: string;
+}
+interface Props {
+  id: string;
+  images: GalleryItem[];
+  alt: string;
+}
+const { id, images, alt } = Astro.props;
+---
+
+<div class="pcar" data-pcar={id} data-reveal>
+  <div class="pcar__frame">
+    <img
+      data-pcar-img
+      src={images[0].src}
+      alt={alt}
+      width="900"
+      height="675"
+      class="pcar__img"
+    />
+    <button type="button" class="pcar__nav pcar__nav--prev" data-pcar-prev aria-label="Previous image">
+      <Icon name="chevron-left" size={20} />
+    </button>
+    <button type="button" class="pcar__nav pcar__nav--next" data-pcar-next aria-label="Next image">
+      <Icon name="chevron-right" size={20} />
+    </button>
+    <button type="button" class="pcar__expand" data-pcar-expand aria-label="View full size">
+      <Icon name="maximize-2" size={16} />
+    </button>
+  </div>
+  <div class="pcar__caption">
+    <span data-pcar-caption class="pcar__caption-text">{images[0].caption}</span>
+    <span data-pcar-counter class="pcar__caption-counter">1 / {images.length}</span>
+  </div>
+</div>
+
+<style>
+  .pcar {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    transition: all 0.2s ease;
+  }
+  .pcar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.14);
+  }
+  .pcar__frame {
+    position: relative;
+  }
+  .pcar__img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+  }
+  .pcar__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(16, 24, 40, 0.18);
+    transition: all 0.2s ease;
+  }
+  .pcar__nav:hover {
+    background: var(--color-blue);
+    color: #fff;
+  }
+  .pcar__nav--prev {
+    left: 14px;
+  }
+  .pcar__nav--next {
+    right: 14px;
+  }
+  .pcar__expand {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(26, 26, 46, 0.7);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .pcar__expand:hover {
+    background: var(--color-blue);
+  }
+  .pcar__caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--color-border);
+  }
+  .pcar__caption-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-steel);
+  }
+  .pcar__caption-counter {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-grey);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 899px) {
+    .pcar__img {
+      height: 320px;
+    }
+  }
+</style>
+
+<script define:vars={{ id, images }}>
+  const root = document.querySelector(`[data-pcar="${id}"]`);
+  if (root) {
+    const img = root.querySelector('[data-pcar-img]');
+    const captionEl = root.querySelector('[data-pcar-caption]');
+    const counterEl = root.querySelector('[data-pcar-counter]');
+    let idx = 0;
+
+    function render() {
+      img.src = images[idx].src;
+      captionEl.textContent = images[idx].caption;
+      counterEl.textContent = `${idx + 1} / ${images.length}`;
+    }
+    function step(dir) {
+      idx = (idx + dir + images.length) % images.length;
+      render();
+    }
+    root.querySelector('[data-pcar-prev]')?.addEventListener('click', () => step(-1));
+    root.querySelector('[data-pcar-next]')?.addEventListener('click', () => step(1));
+    const openLightbox = () =>
+      window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { images, index: idx } }));
+    img.addEventListener('click', openLightbox);
+    root.querySelector('[data-pcar-expand]')?.addEventListener('click', openLightbox);
+  }
+</script>

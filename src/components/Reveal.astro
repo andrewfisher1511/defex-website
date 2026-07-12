@@ -1,18 +1,16 @@
 ---
 /**
- * Reveal — wraps children so the scroll-reveal IntersectionObserver (in Base)
- * can fade + translate them in once. Stagger via `index` (≤3 recommended).
- * No motion under prefers-reduced-motion (handled in CSS).
+ * Reveal — marks children for the shared IntersectionObserver in Base.astro
+ * (fade + 24px slide-up, fired once). `delay` in ms for section stagger.
  */
 interface Props {
   as?: string;
-  index?: number;
+  delay?: number;
   class?: string;
 }
-const { as: Tag = 'div', index = 0, class: className = '' } = Astro.props;
-const delay = Math.min(index, 3) * 90;
+const { as: Tag = 'div', delay = 0, class: className = '' } = Astro.props;
 ---
 
-<Tag class={`reveal ${className}`} style={`transition-delay:${delay}ms`}>
+<Tag data-reveal data-delay={delay} class={className}>
   <slot />
 </Tag>

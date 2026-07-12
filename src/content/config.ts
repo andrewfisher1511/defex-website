@@ -2,43 +2,44 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const services = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/services' }),
+  loader: glob({ pattern: '**/*.md', base: './content/services' }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
     order: z.number(),
-    summary: z.string().max(160),
+    summary: z.string().max(200),
   }),
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
+  loader: glob({ pattern: '**/*.md', base: './content/projects' }),
   schema: z.object({
     title: z.string(),
-    sector: z.string(),
-    region: z.string(),
-    scopeTags: z.array(z.string()),
+    eyebrow: z.string(),
+    tags: z.array(z.string()),
     order: z.number(),
-    image: z.enum(['project-1', 'project-2', 'project-3', 'hero']),
+    gallery: z.array(
+      z.object({
+        image: z.enum(['project-1', 'project-2', 'project-3', 'hero-architecture']),
+        caption: z.string(),
+      })
+    ),
   }),
 });
 
-const appFeatures = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/app-features' }),
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './content/posts' }),
   schema: z.object({
     title: z.string(),
+    slug: z.string(),
+    category: z.string(),
+    date: z.coerce.date(),
+    author: z.string(),
+    image: z.enum(['project-1', 'project-2', 'project-3', 'hero-architecture']),
+    excerpt: z.string(),
+    ctaLabel: z.string(),
     order: z.number(),
-    screenshot: z.string().nullable(),
   }),
 });
 
-const testimonials = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
-  schema: z.object({
-    quote: z.string(),
-    attribution: z.string(),
-    placeholder: z.boolean(),
-  }),
-});
-
-export const collections = { services, projects, 'app-features': appFeatures, testimonials };
+export const collections = { services, projects, posts };

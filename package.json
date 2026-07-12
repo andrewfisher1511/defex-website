@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "og": "node scripts/generate-og.mjs",
-    "build": "astro build && node scripts/facts-gate.mjs && node scripts/verify-budget.mjs",
+    "knowledge": "node scripts/generate-knowledge.mjs",
+    "test:enquiry": "node --experimental-strip-types scripts/test-enquiry.ts",
+    "build": "node scripts/generate-knowledge.mjs && astro build && node scripts/facts-gate.mjs && node scripts/verify-budget.mjs",
     "build:astro": "astro build",
     "preview": "astro preview",
     "astro": "astro"

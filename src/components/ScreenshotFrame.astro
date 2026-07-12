@@ -1,62 +1,77 @@
 ---
 /**
- * ScreenshotFrame — product-shot treatment (spec §7). Navy frame, 16px radius,
- * 8px padding, minimal window bar (three Concrete dots at 40%), screenshot at
- * 8px radius + shadow-lg, optional caption. On Navy sections set `onDark` to
- * invert the frame to white-6% with a Concrete hairline. Never upscaled: 2×
- * srcset is capped at native resolution by astro:assets.
+ * ScreenshotFrame — "browser" product-shot treatment: navy title bar with 3
+ * dots (+ optional label) above a full-bleed screenshot. 16px radius, 1px
+ * border, soft shadow. Used by Home's platform teaser and DEFEX App.
  */
-import { Picture } from 'astro:assets';
+import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
   image: ImageMetadata;
   alt: string;
-  caption?: string;
-  onDark?: boolean;
-  /** CSS display width in px used to size the srcset. */
+  label?: string;
   displayWidth?: number;
   loading?: 'lazy' | 'eager';
   class?: string;
+  glow?: boolean;
 }
 const {
   image,
   alt,
-  caption,
-  onDark = false,
-  displayWidth = 480,
+  label,
+  displayWidth = 900,
   loading = 'lazy',
   class: className = '',
+  glow = false,
 } = Astro.props;
-
-const frame = onDark
-  ? 'bg-white/[0.06] ring-1 ring-concrete/25'
-  : 'bg-navy';
 ---
 
-<figure class={`w-full ${className}`}>
-  <div class={`rounded-frame p-2 ${frame}`}>
-    <div class="flex items-center gap-1.5 px-1.5 py-2" aria-hidden="true">
-      <span class="h-2 w-2 rounded-full bg-concrete/40"></span>
-      <span class="h-2 w-2 rounded-full bg-concrete/40"></span>
-      <span class="h-2 w-2 rounded-full bg-concrete/40"></span>
-    </div>
-    <Picture
-      src={image}
-      formats={['avif', 'webp']}
-      fallbackFormat="png"
-      alt={alt}
-      width={displayWidth}
-      densities={[1, 2]}
-      loading={loading}
-      class="w-full rounded-[8px] shadow-lg"
-    />
+<div class:list={['screenshot-frame', { 'has-glow': glow }, className]}>
+  <div class="screenshot-frame__bar">
+    <span class="screenshot-frame__dot"></span>
+    <span class="screenshot-frame__dot"></span>
+    <span class="screenshot-frame__dot"></span>
+    {label && <span class="screenshot-frame__label">{label}</span>}
   </div>
-  {
-    caption && (
-      <figcaption class="mt-3 text-center text-xs text-steel">
-        {caption}
-      </figcaption>
-    )
+  <Image src={image} alt={alt} width={displayWidth} loading={loading} class="screenshot-frame__img" />
+</div>
+
+<style>
+  .screenshot-frame {
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 24px 64px rgba(16, 24, 40, 0.12);
   }
-</figure>
+  .screenshot-frame.has-glow {
+    border-color: rgba(255, 255, 255, 0.14);
+    border-bottom: none;
+    border-radius: var(--radius-frame) var(--radius-frame) 0 0;
+    box-shadow: 0 -8px 64px rgba(37, 99, 235, 0.18);
+  }
+  .screenshot-frame__bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-navy);
+    padding: 12px 16px;
+  }
+  .screenshot-frame__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-steel);
+    display: block;
+  }
+  .screenshot-frame__label {
+    margin-left: 12px;
+    font-size: 12px;
+    color: var(--color-grey);
+    font-weight: 500;
+  }
+  .screenshot-frame__img {
+    width: 100%;
+    display: block;
+  }
+</style>
