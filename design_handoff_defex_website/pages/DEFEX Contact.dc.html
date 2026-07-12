@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/styles.css">
+  <link rel="stylesheet" href="tokens/colors.css">
+  <script src="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #FFFFFF; color: #1C222B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1D4ED8; }
+    ::selection { background: #2563EB; color: #FFFFFF; }
+    input::placeholder, textarea::placeholder { color: #98A2B3; }
+    input:focus, textarea:focus { outline: 2px solid #2563EB; outline-offset: 1px; border-color: #2563EB; }
+  </style>
+</helmet>
+
+<div style="min-width: 1100px">
+
+  <div ref="{{ progressRef }}" style="position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563EB; z-index: 300"></div>
+
+  <!-- Nav -->
+  <nav ref="{{ navRef }}" data-screen-label="Nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(228,231,236,0)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px">
+      <a href="DEFEX Home.dc.html" aria-label="DEFEX Engineering home" style="display: flex; align-items: center; min-height: 44px">
+        <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 36px; display: block">
+      </a>
+      <div style="display: flex; align-items: center; gap: 2px">
+        <a href="DEFEX Home.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Home</a>
+        <a href="DEFEX Services.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Services</a>
+        <a href="DEFEX Projects.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Projects</a>
+        <a href="DEFEX App.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">DEFEX App</a>
+        <a href="DEFEX About.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">About</a>
+        <a href="DEFEX Blog.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Blog</a>
+        <a href="https://app.defex.engineering" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-left: 14px; padding: 0 16px; font-size: 14px; font-weight: 600; color: #1A1A2E; background: transparent; border: 1px solid #E4E7EC; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="border-color: #2563EB; color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="lock" style="width: 14px; height: 14px"></i> Log in</a>
+        <a href="DEFEX Contact.dc.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; margin-left: 14px; padding: 0 20px; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #1D4ED8; border-radius: 8px; white-space: nowrap" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page header -->
+  <header id="top" data-screen-label="Contact header" style="background: #FFFFFF; padding: 216px 32px 72px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div data-hero-seq="0" style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px">
+        <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">CONTACT</span>
+      </div>
+      <h1 data-hero-seq="1" style="margin: 0 0 28px; max-width: 1100px; font-size: 76px; font-weight: 300; line-height: 1.04; letter-spacing: -0.02em; text-transform: uppercase; color: #1A1A2E; text-wrap: balance">Discuss a defect.</h1>
+      <p data-hero-seq="2" style="margin: 0; max-width: 620px; font-size: 18px; line-height: 1.65; color: #44505F; text-wrap: pretty">Call or email directly, or send the details below. Engagements are accepted across Sydney metro and occasionally Greater NSW.</p>
+    </div>
+  </header>
+
+  <!-- Contact body -->
+  <section data-screen-label="Contact form" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 96px 32px 120px">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 96px; align-items: start">
+
+      <!-- Left rail -->
+      <aside data-reveal style="position: sticky; top: 104px; display: flex; flex-direction: column; gap: 36px">
+        <div>
+          <p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">PHONE</p>
+          <a href="tel:+61432261722" style="font-size: 24px; font-weight: 300; color: #1A1A2E; font-variant-numeric: tabular-nums" style-hover="color: #2563EB">0432 261 722</a>
+        </div>
+        <div>
+          <p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">EMAIL</p>
+          <a href="mailto:andrew@defex.engineering" style="font-size: 20px; font-weight: 300; color: #1A1A2E" style-hover="color: #2563EB">andrew@defex.engineering</a>
+        </div>
+        <div>
+          <p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">SERVICE AREA</p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #44505F">Sydney metro, occasionally Greater NSW.</p>
+        </div>
+        <div>
+          <p style="margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">HOURS</p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #44505F">Monday–Friday, 8:00am–5:00pm.<br>Site attendances by arrangement.</p>
+        </div>
+        <div style="background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start">
+          <i data-lucide="camera" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0; margin-top: 2px"></i>
+          <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #44505F">Attachments help with an early read — photos of the symptom, previous reports, strata minutes or quotes.</p>
+        </div>
+        <div style="border: 1px solid #E4E7EC; border-radius: 12px; overflow: hidden; background: #FFFFFF">
+          <iframe src="https://www.google.com/maps?q=Gymea%20NSW%202227&output=embed" title="DEFEX Engineering — based in Gymea NSW" loading="lazy" style="width: 100%; height: 220px; border: none; display: block"></iframe>
+          <p style="margin: 0; padding: 12px 16px; font-size: 13px; line-height: 1.5; color: #5C6B7F; border-top: 1px solid #E4E7EC">Based in Gymea, NSW — serving Sydney metro.</p>
+        </div>
+      </aside>
+
+      <!-- Form / success -->
+      <div>
+        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <div data-reveal data-delay="80" style="background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 44px 48px; box-shadow: 0 2px 12px rgba(16,24,40,0.04)">
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 24px">
+
+              <!-- Name -->
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <label for="f-name" style="font-size: 14px; font-weight: 500; color: #1A1A2E">Name <span style="color: #B91C1C">*</span></label>
+                <input id="f-name" type="text" value="{{ fName }}" onChange="{{ onName }}" autocomplete="name" style="{{ nameStyle }}">
+                <sc-if value="{{ errName }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #B91C1C">{{ errName }}</span></sc-if>
+              </div>
+
+              <!-- Email + Phone -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <label for="f-email" style="font-size: 14px; font-weight: 500; color: #1A1A2E">Email <span style="color: #B91C1C">*</span></label>
+                  <input id="f-email" type="email" value="{{ fEmail }}" onChange="{{ onEmail }}" autocomplete="email" style="{{ emailStyle }}">
+                  <sc-if value="{{ errEmail }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #B91C1C">{{ errEmail }}</span></sc-if>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <label for="f-phone" style="font-size: 14px; font-weight: 500; color: #1A1A2E">Phone</label>
+                  <input id="f-phone" type="tel" value="{{ fPhone }}" onChange="{{ onPhone }}" autocomplete="tel" style="min-height: 44px; padding: 10px 14px; font-size: 16px; font-family: inherit; color: #1C222B; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 8px; font-variant-numeric: tabular-nums">
+                </div>
+              </div>
+
+              <!-- Role -->
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <span style="font-size: 14px; font-weight: 500; color: #1A1A2E">I am the</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                  <button onClick="{{ role0Select }}" style="{{ role0Style }}" style-hover="border-color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Owner</button>
+                  <button onClick="{{ role1Select }}" style="{{ role1Style }}" style-hover="border-color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Strata manager</button>
+                  <button onClick="{{ role2Select }}" style="{{ role2Style }}" style-hover="border-color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Body corporate</button>
+                  <button onClick="{{ role3Select }}" style="{{ role3Style }}" style-hover="border-color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Builder</button>
+                  <button onClick="{{ role4Select }}" style="{{ role4Style }}" style-hover="border-color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Insurer</button>
+                  <button onClick="{{ role5Select }}" style="{{ role5Style }}" style-hover="border-color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Other</button>
+                </div>
+              </div>
+
+              <!-- Address -->
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <label for="f-address" style="font-size: 14px; font-weight: 500; color: #1A1A2E">Building address</label>
+                <div style="position: relative">
+                  <div style="display: flex; gap: 10px">
+                    <input id="f-address" type="text" value="{{ fAddress }}" onChange="{{ onAddress }}" placeholder="Start typing — street, suburb" autocomplete="off" style="flex: 1; min-height: 44px; padding: 10px 14px; font-size: 16px; font-family: inherit; color: #1C222B; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 8px">
+                    <button onClick="{{ openMaps }}" disabled="{{ mapsDisabled }}" aria-label="Open address in Google Maps" title="Open in Google Maps" style="{{ mapsBtnStyle }}" style-hover="border-color: #2563EB; color: #1D4ED8" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+                      <i data-lucide="map-pin" style="width: 18px; height: 18px"></i>
+                      <span style="white-space: nowrap">Maps</span>
+                    </button>
+                  </div>
+                  <sc-if value="{{ hasSugs }}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; top: calc(100% + 6px); left: 0; right: 118px; z-index: 50; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 8px; box-shadow: 0 12px 32px rgba(16,24,40,0.14); overflow: hidden">
+                      <button onClick="{{ sug0Select }}" style="{{ sug0Style }}" style-hover="background: #EFF4FE"><i data-lucide="map-pin" style="width: 14px; height: 14px; color: #98A2B3; flex-shrink: 0"></i><span>{{ sug0Text }}</span></button>
+                      <button onClick="{{ sug1Select }}" style="{{ sug1Style }}" style-hover="background: #EFF4FE"><i data-lucide="map-pin" style="width: 14px; height: 14px; color: #98A2B3; flex-shrink: 0"></i><span>{{ sug1Text }}</span></button>
+                      <button onClick="{{ sug2Select }}" style="{{ sug2Style }}" style-hover="background: #EFF4FE"><i data-lucide="map-pin" style="width: 14px; height: 14px; color: #98A2B3; flex-shrink: 0"></i><span>{{ sug2Text }}</span></button>
+                      <button onClick="{{ sug3Select }}" style="{{ sug3Style }}" style-hover="background: #EFF4FE"><i data-lucide="map-pin" style="width: 14px; height: 14px; color: #98A2B3; flex-shrink: 0"></i><span>{{ sug3Text }}</span></button>
+                    </div>
+                  </sc-if>
+                </div>
+                <span style="font-size: 13px; color: #98A2B3">Suggestions are indicative — production uses Google Places Autocomplete. The Maps button checks the address you have typed.</span>
+                <sc-if value="{{ areaNote }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; gap: 12px; align-items: flex-start; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 8px; padding: 12px 16px">
+                    <i data-lucide="info" style="width: 16px; height: 16px; color: #2563EB; flex-shrink: 0; margin-top: 2px"></i>
+                    <span style="font-size: 13px; line-height: 1.55; color: #44505F">This looks outside Sydney metro. Greater NSW is occasionally covered — still worth sending the details.</span>
+                  </div>
+                </sc-if>
+              </div>
+
+              <!-- Description -->
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <label for="f-desc" style="font-size: 14px; font-weight: 500; color: #1A1A2E">What's happening with the building? <span style="color: #B91C1C">*</span></label>
+                <textarea id="f-desc" rows="6" value="{{ fDesc }}" onChange="{{ onDesc }}" placeholder="Symptoms, where they appear, and how long they have been present — water ingress, cracking, spalling, movement, failed finishes." style="{{ descStyle }}"></textarea>
+                <sc-if value="{{ errDesc }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #B91C1C">{{ errDesc }}</span></sc-if>
+              </div>
+
+              <!-- How did you hear -->
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <label for="f-hear" style="font-size: 14px; font-weight: 500; color: #1A1A2E">How did you hear about us?</label>
+                <input id="f-hear" type="text" value="{{ fHear }}" onChange="{{ onHear }}" placeholder="Referral, search, strata manager, previous project…" style="min-height: 44px; padding: 10px 14px; font-size: 16px; font-family: inherit; color: #1C222B; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 8px">
+              </div>
+
+              <!-- Uploads -->
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <span style="font-size: 14px; font-weight: 500; color: #1A1A2E">Photographs or documents</span>
+                <div ref="{{ dropRef }}" onClick="{{ pickFiles }}" onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" onDrop="{{ onDrop }}" role="button" tabindex="0" style="border: 2px dashed #C9CFD8; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; background: #F9FAFB; transition: all 0.2s ease" style-hover="border-color: #2563EB; background: #EFF4FE" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+                  <i data-lucide="upload" style="width: 22px; height: 22px; color: #2563EB"></i>
+                  <span style="font-size: 14px; font-weight: 500; color: #1A1A2E">Drop files here, or click to browse</span>
+                  <span style="font-size: 13px; color: #98A2B3">Photos, PDFs, reports — up to 10 files</span>
+                </div>
+                <input ref="{{ fileInputRef }}" type="file" multiple onChange="{{ onFileInput }}" style="display: none" aria-hidden="true">
+                <sc-if value="{{ hasFiles }}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px">
+                    <sc-for list="{{ files }}" as="f" hint-placeholder-count="2">
+                      <div style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 8px; padding: 10px 14px">
+                        <i data-lucide="{{ f.icon }}" style="width: 16px; height: 16px; color: #2563EB; flex-shrink: 0"></i>
+                        <span style="flex: 1; font-size: 14px; color: #1C222B; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ f.name }}</span>
+                        <span style="font-size: 13px; color: #98A2B3; white-space: nowrap; font-variant-numeric: tabular-nums">{{ f.size }}</span>
+                        <button onClick="{{ f.remove }}" aria-label="Remove file" style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: none; background: transparent; color: #98A2B3; cursor: pointer; border-radius: 6px" style-hover="color: #B91C1C; background: #FDECEC">
+                          <i data-lucide="x" style="width: 14px; height: 14px"></i>
+                        </button>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+
+              <!-- Submit -->
+              <div style="display: flex; align-items: center; gap: 20px; margin-top: 8px">
+                <button onClick="{{ submit }}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 14px 30px; background: #2563EB; color: #FFFFFF; font-size: 15px; font-weight: 600; font-family: inherit; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Send enquiry <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></button>
+                <sc-if value="{{ errSummary }}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #B91C1C">{{ errSummary }}</span></sc-if>
+              </div>
+              <p style="margin: 0; font-size: 13px; color: #98A2B3">Details are used only to respond to this enquiry.</p>
+
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 56px 48px; box-shadow: 0 2px 12px rgba(16,24,40,0.04); display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+            <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #E8F6EE">
+              <i data-lucide="check" style="width: 26px; height: 26px; color: #15803D"></i>
+            </span>
+            <h2 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; color: #1A1A2E">Enquiry sent.</h2>
+            <p style="margin: 0; max-width: 56ch; font-size: 16px; line-height: 1.7; color: #44505F">Thanks {{ firstName }} — the details are on their way to Andrew. If the matter is urgent, call <a href="tel:+61432261722" style="font-weight: 600; font-variant-numeric: tabular-nums">0432 261 722</a> directly.</p>
+            <p style="margin: 0; font-size: 14px; color: #98A2B3">{{ fileSummary }}</p>
+
+            <div style="width: 100%; border: 1px solid #E4E7EC; border-radius: 12px; overflow: hidden; margin-top: 8px">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #F9FAFB; border-bottom: 1px solid #E4E7EC; padding: 12px 20px">
+                <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3; white-space: nowrap">WHAT ANDREW RECEIVES</span>
+                <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #6E84A8; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 4px 10px; white-space: nowrap">SUBJECT SUMMARISED AUTOMATICALLY</span>
+              </div>
+              <div style="padding: 20px; display: flex; flex-direction: column; gap: 14px">
+                <div style="display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; align-items: baseline">
+                  <span style="font-size: 13px; font-weight: 600; color: #98A2B3">To</span>
+                  <span style="font-size: 14px; color: #1C222B">andrew@defex.engineering</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; align-items: baseline">
+                  <span style="font-size: 13px; font-weight: 600; color: #98A2B3">Subject</span>
+                  <span style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start">
+                    <sc-if value="{{ urgentFlag }}" hint-placeholder-val="{{ false }}">
+                      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #B91C1C; background: #FDECEC; border-radius: 999px; padding: 4px 12px; white-space: nowrap"><i data-lucide="alert-triangle" style="width: 12px; height: 12px"></i> URGENT — ACTIVE WATER INDICATED</span>
+                    </sc-if>
+                    <span style="font-size: 15px; font-weight: 600; line-height: 1.5; color: #1A1A2E">{{ subjectLine }}</span>
+                  </span>
+                </div>
+                <div style="border-top: 1px solid #F0F2F5; padding-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+                  <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #FFFFFF; background: #2563EB; border-radius: 8px; padding: 10px 16px; white-space: nowrap"><i data-lucide="kanban-square" style="width: 15px; height: 15px"></i> Add to DEFEX Command as potential job</span>
+                  <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #2563EB; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 8px; padding: 10px 16px; white-space: nowrap"><i data-lucide="users" style="width: 15px; height: 15px"></i> Create CRM contact</span>
+                  <span style="font-size: 12px; color: #98A2B3">One-tap links inside the email — every field pre-filled.</span>
+                </div>
+              </div>
+            </div>
+
+            <button onClick="{{ resetForm }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 10px 20px; background: transparent; color: #2563EB; font-size: 14px; font-weight: 600; font-family: inherit; border: 1px solid #D7E3FB; border-radius: 8px; cursor: pointer; transition: all 0.2s ease" style-hover="background: #EFF4FE" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Send another enquiry</button>
+          </div>
+        </sc-if>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer data-screen-label="Footer" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 72px 32px 40px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 64px; padding-bottom: 48px">
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start">
+          <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 44px; display: block">
+          <p style="margin: 0; font-size: 15px; font-weight: 600; color: #1A1A2E">Defects Resolved.</p>
+          <p style="margin: 0; font-size: 14px; color: #5C6B7F; display: flex; gap: 10px; align-items: center">
+            <a href="tel:+61432261722" style="color: #5C6B7F; font-variant-numeric: tabular-nums" style-hover="color: #2563EB">0432 261 722</a>
+            <span>·</span>
+            <a href="mailto:andrew@defex.engineering" style="color: #5C6B7F" style-hover="color: #2563EB">andrew@defex.engineering</a>
+          </p>
+          <div style="display: flex; gap: 10px; margin-top: 4px">
+            <a href="https://www.linkedin.com/company/defex-engineering" target="_blank" rel="noopener" aria-label="DEFEX on LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a>
+            <a href="https://www.facebook.com/defexengineering" target="_blank" rel="noopener" aria-label="DEFEX on Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14C16.5 3.09 15.47 3 14.31 3c-2.45 0-4.13 1.5-4.13 4.24v2.36H7.42v3.2h2.76V21h3.32z"></path></svg></a>
+            <a href="https://www.instagram.com/defexengineering" target="_blank" rel="noopener" aria-label="DEFEX on Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5"></rect><circle cx="12" cy="12" r="4.1"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">SITE</p>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <a href="DEFEX Services.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Services</a>
+            <a href="DEFEX Projects.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Projects</a>
+            <a href="DEFEX App.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">DEFEX App</a>
+            <a href="DEFEX About.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">About</a>
+            <a href="DEFEX Blog.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Blog</a>
+            <a href="DEFEX Contact.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">PRACTICE</p>
+          <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #5C6B7F">Remedial consulting engineers.<br>Sydney metro, occasionally Greater NSW.</p>
+          <a href="#" title="Attach the capability statement PDF" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 14px; font-weight: 600; color: #2563EB; min-height: 44px" style-hover="color: #1D4ED8"><i data-lucide="file-down" style="width: 16px; height: 16px"></i> Capability statement (PDF)</a>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #E4E7EC; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap">
+        <p style="margin: 0; font-size: 13px; color: #98A2B3">Andrew Fisher — BEng(Civil), MIEAust, CPEng, NER · NSW Registered Professional Engineer · NSW Registered Design Practitioner · ABN XXX XXX XXX XXX</p>
+        <p style="margin: 0; font-size: 13px; color: #98A2B3; display: flex; gap: 16px; align-items: center; white-space: nowrap">
+          <span>© 2026 DEFEX Engineering</span>
+          <a href="DEFEX Privacy.dc.html" style="color: #98A2B3" style-hover="color: #2563EB">Privacy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;motion&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    name: '', email: '', phone: '', address: '', desc: '', hear: '',
+    role: '', files: [], errors: {}, submitted: false, subject: '', sugs: []
+  };
+
+  addressPool = [
+    '12 Harbour Street, Pyrmont', '88 Foreshore Road, Botany', '5 Beaconsfield Parade, Lindfield',
+    '42 Ocean Street, Cronulla', '17 Kembla Crescent, Ryde', '230 Victoria Road, Gladesville',
+    '9 Grand Parade, Brighton-Le-Sands', '3 Mount Street, North Sydney', '76 Norton Street, Leichhardt',
+    '21 Gymea Bay Road, Gymea', '14 Marine Parade, Manly', '58 Church Street, Parramatta',
+    '33 Anzac Parade, Kensington', '7 Railway Parade, Hurstville', '105 Pacific Highway, Chatswood'
+  ];
+
+  regionalMarkers = ['wollongong', 'newcastle', 'gosford', 'central coast', 'blue mountains', 'katoomba', 'orange', 'bathurst', 'dubbo', 'coffs', 'wagga', 'tamworth', 'byron', 'ballina', 'goulburn', 'nowra', 'kiama', 'shellharbour', 'albury', 'armidale'];
+
+  isUrgent() {
+    return /\b(leak(s|ing)?|water ingress|flood(ing|ed)?|dripping|ceiling (is )?(sagging|bulging|coming down)|actively|overnight)\b/i.test(this.state.desc);
+  }
+
+  computeSugs(value) {
+    const q = value.trim().toLowerCase();
+    if (q.length < 3) return [];
+    return this.addressPool.filter(a => a.toLowerCase().includes(q)).slice(0, 4);
+  }
+
+  isRegional() {
+    const a = this.state.address.toLowerCase();
+    return a.length > 3 && this.regionalMarkers.some(m => a.includes(m));
+  }
+
+  fallbackSubject() {
+    const s = this.state;
+    const who = s.role ? s.role + ' (' + s.name.trim() + ')' : s.name.trim();
+    const where = s.address.trim() ? ' - ' + s.address.trim() : '';
+    const what = s.desc.trim() ? ' - ' + s.desc.trim().slice(0, 80) : '';
+    const flag = this.isUrgent() ? 'URGENT - ' : '';
+    return flag + 'New DEFEX Website enquiry - ' + who + where + what;
+  }
+
+  async generateSubject() {
+    const s = this.state;
+    this.setState({ subject: 'Summarising enquiry\u2026' });
+    const fallback = this.fallbackSubject();
+    try {
+      if (!window.claude || !window.claude.complete) { this.setState({ subject: fallback }); return; }
+      const prompt = 'Write ONE email subject line for a remedial engineering enquiry from a website form. Format exactly: "New DEFEX Website enquiry - <role or company> (<name>) - <address> - <very short plain summary of the request>". Australian English, no exclamation marks, no quotes, under 140 characters, output only the subject line. If the description indicates active water ingress or a safety risk, prefix the whole line with "URGENT - ".\n\nForm data:\nName: ' + s.name + '\nRole: ' + (s.role || 'not stated') + '\nAddress: ' + (s.address || 'not stated') + '\nDescription: ' + s.desc + '\nAttachments: ' + s.files.length;
+      const text = await window.claude.complete(prompt);
+      const line = (text || '').trim().split('\n')[0].replace(/^["']|["']$/g, '');
+      this.setState({ subject: line && line.length > 20 ? line : fallback });
+    } catch (e) {
+      this.setState({ subject: fallback });
+    }
+  }
+  progressRef = React.createRef();
+  navRef = React.createRef();
+  dropRef = React.createRef();
+  fileInputRef = React.createRef();
+
+  roleOptions = ['Owner', 'Strata manager', 'Body corporate', 'Builder', 'Insurer', 'Other'];
+
+  inputBase = 'min-height: 44px; padding: 10px 14px; font-size: 16px; font-family: inherit; color: #1C222B; background: #FFFFFF; border-radius: 8px; border: 1px solid ';
+
+  roleStyle(i) {
+    const label = this.roleOptions[i];
+    return 'min-height: 44px; padding: 10px 18px; font-size: 14px; font-weight: 600; font-family: inherit; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; ' +
+      (this.state.role === label
+        ? 'background: #2563EB; color: #FFFFFF; border: 1px solid #2563EB'
+        : 'background: #FFFFFF; color: #44505F; border: 1px solid #E4E7EC');
+  }
+
+  toggleRole(i) {
+    const label = this.roleOptions[i];
+    this.setState(s => ({ role: s.role === label ? '' : label }));
+  }
+
+  sugStyle(i) {
+    const shown = i < this.state.sugs.length;
+    return 'display: ' + (shown ? 'flex' : 'none') + '; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 10px 14px; background: #FFFFFF; border: none; border-bottom: 1px solid #F0F2F5; cursor: pointer; font-family: inherit; font-size: 14px; color: #1C222B; text-align: left; transition: background 0.2s ease';
+  }
+
+  pickSug(i) {
+    const val = this.state.sugs[i];
+    if (val) this.setState({ address: val, sugs: [] });
+  }
+
+  fmtSize(bytes) {
+    if (bytes > 1048576) return (bytes / 1048576).toFixed(1) + ' MB';
+    if (bytes > 1024) return Math.round(bytes / 1024) + ' KB';
+    return bytes + ' B';
+  }
+
+  fileIcon(name) {
+    const n = (name || '').toLowerCase();
+    if (/\.(jpg|jpeg|png|heic|webp|gif)$/.test(n)) return 'image';
+    if (/\.pdf$/.test(n)) return 'file-text';
+    return 'file';
+  }
+
+  addFiles(list) {
+    const incoming = Array.from(list || []).slice(0, 10 - this.state.files.length);
+    if (!incoming.length) return;
+    this.setState(s => ({ files: s.files.concat(incoming.map(f => ({ name: f.name, bytes: f.size }))) }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const e = s.errors;
+    const errStyle = '#B91C1C; box-shadow: 0 0 0 1px #B91C1C';
+    const okStyle = '#E4E7EC';
+    return {
+      notSubmitted: !s.submitted,
+      submitted: s.submitted,
+      fName: s.name, fEmail: s.email, fPhone: s.phone, fAddress: s.address, fDesc: s.desc, fHear: s.hear,
+      onName: ev => this.setState({ name: ev.target.value }),
+      onEmail: ev => this.setState({ email: ev.target.value }),
+      onPhone: ev => this.setState({ phone: ev.target.value }),
+      onAddress: ev => this.setState({ address: ev.target.value, sugs: this.computeSugs(ev.target.value) }),
+      hasSugs: s.sugs.length > 0,
+      sug0Text: s.sugs[0] || '', sug1Text: s.sugs[1] || '', sug2Text: s.sugs[2] || '', sug3Text: s.sugs[3] || '',
+      sug0Style: this.sugStyle(0), sug1Style: this.sugStyle(1), sug2Style: this.sugStyle(2), sug3Style: this.sugStyle(3),
+      sug0Select: () => this.pickSug(0), sug1Select: () => this.pickSug(1), sug2Select: () => this.pickSug(2), sug3Select: () => this.pickSug(3),
+      areaNote: this.isRegional(),
+      urgentFlag: s.submitted && this.isUrgent(),
+      onDesc: ev => this.setState({ desc: ev.target.value }),
+      onHear: ev => this.setState({ hear: ev.target.value }),
+      nameStyle: this.inputBase + (e.name ? errStyle : okStyle),
+      emailStyle: this.inputBase + (e.email ? errStyle : okStyle),
+      descStyle: 'padding: 12px 14px; font-size: 16px; line-height: 1.6; font-family: inherit; color: #1C222B; background: #FFFFFF; border-radius: 8px; resize: vertical; border: 1px solid ' + (e.desc ? errStyle : okStyle),
+      errName: e.name || false,
+      errEmail: e.email || false,
+      errDesc: e.desc || false,
+      errSummary: e.summary || false,
+      role0Style: this.roleStyle(0), role1Style: this.roleStyle(1), role2Style: this.roleStyle(2),
+      role3Style: this.roleStyle(3), role4Style: this.roleStyle(4), role5Style: this.roleStyle(5),
+      role0Select: () => this.toggleRole(0), role1Select: () => this.toggleRole(1), role2Select: () => this.toggleRole(2),
+      role3Select: () => this.toggleRole(3), role4Select: () => this.toggleRole(4), role5Select: () => this.toggleRole(5),
+      mapsDisabled: !s.address.trim(),
+      mapsBtnStyle: 'display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; font-size: 14px; font-weight: 600; font-family: inherit; border-radius: 8px; transition: all 0.2s ease; ' +
+        (s.address.trim()
+          ? 'background: #EFF4FE; color: #2563EB; border: 1px solid #D7E3FB; cursor: pointer'
+          : 'background: #F2F4F7; color: #98A2B3; border: 1px solid #E4E7EC; cursor: not-allowed'),
+      openMaps: () => {
+        const q = this.state.address.trim();
+        if (q) window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q + ', NSW, Australia'), '_blank');
+      },
+      hasFiles: s.files.length > 0,
+      files: s.files.map((f, i) => ({
+        name: f.name,
+        size: this.fmtSize(f.bytes),
+        icon: this.fileIcon(f.name),
+        remove: () => this.setState(st => ({ files: st.files.filter((_, j) => j !== i) }))
+      })),
+      pickFiles: () => this.fileInputRef.current && this.fileInputRef.current.click(),
+      onFileInput: ev => { this.addFiles(ev.target.files); ev.target.value = ''; },
+      onDragOver: ev => { ev.preventDefault(); if (this.dropRef.current) this.dropRef.current.style.borderColor = '#2563EB'; },
+      onDragLeave: () => { if (this.dropRef.current) this.dropRef.current.style.borderColor = '#C9CFD8'; },
+      onDrop: ev => { ev.preventDefault(); this.addFiles(ev.dataTransfer.files); if (this.dropRef.current) this.dropRef.current.style.borderColor = '#C9CFD8'; },
+      dropRef: this.dropRef,
+      fileInputRef: this.fileInputRef,
+      submit: () => this.submit(),
+      subjectLine: s.subject || 'Summarising enquiry\u2026',
+      resetForm: () => this.setState({ submitted: false, name: '', email: '', phone: '', address: '', desc: '', hear: '', role: '', files: [], errors: {}, subject: '' }),
+      firstName: (s.name.trim().split(/\s+/)[0] || ''),
+      fileSummary: s.files.length
+        ? s.files.length + (s.files.length === 1 ? ' attachment' : ' attachments') + ' included with the enquiry.'
+        : 'No attachments included — photos can always follow by email.',
+      progressRef: this.progressRef,
+      navRef: this.navRef
+    };
+  }
+
+  submit() {
+    const s = this.state;
+    const errors = {};
+    if (!s.name.trim()) errors.name = 'Name is required.';
+    if (!s.email.trim()) errors.email = 'Email is required.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim())) errors.email = 'Enter a valid email address.';
+    if (!s.desc.trim()) errors.desc = 'A short description of the symptoms is required.';
+    if (Object.keys(errors).length) {
+      errors.summary = 'Complete the required fields above.';
+      this.setState({ errors });
+      return;
+    }
+    this.setState({ errors: {}, submitted: true }, () => this.generateSubject());
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.motionOn = (this.props.motion ?? true) && !this.reduced;
+    this.renderIcons();
+    this.onScroll = () => this.applyScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    this.applyScroll();
+    if (this.motionOn) { this.setupReveals(); this.heroIntro(); }
+  }
+
+  componentDidUpdate() { this.renderIcons(); }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    if (this.io) this.io.disconnect();
+  }
+
+  renderIcons() {
+    const go = () => window.lucide && window.lucide.createIcons();
+    if (window.lucide) go(); else setTimeout(go, 700);
+  }
+
+  applyScroll() {
+    const y = window.scrollY || 0;
+    const doc = document.documentElement;
+    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+    if (this.progressRef.current) this.progressRef.current.style.width = (Math.min(1, y / max) * 100).toFixed(2) + '%';
+    if (this.navRef.current) {
+      const on = y > 8;
+      this.navRef.current.style.borderBottomColor = on ? 'rgba(228,231,236,1)' : 'rgba(228,231,236,0)';
+      this.navRef.current.style.boxShadow = on ? '0 1px 8px rgba(16,24,40,0.05)' : 'none';
+    }
+  }
+
+  setupReveals() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(24px)'; });
+    this.io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+        el.style.transition = 'opacity 0.7s ' + ease + ' ' + delay + 'ms, transform 0.7s ' + ease + ' ' + delay + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+
+  heroIntro() {
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    document.querySelectorAll('[data-hero-seq]').forEach(el => {
+      const i = parseInt(el.getAttribute('data-hero-seq'), 10) || 0;
+      el.animate(
+        [{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 750, delay: 150 + i * 140, easing: ease, fill: 'both' }
+      );
+    });
+  }
+}
+
+</script>
+</body>
+</html>

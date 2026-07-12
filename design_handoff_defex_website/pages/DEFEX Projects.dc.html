@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/styles.css">
+  <link rel="stylesheet" href="tokens/colors.css">
+  <script src="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #FFFFFF; color: #1C222B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1D4ED8; }
+    ::selection { background: #2563EB; color: #FFFFFF; }
+  </style>
+</helmet>
+
+<div style="min-width: 1100px">
+
+  <div ref="{{ progressRef }}" style="position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563EB; z-index: 300"></div>
+
+  <!-- Nav -->
+  <nav ref="{{ navRef }}" data-screen-label="Nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(228,231,236,0)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px">
+      <a href="DEFEX Home.dc.html" aria-label="DEFEX Engineering home" style="display: flex; align-items: center; min-height: 44px">
+        <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 36px; display: block">
+      </a>
+      <div style="display: flex; align-items: center; gap: 2px">
+        <a href="DEFEX Home.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Home</a>
+        <a href="DEFEX Services.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Services</a>
+        <a href="DEFEX Projects.dc.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Projects</a>
+        <a href="DEFEX App.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">DEFEX App</a>
+        <a href="DEFEX About.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">About</a>
+        <a href="DEFEX Blog.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Blog</a>
+        <a href="https://app.defex.engineering" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-left: 14px; padding: 0 16px; font-size: 14px; font-weight: 600; color: #1A1A2E; background: transparent; border: 1px solid #E4E7EC; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="border-color: #2563EB; color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="lock" style="width: 14px; height: 14px"></i> Log in</a>
+        <a href="DEFEX Contact.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; margin-left: 14px; padding: 0 20px; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #2563EB; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page header -->
+  <header id="top" data-screen-label="Projects header" style="background: #FFFFFF; padding: 216px 32px 88px; border-bottom: 1px solid #E4E7EC">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div data-hero-seq="0" style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px">
+        <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">PROJECTS</span>
+      </div>
+      <h1 data-hero-seq="1" style="margin: 0 0 28px; max-width: 1100px; font-size: 76px; font-weight: 300; line-height: 1.04; letter-spacing: -0.02em; text-transform: uppercase; color: #1A1A2E; text-wrap: balance">Representative engagements.</h1>
+      <p data-hero-seq="2" style="margin: 0 0 36px; max-width: 620px; font-size: 18px; line-height: 1.65; color: #44505F; text-wrap: pretty">Selected project experience, described in general terms. Addresses and parties are withheld as a matter of course.</p>
+      <div data-hero-seq="3" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3; white-space: nowrap">ACTS FOR</span>
+        <span style="font-size: 13px; font-weight: 600; color: #44505F; background: #F9FAFB; border: 1px solid #E4E7EC; border-radius: 999px; padding: 8px 16px; white-space: nowrap">Owners corporations</span>
+        <span style="font-size: 13px; font-weight: 600; color: #44505F; background: #F9FAFB; border: 1px solid #E4E7EC; border-radius: 999px; padding: 8px 16px; white-space: nowrap">Strata managers</span>
+        <span style="font-size: 13px; font-weight: 600; color: #44505F; background: #F9FAFB; border: 1px solid #E4E7EC; border-radius: 999px; padding: 8px 16px; white-space: nowrap">Private owners</span>
+        <span style="font-size: 13px; font-weight: 600; color: #44505F; background: #F9FAFB; border: 1px solid #E4E7EC; border-radius: 999px; padding: 8px 16px; white-space: nowrap">Insurers</span>
+        <span style="font-size: 13px; font-weight: 600; color: #44505F; background: #F9FAFB; border: 1px solid #E4E7EC; border-radius: 999px; padding: 8px 16px; white-space: nowrap">Builders</span>
+        <span style="font-size: 13px; font-weight: 600; color: #44505F; background: #F9FAFB; border: 1px solid #E4E7EC; border-radius: 999px; padding: 8px 16px; white-space: nowrap">Legal practitioners</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Case 1 -->
+  <section data-screen-label="Case study 1" style="background: #FFFFFF; padding: 104px 32px">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 520px minmax(0, 1fr); gap: 96px; align-items: center">
+      <div data-reveal style="display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; border: 1px solid #E4E7EC; background: #FFFFFF; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.14)">
+        <div style="position: relative">
+          <img ref="{{ c1ImgRef }}" src="assets/project-1.jpg" alt="Strata remediation project imagery" onClick="{{ c1Open }}" style="width: 100%; height: 480px; object-fit: cover; display: block; cursor: zoom-in">
+          <button onClick="{{ c1Prev }}" aria-label="Previous image" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: #1A1A2E; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(16,24,40,0.18); transition: all 0.2s ease" style-hover="background: #2563EB; color: #FFFFFF" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="chevron-left" style="width: 20px; height: 20px"></i></button>
+          <button onClick="{{ c1Next }}" aria-label="Next image" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: #1A1A2E; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(16,24,40,0.18); transition: all 0.2s ease" style-hover="background: #2563EB; color: #FFFFFF" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="chevron-right" style="width: 20px; height: 20px"></i></button>
+          <button onClick="{{ c1Open }}" aria-label="View full size" style="position: absolute; right: 14px; bottom: 14px; width: 40px; height: 40px; border-radius: 8px; border: none; background: rgba(26,26,46,0.7); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease" style-hover="background: #2563EB" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="maximize-2" style="width: 16px; height: 16px"></i></button>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-top: 1px solid #E4E7EC">
+          <span style="font-size: 13px; line-height: 1.5; color: #5C6B7F">{{ c1Caption }}</span>
+          <span style="font-size: 13px; font-weight: 600; color: #98A2B3; white-space: nowrap; font-variant-numeric: tabular-nums">{{ c1Counter }}</span>
+        </div>
+      </div>
+      <div>
+        <p data-reveal style="margin: 0 0 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; color: #6E84A8">RESIDENTIAL STRATA · INNER WEST</p>
+        <div data-reveal data-delay="40" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap">
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Concrete repair</span>
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Waterproofing</span>
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Superintendency</span>
+        </div>
+        <h2 data-reveal data-delay="80" style="margin: 0 0 24px; font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: #1A1A2E; text-wrap: balance">Strata remediation, Inner West — 48 lots</h2>
+        <p data-reveal data-delay="120" style="margin: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">A four-storey walk-up complex presented with spalling concrete to balcony soffits and slab edges, and recurring leaks from planters over habitable rooms.</p>
+        <p data-reveal data-delay="160" style="margin: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">Investigation confirmed carbonation-driven reinforcement corrosion and failed planter membranes. A remedial design and specification covered concrete repair, cathodic-risk detailing at exposed edges, and full membrane replacement with revised falls and drainage.</p>
+        <p data-reveal data-delay="200" style="margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">The works were tendered competitively and delivered under an AS 4000 contract with independent superintendency through to practical completion and defects liability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case 2 -->
+  <section data-screen-label="Case study 2" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 104px 32px">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 96px; align-items: center">
+      <div>
+        <p data-reveal style="margin: 0 0 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; color: #6E84A8">COMMERCIAL · LOWER NORTH SHORE</p>
+        <div data-reveal data-delay="40" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap">
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Waterproofing</span>
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Investigation</span>
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Specification and tender</span>
+        </div>
+        <h2 data-reveal data-delay="80" style="margin: 0 0 24px; font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: #1A1A2E; text-wrap: balance">Podium waterproofing, Lower North Shore — commercial</h2>
+        <p data-reveal data-delay="120" style="margin: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">A trafficked podium deck over commercial tenancies showed persistent ingress at multiple points, with previous patch repairs failing within seasons.</p>
+        <p data-reveal data-delay="160" style="margin: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">Targeted opening-up traced the ingress to terminations and inadequate falls rather than the membrane field. The remedial design replaced the system as a whole — falls re-established, terminations detailed, drainage upgraded — rather than continuing the cycle of patching.</p>
+        <p data-reveal data-delay="200" style="margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">A measured specification allowed like-for-like tenders, and staging kept the tenancies trading throughout the works.</p>
+      </div>
+      <div data-reveal style="display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; border: 1px solid #E4E7EC; background: #FFFFFF; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.14)">
+        <div style="position: relative">
+          <img ref="{{ c2ImgRef }}" src="assets/project-2.jpg" alt="Podium waterproofing project imagery" onClick="{{ c2Open }}" style="width: 100%; height: 480px; object-fit: cover; display: block; cursor: zoom-in">
+          <button onClick="{{ c2Prev }}" aria-label="Previous image" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: #1A1A2E; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(16,24,40,0.18); transition: all 0.2s ease" style-hover="background: #2563EB; color: #FFFFFF" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="chevron-left" style="width: 20px; height: 20px"></i></button>
+          <button onClick="{{ c2Next }}" aria-label="Next image" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: #1A1A2E; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(16,24,40,0.18); transition: all 0.2s ease" style-hover="background: #2563EB; color: #FFFFFF" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="chevron-right" style="width: 20px; height: 20px"></i></button>
+          <button onClick="{{ c2Open }}" aria-label="View full size" style="position: absolute; right: 14px; bottom: 14px; width: 40px; height: 40px; border-radius: 8px; border: none; background: rgba(26,26,46,0.7); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease" style-hover="background: #2563EB" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="maximize-2" style="width: 16px; height: 16px"></i></button>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-top: 1px solid #E4E7EC">
+          <span style="font-size: 13px; line-height: 1.5; color: #5C6B7F">{{ c2Caption }}</span>
+          <span style="font-size: 13px; font-weight: 600; color: #98A2B3; white-space: nowrap; font-variant-numeric: tabular-nums">{{ c2Counter }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case 3 -->
+  <section data-screen-label="Case study 3" style="background: #FFFFFF; border-top: 1px solid #E4E7EC; padding: 104px 32px">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 520px minmax(0, 1fr); gap: 96px; align-items: center">
+      <div data-reveal style="display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; border: 1px solid #E4E7EC; background: #FFFFFF; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,99,235,0.14)">
+        <div style="position: relative">
+          <img ref="{{ c3ImgRef }}" src="assets/project-3.jpg" alt="Expert reporting project imagery" onClick="{{ c3Open }}" style="width: 100%; height: 480px; object-fit: cover; display: block; cursor: zoom-in">
+          <button onClick="{{ c3Prev }}" aria-label="Previous image" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: #1A1A2E; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(16,24,40,0.18); transition: all 0.2s ease" style-hover="background: #2563EB; color: #FFFFFF" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="chevron-left" style="width: 20px; height: 20px"></i></button>
+          <button onClick="{{ c3Next }}" aria-label="Next image" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: #1A1A2E; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 12px rgba(16,24,40,0.18); transition: all 0.2s ease" style-hover="background: #2563EB; color: #FFFFFF" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="chevron-right" style="width: 20px; height: 20px"></i></button>
+          <button onClick="{{ c3Open }}" aria-label="View full size" style="position: absolute; right: 14px; bottom: 14px; width: 40px; height: 40px; border-radius: 8px; border: none; background: rgba(26,26,46,0.7); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease" style-hover="background: #2563EB" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="maximize-2" style="width: 16px; height: 16px"></i></button>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border-top: 1px solid #E4E7EC">
+          <span style="font-size: 13px; line-height: 1.5; color: #5C6B7F">{{ c3Caption }}</span>
+          <span style="font-size: 13px; font-weight: 600; color: #98A2B3; white-space: nowrap; font-variant-numeric: tabular-nums">{{ c3Counter }}</span>
+        </div>
+      </div>
+      <div>
+        <p data-reveal style="margin: 0 0 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; color: #6E84A8">RESIDENTIAL STRATA · SOUTH SYDNEY</p>
+        <div data-reveal data-delay="40" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap">
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Expert reporting</span>
+          <span style="font-size: 12px; font-weight: 600; color: #1A1A2E; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 999px; padding: 6px 14px; white-space: nowrap">Defect investigation</span>
+        </div>
+        <h2 data-reveal data-delay="80" style="margin: 0 0 24px; font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: #1A1A2E; text-wrap: balance">Expert reporting, South Sydney — balcony defects</h2>
+        <p data-reveal data-delay="120" style="margin: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">An owners corporation in dispute over balcony waterproofing and balustrade fixing defects required an independent expert assessment for use in proceedings.</p>
+        <p data-reveal data-delay="160" style="margin: 0 0 20px; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">Every balcony was inspected and photographed; findings were keyed to the relevant Australian Standards and NCC provisions, with a schedule of defects, causes and rectification costs prepared in a form suitable for the tribunal.</p>
+        <p data-reveal data-delay="200" style="margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.75; color: #1C222B; text-wrap: pretty">The matter resolved by negotiation, with the report's rectification scope adopted as the basis of settlement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section data-screen-label="CTA" style="position: relative; background: #1A1A2E; padding: 128px 32px; overflow: hidden">
+    <img src="assets/defex-mark-white.svg" alt="" aria-hidden="true" style="position: absolute; right: -70px; top: 50%; transform: translateY(-50%) rotate(8deg); width: 460px; opacity: 0.05; pointer-events: none">
+    <div style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 64px; position: relative">
+      <div data-reveal>
+        <h2 style="margin: 0 0 20px; font-size: 52px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; color: #FFFFFF; text-wrap: balance">A building presenting the same way?</h2>
+        <p style="margin: 0; font-size: 15px; color: #C9CFD8">Describe the symptoms — references for comparable work are available on request.</p>
+      </div>
+      <a data-reveal data-delay="120" href="DEFEX Contact.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 16px 30px; background: #2563EB; color: #FFFFFF; font-size: 15px; font-weight: 600; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.35)" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">Discuss a defect <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ lbClose }}" role="dialog" aria-label="Image viewer" style="position: fixed; inset: 0; z-index: 400; background: rgba(12,12,24,0.93); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 48px">
+      <button onClick="{{ lbClose }}" aria-label="Close viewer" style="position: absolute; top: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease" style-hover="background: rgba(255,255,255,0.12)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="x" style="width: 22px; height: 22px"></i></button>
+      <button onClick="{{ lbPrev }}" aria-label="Previous image" style="position: absolute; left: 32px; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease" style-hover="background: rgba(255,255,255,0.12)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="chevron-left" style="width: 24px; height: 24px"></i></button>
+      <button onClick="{{ lbNext }}" aria-label="Next image" style="position: absolute; right: 32px; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease" style-hover="background: rgba(255,255,255,0.12)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="chevron-right" style="width: 24px; height: 24px"></i></button>
+      <img data-lb-img ref="{{ lbImgRef }}" src="assets/project-1.jpg" alt="{{ lbCaption }}" onClick="{{ lbStop }}" style="max-width: 84vw; max-height: 74vh; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,0.5)">
+      <div onClick="{{ lbStop }}" style="display: flex; align-items: center; gap: 16px; max-width: 84vw">
+        <span style="font-size: 15px; line-height: 1.5; color: #FFFFFF">{{ lbCaption }}</span>
+        <span style="font-size: 14px; font-weight: 600; color: #98A2B3; white-space: nowrap; font-variant-numeric: tabular-nums">{{ lbCounter }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Footer -->
+  <footer data-screen-label="Footer" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 72px 32px 40px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 64px; padding-bottom: 48px">
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start">
+          <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 44px; display: block">
+          <p style="margin: 0; font-size: 15px; font-weight: 600; color: #1A1A2E">Defects Resolved.</p>
+          <p style="margin: 0; font-size: 14px; color: #5C6B7F; display: flex; gap: 10px; align-items: center">
+            <a href="tel:+61432261722" style="color: #5C6B7F; font-variant-numeric: tabular-nums" style-hover="color: #2563EB">0432 261 722</a>
+            <span>·</span>
+            <a href="mailto:andrew@defex.engineering" style="color: #5C6B7F" style-hover="color: #2563EB">andrew@defex.engineering</a>
+          </p>
+          <div style="display: flex; gap: 10px; margin-top: 4px">
+            <a href="https://www.linkedin.com/company/defex-engineering" target="_blank" rel="noopener" aria-label="DEFEX on LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a>
+            <a href="https://www.facebook.com/defexengineering" target="_blank" rel="noopener" aria-label="DEFEX on Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14C16.5 3.09 15.47 3 14.31 3c-2.45 0-4.13 1.5-4.13 4.24v2.36H7.42v3.2h2.76V21h3.32z"></path></svg></a>
+            <a href="https://www.instagram.com/defexengineering" target="_blank" rel="noopener" aria-label="DEFEX on Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5"></rect><circle cx="12" cy="12" r="4.1"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">SITE</p>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <a href="DEFEX Services.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Services</a>
+            <a href="DEFEX Projects.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Projects</a>
+            <a href="DEFEX App.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">DEFEX App</a>
+            <a href="DEFEX About.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">About</a>
+            <a href="DEFEX Blog.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Blog</a>
+            <a href="DEFEX Contact.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">PRACTICE</p>
+          <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #5C6B7F">Remedial consulting engineers.<br>Sydney metro, occasionally Greater NSW.</p>
+          <a href="#" title="Attach the capability statement PDF" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 14px; font-weight: 600; color: #2563EB; min-height: 44px" style-hover="color: #1D4ED8"><i data-lucide="file-down" style="width: 16px; height: 16px"></i> Capability statement (PDF)</a>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #E4E7EC; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap">
+        <p style="margin: 0; font-size: 13px; color: #98A2B3">Andrew Fisher — BEng(Civil), MIEAust, CPEng, NER · NSW Registered Professional Engineer · NSW Registered Design Practitioner · ABN XXX XXX XXX XXX</p>
+        <p style="margin: 0; font-size: 13px; color: #98A2B3; display: flex; gap: 16px; align-items: center; white-space: nowrap">
+          <span>© 2026 DEFEX Engineering</span>
+          <a href="DEFEX Privacy.dc.html" style="color: #98A2B3" style-hover="color: #2563EB">Privacy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;motion&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot; }
+}">
+class Component extends DCLogic {
+  state = { idx: [0, 0, 0], lb: null };
+  progressRef = React.createRef();
+  navRef = React.createRef();
+  c1ImgRef = React.createRef();
+  c2ImgRef = React.createRef();
+  c3ImgRef = React.createRef();
+  lbImgRef = React.createRef();
+
+  galleries = [
+    [
+      { src: 'assets/project-1.jpg', cap: 'Balcony soffits and slab edges presenting spalling concrete' },
+      { src: 'assets/hero-architecture.jpg', cap: 'Remedial design covered concrete repair and edge detailing' },
+      { src: 'assets/project-3.jpg', cap: 'Planter membranes replaced with revised falls and drainage' }
+    ],
+    [
+      { src: 'assets/project-2.jpg', cap: 'Trafficked podium deck over commercial tenancies' },
+      { src: 'assets/hero-architecture.jpg', cap: 'Ingress traced to terminations and inadequate falls' },
+      { src: 'assets/project-1.jpg', cap: 'Staged delivery kept the tenancies trading throughout' }
+    ],
+    [
+      { src: 'assets/project-3.jpg', cap: 'Every balcony inspected and photographed' },
+      { src: 'assets/project-2.jpg', cap: 'Findings keyed to the relevant Australian Standards and NCC' },
+      { src: 'assets/hero-architecture.jpg', cap: 'Schedule of defects and costs prepared for the tribunal' }
+    ]
+  ];
+
+  step(g, dir) {
+    this.setState(s => {
+      const idx = s.idx.slice();
+      const n = this.galleries[g].length;
+      idx[g] = (idx[g] + dir + n) % n;
+      return { idx };
+    });
+  }
+
+  syncCarousels() {
+    const refs = [this.c1ImgRef, this.c2ImgRef, this.c3ImgRef];
+    refs.forEach((r, g) => {
+      const want = this.galleries[g][this.state.idx[g]].src;
+      if (r.current && !r.current.getAttribute('src').endsWith(want)) r.current.setAttribute('src', want);
+    });
+    const tryScan = (n) => {
+      const lb = this.state.lb;
+      if (!lb) return;
+      const el = this.lbImgRef.current || document.querySelector('[data-lb-img]');
+      if (!el) {
+        if (n > 0) requestAnimationFrame(() => tryScan(n - 1));
+        return;
+      }
+      const want = this.galleries[lb.g][lb.i].src;
+      if (!(el.getAttribute('src') || '').endsWith(want)) el.src = want;
+    };
+    requestAnimationFrame(() => tryScan(15));
+  }
+
+  carouselVals(g) {
+    const i = this.state.idx[g];
+    const n = this.galleries[g].length;
+    return {
+      ['c' + (g + 1) + 'Caption']: this.galleries[g][i].cap,
+      ['c' + (g + 1) + 'Counter']: (i + 1) + ' / ' + n,
+      ['c' + (g + 1) + 'Prev']: () => this.step(g, -1),
+      ['c' + (g + 1) + 'Next']: () => this.step(g, 1),
+      ['c' + (g + 1) + 'Open']: () => this.setState({ lb: { g, i: this.state.idx[g] } }),
+      ['c' + (g + 1) + 'ImgRef']: [this.c1ImgRef, this.c2ImgRef, this.c3ImgRef][g]
+    };
+  }
+
+  renderVals() {
+    const lb = this.state.lb;
+    let lbVals = { lbOpen: false, lbSrc: '', lbCaption: '', lbCounter: '' };
+    if (lb) {
+      const gal = this.galleries[lb.g];
+      const item = gal[lb.i];
+      lbVals = { lbOpen: true, lbCaption: item.cap, lbCounter: (lb.i + 1) + ' / ' + gal.length };
+    }
+    return Object.assign(
+      {
+        progressRef: this.progressRef,
+        navRef: this.navRef,
+        lbClose: () => this.setState({ lb: null }),
+        lbStop: ev => ev.stopPropagation(),
+        lbPrev: ev => { ev.stopPropagation(); this.stepLb(-1); },
+        lbNext: ev => { ev.stopPropagation(); this.stepLb(1); }
+      },
+      lbVals,
+      this.carouselVals(0),
+      this.carouselVals(1),
+      this.carouselVals(2)
+    );
+  }
+
+  stepLb(dir) {
+    this.setState(s => {
+      if (!s.lb) return null;
+      const n = this.galleries[s.lb.g].length;
+      return { lb: { g: s.lb.g, i: (s.lb.i + dir + n) % n } };
+    });
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.motionOn = (this.props.motion ?? true) && !this.reduced;
+    this.renderIcons();
+    this.onScroll = () => this.applyScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    this.applyScroll();
+    if (this.motionOn) { this.setupReveals(); this.heroIntro(); }
+    this.onKey = (ev) => {
+      if (!this.state.lb) return;
+      if (ev.key === 'Escape') this.setState({ lb: null });
+      if (ev.key === 'ArrowLeft') this.stepLb(-1);
+      if (ev.key === 'ArrowRight') this.stepLb(1);
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+
+  componentDidUpdate() { this.renderIcons(); this.syncCarousels(); }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.io) this.io.disconnect();
+  }
+
+  renderIcons() {
+    const go = () => window.lucide && window.lucide.createIcons();
+    if (window.lucide) go(); else setTimeout(go, 700);
+  }
+
+  applyScroll() {
+    const y = window.scrollY || 0;
+    const doc = document.documentElement;
+    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+    if (this.progressRef.current) this.progressRef.current.style.width = (Math.min(1, y / max) * 100).toFixed(2) + '%';
+    if (this.navRef.current) {
+      const on = y > 8;
+      this.navRef.current.style.borderBottomColor = on ? 'rgba(228,231,236,1)' : 'rgba(228,231,236,0)';
+      this.navRef.current.style.boxShadow = on ? '0 1px 8px rgba(16,24,40,0.05)' : 'none';
+    }
+  }
+
+  setupReveals() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(24px)'; });
+    this.io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+        el.style.transition = 'opacity 0.7s ' + ease + ' ' + delay + 'ms, transform 0.7s ' + ease + ' ' + delay + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+
+  heroIntro() {
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    document.querySelectorAll('[data-hero-seq]').forEach(el => {
+      const i = parseInt(el.getAttribute('data-hero-seq'), 10) || 0;
+      el.animate(
+        [{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 750, delay: 150 + i * 140, easing: ease, fill: 'both' }
+      );
+    });
+  }
+}
+
+</script>
+</body>
+</html>

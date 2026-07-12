@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/styles.css">
+  <link rel="stylesheet" href="tokens/colors.css">
+  <script src="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #FFFFFF; color: #1C222B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1D4ED8; }
+    ::selection { background: #2563EB; color: #FFFFFF; }
+  </style>
+</helmet>
+
+<div style="min-width: 1100px">
+
+  <!-- Scroll progress -->
+  <div ref="{{ progressRef }}" style="position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563EB; z-index: 300"></div>
+
+  <!-- Nav -->
+  <nav ref="{{ navRef }}" data-screen-label="Nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(228,231,236,0)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 32px">
+      <a href="DEFEX Home.dc.html" aria-label="DEFEX Engineering home" style="display: flex; align-items: center; min-height: 44px">
+        <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 36px; display: block">
+      </a>
+      <div style="display: flex; align-items: center; gap: 2px">
+        <a href="DEFEX Home.dc.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Home</a>
+        <a href="DEFEX Services.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Services</a>
+        <a href="DEFEX Projects.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Projects</a>
+        <a href="DEFEX App.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">DEFEX App</a>
+        <a href="DEFEX About.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">About</a>
+        <a href="DEFEX Blog.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Blog</a>
+        <a href="https://app.defex.engineering" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-left: 14px; padding: 0 16px; font-size: 14px; font-weight: 600; color: #1A1A2E; background: transparent; border: 1px solid #E4E7EC; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="border-color: #2563EB; color: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="lock" style="width: 14px; height: 14px"></i> Log in</a>
+        <a href="DEFEX Contact.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; margin-left: 14px; padding: 0 20px; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #2563EB; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" ref="{{ heroRef }}" data-screen-label="Hero" style="position: relative; height: 820px; overflow: hidden; background: #1A1A2E">
+    <div ref="{{ heroWrapRef }}" style="position: absolute; top: -90px; bottom: -90px; left: 0; right: 0; will-change: transform">
+      <img ref="{{ heroImgRef }}" src="assets/hero-architecture.jpg" alt="Architectural concrete facade" style="width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform">
+    </div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(155deg, rgba(26,26,46,0.93) 0%, rgba(26,26,46,0.62) 48%, rgba(37,99,235,0.42) 100%)"></div>
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 0 104px">
+      <div style="max-width: 1400px; margin: 0 auto; padding: 0 32px">
+        <div data-hero-seq="0" style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px">
+          <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #C9CFD8; white-space: nowrap">SYDNEY · REMEDIAL CONSULTING ENGINEERS</span>
+        </div>
+        <h1 data-hero-seq="1" style="margin: 0 0 28px; max-width: 1100px; font-size: 104px; font-weight: 300; line-height: 0.98; letter-spacing: -0.02em; text-transform: uppercase; color: #FFFFFF; text-wrap: balance">Remedial engineering.</h1>
+        <p data-hero-seq="2" style="margin: 0 0 40px; max-width: 620px; font-size: 18px; line-height: 1.6; font-weight: 400; color: rgba(255,255,255,0.78)">Defects resolved — investigated, designed and superintended by the engineer who signs.</p>
+        <div data-hero-seq="3" style="display: flex; gap: 16px; align-items: center">
+          <a href="DEFEX Contact.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 14px 26px; background: #2563EB; color: #FFFFFF; font-size: 15px; font-weight: 600; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.35)" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">Discuss a defect <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+          <a href="DEFEX Services.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 14px 26px; background: transparent; border: 1px solid rgba(255,255,255,0.4); color: #FFFFFF; font-size: 15px; font-weight: 600; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); color: #FFFFFF" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">View services</a>
+        </div>
+      </div>
+    </div>
+    <div style="position: absolute; right: 40px; bottom: 104px; display: flex; flex-direction: column; align-items: center; gap: 14px">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.3em; color: rgba(255,255,255,0.6); writing-mode: vertical-rl">SCROLL</span>
+      <span style="display: block; width: 1px; height: 56px; background: rgba(255,255,255,0.35)"></span>
+    </div>
+  </header>
+
+  <!-- Practice strip -->
+  <section data-screen-label="Practice strip" style="background: #FFFFFF; padding: 96px 32px; border-bottom: 1px solid #E4E7EC">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 96px; align-items: center">
+      <div>
+        <div data-reveal style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px">
+          <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">THE PRACTICE</span>
+        </div>
+        <p data-reveal data-delay="80" style="margin: 0 0 28px; max-width: 60ch; font-size: 26px; font-weight: 300; line-height: 1.5; color: #1A1A2E; text-wrap: pretty">A deliberately small Sydney practice — the engineer who inspects the building is the engineer who writes the report, prepares the design and superintends the works.</p>
+        <a data-reveal data-delay="160" href="DEFEX About.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #2563EB; min-height: 44px" style-hover="color: #1D4ED8">About the practice <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+      </div>
+      <div data-reveal data-delay="120" style="display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; gap: 14px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 14px 20px; min-height: 44px">
+          <i data-lucide="award" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0"></i>
+          <span style="font-size: 14px; font-weight: 600; color: #1A1A2E; white-space: nowrap">BEng(Civil), MIEAust, CPEng</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 14px 20px; min-height: 44px">
+          <i data-lucide="shield-check" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0"></i>
+          <span style="font-size: 14px; font-weight: 600; color: #1A1A2E; white-space: nowrap">NSW Registered Professional Engineer</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 14px 20px; min-height: 44px">
+          <i data-lucide="pencil-ruler" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0"></i>
+          <span style="font-size: 14px; font-weight: 600; color: #1A1A2E; white-space: nowrap">NSW Registered Design Practitioner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services grid -->
+  <section data-screen-label="Services grid" style="background: #F9FAFB; padding: 120px 32px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div data-reveal style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px">
+        <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">SERVICES</span>
+      </div>
+      <div data-reveal data-delay="60" style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 56px">
+        <h2 style="margin: 0; font-size: 37px; font-weight: 600; letter-spacing: -0.02em; color: #1A1A2E">Remedial engineering, end to end</h2>
+        <a href="DEFEX Services.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #2563EB; min-height: 44px; white-space: nowrap" style-hover="color: #1D4ED8">All services <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px">
+        <a data-reveal href="DEFEX Services.dc.html" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 32px; color: #1C222B; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: #D7E3FB; color: #1C222B" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+          <span style="font-size: 40px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">01</span>
+          <span style="font-size: 18px; font-weight: 600; color: #1A1A2E">Defect investigation and diagnostics</span>
+          <span style="font-size: 14px; line-height: 1.6; color: #5C6B7F">From symptom back to cause — photo-evidenced, standards-keyed, written to be read.</span>
+        </a>
+        <a data-reveal data-delay="60" href="DEFEX Services.dc.html" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 32px; color: #1C222B; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: #D7E3FB; color: #1C222B" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+          <span style="font-size: 40px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">02</span>
+          <span style="font-size: 18px; font-weight: 600; color: #1A1A2E">Remedial design and declared designs</span>
+          <span style="font-size: 14px; line-height: 1.6; color: #5C6B7F">Concrete repair, waterproofing and façade design — declared under the DBP Act where required.</span>
+        </a>
+        <a data-reveal data-delay="120" href="DEFEX Services.dc.html" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 32px; color: #1C222B; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: #D7E3FB; color: #1C222B" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+          <span style="font-size: 40px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">03</span>
+          <span style="font-size: 18px; font-weight: 600; color: #1A1A2E">Specifications and tender</span>
+          <span style="font-size: 14px; line-height: 1.6; color: #5C6B7F">Scopes priced well because they are specified well — comparable tenders, fewer variations.</span>
+        </a>
+        <a data-reveal href="DEFEX Services.dc.html" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 32px; color: #1C222B; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: #D7E3FB; color: #1C222B" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+          <span style="font-size: 40px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">04</span>
+          <span style="font-size: 18px; font-weight: 600; color: #1A1A2E">Superintendency and contract administration</span>
+          <span style="font-size: 14px; line-height: 1.6; color: #5C6B7F">AS 4000 administration — progress claims, variations and EOTs assessed independently.</span>
+        </a>
+        <a data-reveal data-delay="60" href="DEFEX Services.dc.html" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 32px; color: #1C222B; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: #D7E3FB; color: #1C222B" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+          <span style="font-size: 40px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">05</span>
+          <span style="font-size: 18px; font-weight: 600; color: #1A1A2E">Expert and litigation-support reporting</span>
+          <span style="font-size: 14px; line-height: 1.6; color: #5C6B7F">Reports prepared for use in proceedings — a clear statement of cause and consequence.</span>
+        </a>
+        <a data-reveal data-delay="120" href="DEFEX Services.dc.html" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; padding: 32px; color: #1C222B; transition: all 0.2s ease" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: #D7E3FB; color: #1C222B" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">
+          <span style="font-size: 40px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">06</span>
+          <span style="font-size: 18px; font-weight: 600; color: #1A1A2E">Façade and waterproofing assessment</span>
+          <span style="font-size: 14px; line-height: 1.6; color: #5C6B7F">Condition, falls-to-drain and membrane performance — assessed before they become claims.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Defect diagnostics interactive -->
+  <section data-screen-label="Defect diagnostics" style="background: #1A1A2E; padding: 120px 32px; overflow: hidden">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 480px minmax(0, 1fr); gap: 96px; align-items: center">
+      <div>
+        <div data-reveal style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px">
+          <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #C9CFD8; white-space: nowrap">DEFECT DIAGNOSTICS</span>
+        </div>
+        <h2 data-reveal data-delay="60" style="margin: 0 0 24px; font-size: 46px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; color: #FFFFFF; text-wrap: balance">From symptom to cause.</h2>
+        <p data-reveal data-delay="120" style="margin: 0 0 32px; font-size: 16px; line-height: 1.7; color: #C9CFD8; text-wrap: pretty">Every defect is pinned where it sits — photographed at the point of observation, keyed to the relevant Australian Standards and NCC provisions, and traced back to cause before a fix is designed.</p>
+        <p data-reveal data-delay="160" style="margin: 0 0 28px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: #6E84A8">SELECT A PIN TO INSPECT</p>
+        <div data-reveal data-delay="200" style="display: flex; align-items: center; gap: 16px">
+          <button onClick="{{ scnPrev }}" aria-label="Previous example" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #FFFFFF; cursor: pointer; transition: all 0.2s ease" style-hover="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="chevron-left" style="width: 18px; height: 18px"></i></button>
+          <button onClick="{{ scnNext }}" aria-label="Next example" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #FFFFFF; cursor: pointer; transition: all 0.2s ease" style-hover="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px"><i data-lucide="chevron-right" style="width: 18px; height: 18px"></i></button>
+          <span style="font-size: 14px; font-weight: 600; color: #FFFFFF">{{ scnTitle }}</span>
+          <span style="font-size: 13px; font-weight: 600; color: #6E84A8; font-variant-numeric: tabular-nums">{{ scnCounter }}</span>
+        </div>
+      </div>
+      <div data-reveal data-delay="100" style="position: relative">
+        <div style="position: relative; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12)">
+          <img ref="{{ scnImgRef }}" src="assets/project-1.jpg" alt="Building under inspection" style="width: 100%; height: 560px; object-fit: cover; display: block">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,46,0.1) 0%, rgba(26,26,46,0.35) 100%)"></div>
+          <button onClick="{{ pin0Select }}" aria-label="{{ pin0Label }}" style="{{ pin0Style }}" style-hover="transform: translate(-50%, -50%) scale(1.15)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">
+            <img src="assets/defex-mark-white.svg" alt="" style="width: 22px; height: 22px; display: block; pointer-events: none">
+          </button>
+          <button onClick="{{ pin1Select }}" aria-label="{{ pin1Label }}" style="{{ pin1Style }}" style-hover="transform: translate(-50%, -50%) scale(1.15)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">
+            <img src="assets/defex-mark-white.svg" alt="" style="width: 22px; height: 22px; display: block; pointer-events: none">
+          </button>
+          <button onClick="{{ pin2Select }}" aria-label="{{ pin2Label }}" style="{{ pin2Style }}" style-hover="transform: translate(-50%, -50%) scale(1.15)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">
+            <img src="assets/defex-mark-white.svg" alt="" style="width: 22px; height: 22px; display: block; pointer-events: none">
+          </button>
+          <div style="{{ activeCardStyle }}">
+            <p style="margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: #6E84A8">{{ activePin.kind }}</p>
+            <p style="margin: 0 0 8px; font-size: 17px; font-weight: 600; color: #1A1A2E">{{ activePin.title }}</p>
+            <p style="margin: 0 0 10px; font-size: 13px; line-height: 1.6; color: #44505F">{{ activePin.body }}</p>
+            <p style="margin: 0; font-size: 12px; font-weight: 600; color: #2563EB; font-variant-numeric: tabular-nums">{{ activePin.ref }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App teaser -->
+  <section data-screen-label="Platform teaser" style="background: #FFFFFF; padding: 120px 32px; border-bottom: 1px solid #E4E7EC">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div style="display: grid; grid-template-columns: 440px minmax(0, 1fr); gap: 96px; align-items: center">
+        <div>
+          <div data-reveal style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px">
+            <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+            <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">THE PLATFORM</span>
+          </div>
+          <h2 data-reveal data-delay="60" style="margin: 0 0 24px; font-size: 37px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; color: #1A1A2E; text-wrap: balance">Carried by DEFEX, field to issued document</h2>
+          <p data-reveal data-delay="120" style="margin: 0 0 32px; font-size: 16px; line-height: 1.7; color: #44505F; text-wrap: pretty">The in-house platform this practice is built on — every engagement runs from site capture to issued document without anything being lost or retyped in between.</p>
+          <a data-reveal data-delay="160" href="DEFEX App.dc.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #2563EB; min-height: 44px" style-hover="color: #1D4ED8">See how DEFEX works <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+        </div>
+        <div data-reveal data-delay="100" style="border-radius: 16px; overflow: hidden; border: 1px solid #E4E7EC; box-shadow: 0 24px 64px rgba(16,24,40,0.12)">
+          <div style="display: flex; align-items: center; gap: 6px; background: #1A1A2E; padding: 12px 16px">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #5C6B7F; display: block"></span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #5C6B7F; display: block"></span>
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #5C6B7F; display: block"></span>
+          </div>
+          <img src="brand-drop/screenshots/defex-command-board.png" alt="DEFEX Command project board" style="width: 100%; display: block">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" data-screen-label="CTA" style="position: relative; background: #1A1A2E; padding: 128px 32px; overflow: hidden">
+    <img src="assets/defex-mark-white.svg" alt="" aria-hidden="true" style="position: absolute; right: -70px; top: 50%; transform: translateY(-50%) rotate(8deg); width: 460px; opacity: 0.05; pointer-events: none">
+    <div style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 64px; position: relative">
+      <div data-reveal>
+        <h2 style="margin: 0 0 20px; font-size: 52px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; color: #FFFFFF; text-wrap: balance">Talk to the engineer directly.</h2>
+        <p style="margin: 0; font-size: 15px; color: #C9CFD8; display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <a href="tel:+61432261722" style="color: #C9CFD8; font-variant-numeric: tabular-nums" style-hover="color: #FFFFFF">0432 261 722</a>
+          <span style="color: #5C6B7F">·</span>
+          <a href="mailto:andrew@defex.engineering" style="color: #C9CFD8" style-hover="color: #FFFFFF">andrew@defex.engineering</a>
+        </p>
+      </div>
+      <a data-reveal data-delay="120" href="DEFEX Contact.dc.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 16px 30px; background: #2563EB; color: #FFFFFF; font-size: 15px; font-weight: 600; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.35)" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">Contact DEFEX <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+    </div>
+  </section>
+
+  <!-- Ask DEFEX chat -->
+  <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Ask DEFEX chat" role="dialog" aria-label="Ask DEFEX assistant" style="position: fixed; right: 28px; bottom: 100px; z-index: 350; width: 388px; height: min(540px, calc(100vh - 130px)); display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 16px; box-shadow: 0 24px 64px rgba(16,24,40,0.24); overflow: hidden">
+      <div style="display: flex; align-items: center; gap: 12px; background: #1A1A2E; padding: 16px 20px">
+        <img src="assets/defex-mark-white.svg" alt="" style="width: 26px; height: 26px; display: block">
+        <div style="flex: 1; min-width: 0">
+          <p style="margin: 0; font-size: 15px; font-weight: 600; color: #FFFFFF">Ask DEFEX</p>
+          <p style="margin: 0; font-size: 12px; color: #C9CFD8">Answers from this website's information</p>
+        </div>
+        <button onClick="{{ chatToggle }}" aria-label="Close assistant" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: none; background: transparent; color: #C9CFD8; cursor: pointer; border-radius: 8px; transition: all 0.2s ease" style-hover="color: #FFFFFF; background: rgba(255,255,255,0.1)"><i data-lucide="x" style="width: 18px; height: 18px"></i></button>
+      </div>
+      <div ref="{{ chatBodyRef }}" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: #F9FAFB">
+        <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="1">
+          <div style="{{ m.rowStyle }}">
+            <div style="{{ m.bubbleStyle }}">{{ m.text }}</div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ chatBusy }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; justify-content: flex-start">
+            <div style="background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 12px 12px 12px 4px; padding: 10px 16px; font-size: 14px; color: #98A2B3">Thinking…</div>
+          </div>
+        </sc-if>
+      </div>
+      <div style="border-top: 1px solid #E4E7EC; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; background: #FFFFFF">
+        <div style="display: flex; gap: 10px">
+          <input type="text" value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask about services, process, service area…" aria-label="Ask a question" style="flex: 1; min-height: 44px; padding: 10px 14px; font-size: 15px; font-family: inherit; color: #1C222B; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 8px">
+          <button onClick="{{ chatSend }}" aria-label="Send question" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: none; background: #2563EB; color: #FFFFFF; border-radius: 8px; cursor: pointer; transition: all 0.2s ease" style-hover="background: #1D4ED8" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="arrow-up" style="width: 18px; height: 18px"></i></button>
+        </div>
+        <p style="margin: 0; font-size: 11px; line-height: 1.5; color: #98A2B3">AI answers based on defex.engineering content — not engineering advice. For anything specific, call <a href="tel:+61432261722" style="color: #98A2B3; font-weight: 600; font-variant-numeric: tabular-nums">0432 261 722</a>.</p>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ chatHint }}" hint-placeholder-val="{{ false }}">
+    <button onClick="{{ chatToggle }}" style="position: fixed; right: 96px; bottom: 40px; z-index: 350; display: inline-flex; align-items: center; min-height: 32px; padding: 8px 16px; border: none; border-radius: 999px; background: #1A1A2E; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; white-space: nowrap; cursor: pointer; box-shadow: 0 8px 24px rgba(16,24,40,0.3); transition: all 0.2s ease" style-hover="background: #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Ask DEFEX</button>
+  </sc-if>
+  <button onClick="{{ chatToggle }}" aria-label="Ask DEFEX a question" style="position: fixed; right: 28px; bottom: 28px; z-index: 350; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border: none; border-radius: 50%; background: #2563EB; color: #FFFFFF; cursor: pointer; box-shadow: 0 8px 24px rgba(37,99,235,0.4); transition: all 0.2s ease" style-hover="background: #1D4ED8; transform: translateY(-2px)" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #2563EB; outline-offset: 2px"><i data-lucide="{{ chatFabIcon }}" style="width: 24px; height: 24px"></i></button>
+
+  <!-- Footer -->
+  <footer data-screen-label="Footer" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 72px 32px 40px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 64px; padding-bottom: 48px">
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start">
+          <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 44px; display: block">
+          <p style="margin: 0; font-size: 15px; font-weight: 600; color: #1A1A2E">Defects Resolved.</p>
+          <p style="margin: 0; font-size: 14px; color: #5C6B7F; display: flex; gap: 10px; align-items: center">
+            <a href="tel:+61432261722" style="color: #5C6B7F; font-variant-numeric: tabular-nums" style-hover="color: #2563EB">0432 261 722</a>
+            <span>·</span>
+            <a href="mailto:andrew@defex.engineering" style="color: #5C6B7F" style-hover="color: #2563EB">andrew@defex.engineering</a>
+          </p>
+          <div style="display: flex; gap: 10px; margin-top: 4px">
+            <a href="https://www.linkedin.com/company/defex-engineering" target="_blank" rel="noopener" aria-label="DEFEX on LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg></a>
+            <a href="https://www.facebook.com/defexengineering" target="_blank" rel="noopener" aria-label="DEFEX on Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.59-1.56h1.7V3.14C16.5 3.09 15.47 3 14.31 3c-2.45 0-4.13 1.5-4.13 4.24v2.36H7.42v3.2h2.76V21h3.32z"></path></svg></a>
+            <a href="https://www.instagram.com/defexengineering" target="_blank" rel="noopener" aria-label="DEFEX on Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E4E7EC; border-radius: 8px; color: #5C6B7F; background: #FFFFFF; transition: all 0.2s ease" style-hover="color: #2563EB; border-color: #D7E3FB; background: #EFF4FE"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5"></rect><circle cx="12" cy="12" r="4.1"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">SITE</p>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <a href="DEFEX Services.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Services</a>
+            <a href="DEFEX Projects.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Projects</a>
+            <a href="DEFEX App.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">DEFEX App</a>
+            <a href="DEFEX About.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">About</a>
+            <a href="DEFEX Blog.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Blog</a>
+            <a href="DEFEX Contact.dc.html" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">PRACTICE</p>
+          <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #5C6B7F">Remedial consulting engineers.<br>Sydney metro, occasionally Greater NSW.</p>
+          <a href="#" title="Attach the capability statement PDF" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 14px; font-weight: 600; color: #2563EB; min-height: 44px" style-hover="color: #1D4ED8"><i data-lucide="file-down" style="width: 16px; height: 16px"></i> Capability statement (PDF)</a>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #E4E7EC; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap">
+        <p style="margin: 0; font-size: 13px; color: #98A2B3">Andrew Fisher — BEng(Civil), MIEAust, CPEng, NER · NSW Registered Professional Engineer · NSW Registered Design Practitioner · ABN XXX XXX XXX XXX</p>
+        <p style="margin: 0; font-size: 13px; color: #98A2B3; display: flex; gap: 16px; align-items: center; white-space: nowrap">
+          <span>© 2026 DEFEX Engineering</span>
+          <a href="DEFEX Privacy.dc.html" style="color: #98A2B3" style-hover="color: #2563EB">Privacy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;motion&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    activePin: 0,
+    scn: 0,
+    chatSeen: false,
+    chatOpen: false,
+    chatInput: '',
+    chatBusy: false,
+    chatMsgs: [{ role: 'assistant', text: 'G\u2019day — ask me anything about DEFEX: services, how engagements run, the service area, or the DEFEX platform. If it\u2019s not covered on this site, I\u2019ll say so.' }]
+  };
+  chatBodyRef = React.createRef();
+
+  siteKnowledge = 'DEFEX Engineering is a deliberately small Sydney remedial consulting practice led by Andrew Fisher (BEng(Civil), MIEAust, CPEng, NER; NSW Registered Professional Engineer; NSW Registered Design Practitioner). Tagline: Defects Resolved. The engineer who inspects the building is the engineer who writes the report, prepares the design and superintends the works. Service area: Sydney metro, occasionally Greater NSW. Contact: 0432 261 722, andrew@defex.engineering, PO Box 106 Gymea NSW 2227. Hours: Monday to Friday 8:00am-5:00pm, site attendances by arrangement. Services: 1) Defect investigation and diagnostics (photo-evidenced, keyed to Australian Standards and NCC, written for owners, committees, insurers and courts). 2) Remedial design and declared designs (concrete repair, waterproofing, facades; for Class 2 buildings regulated designs are declared under the Design and Building Practitioners Act 2020 by a Registered Design Practitioner). 3) Specifications and tender (measured scopes so tenders price like for like, tender assessment and recommendation). 4) Superintendency and contract administration (AS 4000, independent assessment of progress claims, variations and EOTs through to practical completion). 5) Expert and litigation-support reporting (reports for use in proceedings, plain statements of cause, consequence and rectification cost). 6) Facade and waterproofing assessment (condition, falls-to-drain, membranes, prioritised schedule of works). How engagements run: 01 Contact (describe the building and symptoms), 02 Proposal (written scope and fee in plain terms), 03 Investigation and reporting, 04 Design and delivery. The DEFEX platform is the in-house software the practice runs on (site capture with photos tied to defects, project board, timesheets, documents); it is not for sale and has no pricing; clients and builders log in to the projects they are connected to. Enquiries can be sent from the Contact page with photos and documents attached.';
+
+  chatSystem = 'You are the website assistant for DEFEX Engineering. Answer ONLY from the site information provided below. Plain, competent Australian English. No exclamation marks. No emoji. Keep answers under 110 words. If a question is outside the provided information, say plainly that it is not covered on this site and suggest calling 0432 261 722 or emailing andrew@defex.engineering. Never give engineering advice about a specific building or defect — recommend an inspection instead. Do not invent fees, availability, insurance details or client names. Do not recommend other organisations, registers or practitioners.\n\nSITE INFORMATION:\n';
+  progressRef = React.createRef();
+  navRef = React.createRef();
+  heroRef = React.createRef();
+  heroWrapRef = React.createRef();
+  heroImgRef = React.createRef();
+
+  scenarios = [
+    {
+      title: 'Strata balconies',
+      img: 'assets/project-1.jpg',
+      pins: [
+        { kind: 'DEFECT 01 — CONCRETE', title: 'Spalling concrete, slab edge', body: 'Carbonation-driven reinforcement corrosion at the exposed slab edge. Break-out, treat and reinstate; cathodic-risk detailing at exposed edges.', ref: 'Keyed to AS 4349.1 · NCC', x: 22, y: 30 },
+        { kind: 'DEFECT 02 — WATERPROOFING', title: 'Water ingress, planter membrane', body: 'Recurring leaks from planters over habitable rooms. Failed membrane and inadequate falls confirmed by targeted opening-up.', ref: 'Membrane replacement · revised falls and drainage', x: 66, y: 48 },
+        { kind: 'DEFECT 03 — STRUCTURE', title: 'Cracking, masonry movement', body: 'Stepped cracking consistent with differential movement. Monitored, measured and traced to cause before rectification is designed.', ref: 'Cause established before fix is specified', x: 42, y: 72 }
+      ]
+    },
+    {
+      title: 'Podium and façade',
+      img: 'assets/project-2.jpg',
+      pins: [
+        { kind: 'DEFECT 01 — WATERPROOFING', title: 'Failed termination, upstand', body: 'Membrane stops short of the required upstand height at the façade junction. Water enters behind the finish and tracks to the tenancy below.', ref: 'Termination detailing · redesigned upstand', x: 26, y: 34 },
+        { kind: 'DEFECT 02 — DRAINAGE', title: 'Ponding — falls to drain', body: 'Measured falls below the minimum gradient leave standing water against joints after rain. Falls re-established in the remedial design.', ref: 'Falls-to-drain measured on site', x: 60, y: 62 },
+        { kind: 'DEFECT 03 — JOINTS', title: 'Sealant failure, movement joints', body: 'Aged sealant debonded at movement joints. Cut out and re-sealed with detailing matched to the joint width and movement class.', ref: 'Joint schedule in the specification', x: 78, y: 28 }
+      ]
+    },
+    {
+      title: 'Roof and interior',
+      img: 'assets/project-3.jpg',
+      pins: [
+        { kind: 'DEFECT 01 — WATER INGRESS', title: 'Ceiling staining below roof junction', body: 'Staining maps the entry path from a roof junction above, not the fixture beside it. Confirmed by moisture readings and opening-up.', ref: 'Traced to cause before rectification', x: 34, y: 26 },
+        { kind: 'DEFECT 02 — CONCRETE', title: 'Efflorescence at slab soffit', body: 'Salt deposits mark long-term moisture movement through the slab. Source addressed first; cosmetic repair last.', ref: 'Source before surface', x: 62, y: 50 },
+        { kind: 'DEFECT 03 — FIXINGS', title: 'Corroded fixings, wet area', body: 'Fixings corroding in a persistently damp zone. Replaced with the correct durability class once the moisture source is resolved.', ref: 'Durability class per exposure', x: 44, y: 76 }
+      ]
+    }
+  ];
+  scnImgRef = React.createRef();
+
+  renderVals() {
+    const active = this.state.activePin;
+    const scn = this.scenarios[this.state.scn];
+    const dotStyle = (i) => {
+      const p = scn.pins[i];
+      return 'position: absolute; left: ' + p.x + '%; top: ' + p.y + '%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 50%; border: 2px solid #FFFFFF; background: ' + (i === active ? '#2563EB' : 'rgba(26,26,46,0.55)') + '; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 16px rgba(16,24,40,0.35); padding: 0';
+    };
+    const p = scn.pins[active];
+    const cardLeft = p.x > 55 ? 'left: 24px' : 'right: 24px';
+    const userRow = 'display: flex; justify-content: flex-end';
+    const botRow = 'display: flex; justify-content: flex-start';
+    const userBubble = 'max-width: 82%; background: #2563EB; color: #FFFFFF; border-radius: 12px 12px 4px 12px; padding: 10px 16px; font-size: 14px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: break-word';
+    const botBubble = 'max-width: 82%; background: #FFFFFF; color: #1C222B; border: 1px solid #E4E7EC; border-radius: 12px 12px 12px 4px; padding: 10px 16px; font-size: 14px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: break-word';
+    return {
+      chatOpen: this.state.chatOpen,
+      chatBusy: this.state.chatBusy,
+      chatInput: this.state.chatInput,
+      chatFabIcon: this.state.chatOpen ? 'x' : 'message-circle',
+      chatHint: !this.state.chatOpen && !this.state.chatSeen,
+      chatMsgs: this.state.chatMsgs.map(m => ({
+        text: m.text,
+        rowStyle: m.role === 'user' ? userRow : botRow,
+        bubbleStyle: m.role === 'user' ? userBubble : botBubble
+      })),
+      chatToggle: () => this.setState(s => ({ chatOpen: !s.chatOpen, chatSeen: true }), () => { this.renderIcons(); this.scrollChat(); }),
+      onChatInput: ev => this.setState({ chatInput: ev.target.value }),
+      onChatKey: ev => { if (ev.key === 'Enter') this.sendChat(); },
+      chatSend: () => this.sendChat(),
+      pin0Style: dotStyle(0),
+      pin1Style: dotStyle(1),
+      pin2Style: dotStyle(2),
+      pin0Select: () => this.setState({ activePin: 0 }),
+      pin1Select: () => this.setState({ activePin: 1 }),
+      pin2Select: () => this.setState({ activePin: 2 }),
+      pin0Label: scn.pins[0].title,
+      pin1Label: scn.pins[1].title,
+      pin2Label: scn.pins[2].title,
+      scnTitle: scn.title,
+      scnCounter: (this.state.scn + 1) + ' / ' + this.scenarios.length,
+      scnPrev: () => this.stepScn(-1),
+      scnNext: () => this.stepScn(1),
+      scnImgRef: this.scnImgRef,
+      activePin: p,
+      activeCardStyle: 'position: absolute; bottom: 24px; ' + cardLeft + '; width: 340px; background: #FFFFFF; border: 1px solid #E4E7EC; border-radius: 12px; padding: 20px 22px; box-shadow: 0 16px 48px rgba(16,24,40,0.28)',
+      progressRef: this.progressRef,
+      navRef: this.navRef,
+      heroRef: this.heroRef,
+      heroWrapRef: this.heroWrapRef,
+      heroImgRef: this.heroImgRef
+    };
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.motionOn = (this.props.motion ?? true) && !this.reduced;
+    this.renderIcons();
+    this.onScroll = () => this.applyScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    this.applyScroll();
+    if (this.motionOn) { this.setupReveals(); this.heroIntro(); }
+  }
+
+  componentDidUpdate() { this.renderIcons(); this.syncScnImg(); }
+
+  stepScn(dir) {
+    this.setState(s => {
+      const n = this.scenarios.length;
+      return { scn: (s.scn + dir + n) % n, activePin: 0 };
+    });
+  }
+
+  syncScnImg() {
+    const el = this.scnImgRef.current;
+    if (!el) return;
+    const want = this.scenarios[this.state.scn].img;
+    if (!(el.getAttribute('src') || '').endsWith(want)) el.src = want;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    if (this.io) this.io.disconnect();
+  }
+
+  renderIcons() {
+    const go = () => window.lucide && window.lucide.createIcons();
+    if (window.lucide) go(); else setTimeout(go, 700);
+  }
+
+  applyScroll() {
+    const y = window.scrollY || 0;
+    const doc = document.documentElement;
+    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+    if (this.progressRef.current) this.progressRef.current.style.width = (Math.min(1, y / max) * 100).toFixed(2) + '%';
+    if (this.navRef.current) {
+      const on = y > 8;
+      this.navRef.current.style.borderBottomColor = on ? 'rgba(228,231,236,1)' : 'rgba(228,231,236,0)';
+      this.navRef.current.style.boxShadow = on ? '0 1px 8px rgba(16,24,40,0.05)' : 'none';
+    }
+    if (this.motionOn && this.heroWrapRef.current && this.heroRef.current) {
+      const h = this.heroRef.current.offsetHeight || 1;
+      const p = Math.min(1, y / h);
+      this.heroWrapRef.current.style.transform = 'translateY(' + (p * 90).toFixed(1) + 'px)';
+    }
+  }
+
+  setupReveals() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    els.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(24px)'; });
+    this.io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+        el.style.transition = 'opacity 0.7s ' + ease + ' ' + delay + 'ms, transform 0.7s ' + ease + ' ' + delay + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+
+  scrollChat() {
+    requestAnimationFrame(() => {
+      const el = this.chatBodyRef.current;
+      if (el) el.scrollTop = el.scrollHeight;
+    });
+  }
+
+  async sendChat() {
+    const q = this.state.chatInput.trim();
+    if (!q || this.state.chatBusy) return;
+    this.setState(s => ({
+      chatMsgs: s.chatMsgs.concat([{ role: 'user', text: q }]),
+      chatInput: '',
+      chatBusy: true
+    }), () => this.scrollChat());
+    let answer;
+    try {
+      if (!window.claude || !window.claude.complete) {
+        answer = 'The assistant is not available in this preview. Call 0432 261 722 or email andrew@defex.engineering.';
+      } else {
+        const history = this.state.chatMsgs
+          .filter(m => m.role === 'user' || m.role === 'assistant')
+          .slice(-8)
+          .map(m => ({ role: m.role, content: m.text }));
+        const text = await window.claude.complete({
+          system: this.chatSystem + this.siteKnowledge,
+          messages: history,
+          max_tokens: 400
+        });
+        answer = (text || '').trim() || 'That is not covered on this site. Call 0432 261 722 or email andrew@defex.engineering.';
+      }
+    } catch (e) {
+      answer = 'Something went wrong answering that. Call 0432 261 722 or email andrew@defex.engineering.';
+    }
+    this.setState(s => ({
+      chatMsgs: s.chatMsgs.concat([{ role: 'assistant', text: answer }]),
+      chatBusy: false
+    }), () => { this.renderIcons(); this.scrollChat(); });
+  }
+
+  heroIntro() {
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    document.querySelectorAll('[data-hero-seq]').forEach(el => {
+      const i = parseInt(el.getAttribute('data-hero-seq'), 10) || 0;
+      el.animate(
+        [{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 750, delay: 150 + i * 140, easing: ease, fill: 'both' }
+      );
+    });
+    if (this.heroImgRef.current) {
+      this.heroImgRef.current.animate(
+        [{ transform: 'scale(1.06)' }, { transform: 'scale(1)' }],
+        { duration: 6000, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' }
+      );
+    }
+  }
+}
+
+</script>
+</body>
+</html>

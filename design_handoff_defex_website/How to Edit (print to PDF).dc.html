@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/colors.css">
+  <link rel="stylesheet" href="tokens/colors.css">
+  <script src="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; font-family: 'Inter', system-ui, sans-serif; color: #1C222B; -webkit-font-smoothing: antialiased; }
+    doc-page:not(:defined) { visibility: hidden; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1D4ED8; }
+  </style>
+</helmet>
+
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" size="a4" margin="0.85in" hint-size="100%,100%">
+
+  <div slot="footer" style="display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; color: #98A2B3; border-top: 1px solid #E4E7EC; padding-top: 8px">
+    <span>DEFEX Engineering — website editing guide</span>
+    <span>www.defex.engineering · andrew@defex.engineering</span>
+  </div>
+
+  <!-- Title block -->
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px">
+    <img src="assets/defex-lockup-light.png" alt="DEFEX Engineering" style="height: 52px">
+    <div style="text-align: right; font-size: 9pt; color: #5C6B7F; line-height: 1.6">
+      <span style="display: block; font-weight: 600; color: #1A1A2E">Working guide — v1</span>
+      <span style="display: block">12 July 2026</span>
+    </div>
+  </div>
+  <h1 style="margin: 24px 0 6px; font-size: 24pt; font-weight: 300; letter-spacing: -0.02em; color: #1A1A2E">How to edit the DEFEX website</h1>
+  <p style="margin: 0 0 28px; font-size: 11pt; line-height: 1.6; color: #5C6B7F">Where the files live, how to change anything safely, and how AI does the typing. Covers both phases: the design prototypes (now) and the built Astro site (after Claude Code builds it).</p>
+
+  <!-- 1 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">1 · Where to save the handoff folder</h2>
+  <p style="margin: 0 0 10px; font-size: 10.5pt; line-height: 1.7">Download <strong>design_handoff_defex_website.zip</strong> from the chat, unzip it, and place the folder <strong>inside the website repo</strong>, at the top level:</p>
+  <p style="margin: 0 0 10px; padding: 12px 16px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 6px; font-size: 10pt; font-family: 'SF Mono', Consolas, monospace; color: #1A1A2E">defex-website/design_handoff_defex_website/</p>
+  <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">That is the folder Claude Code reads when you say "build the site from the handoff". Everything it needs is inside: the README build brief, the four specs, all eight page prototypes, logos, photos and app screenshots. Commit it to the repo so it is versioned with the code it describes.</p>
+
+  <!-- 2 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">2 · Editing now, in the design workspace</h2>
+  <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7">While the site is still a set of prototypes in the DEFEX-Brand workspace:</p>
+  <ul style="margin: 0 0 24px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
+    <li><strong>Text</strong> — click any headline, paragraph or label in the preview and type. It saves in place.</li>
+    <li><strong>Images</strong> — drop your portrait onto the About page's photo slot; other photos are swapped by asking in chat ("use this photo for project 2, image 3").</li>
+    <li><strong>Tweaks panel</strong> — hero photo choice, motion on/off and similar switches.</li>
+    <li><strong>Anything bigger</strong> — describe it in chat; the change is made for you and the old version is kept.</li>
+  </ul>
+
+  <!-- 3 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">3 · Editing the built site — the one rule</h2>
+  <p style="margin: 0 0 10px; font-size: 10.5pt; line-height: 1.7"><strong>All words, projects, posts and settings live in a <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">content/</span> folder, separate from the code.</strong> The build must be structured this way from day one (it is specified in the handoff README):</p>
+  <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 0 0 24px">
+    <thead>
+      <tr>
+        <th style="text-align: left; background: #EFF4FE; color: #6E84A8; font-weight: 600; letter-spacing: 0.06em; font-size: 8.5pt; padding: 8px 12px; border: 1px solid #D7E3FB">FILE</th>
+        <th style="text-align: left; background: #EFF4FE; color: #6E84A8; font-weight: 600; letter-spacing: 0.06em; font-size: 8.5pt; padding: 8px 12px; border: 1px solid #D7E3FB">WHAT IT CONTROLS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC; font-family: 'SF Mono', Consolas, monospace">content/site.json</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Phone, email, hours, ABN, service area, hero copy, service one-liners, social URLs</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC; font-family: 'SF Mono', Consolas, monospace">content/projects/*.md</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">One file per case study — title, tags, paragraphs, carousel images + captions</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC; font-family: 'SF Mono', Consolas, monospace">content/posts/*.md</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">One file per blog post (the web versions of LinkedIn posts)</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC; font-family: 'SF Mono', Consolas, monospace">content/diagnostics.json</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">The Home-page defect-pin scenarios — images, pin positions, captions</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 4 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">4 · The three ways to make an edit</h2>
+  <p style="margin: 0 0 6px; font-size: 10.5pt; line-height: 1.7"><strong style="color: #2563EB">A — Claude Code (at the desk, best for anything).</strong></p>
+  <ol style="margin: 0 0 14px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
+    <li>Open a terminal in the <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">defex-website</span> folder and run <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">claude</span>.</li>
+    <li>Say what you want in plain English — "change the hours to 7:30am start", "add a project: podium remediation, Cronulla, tags waterproofing and superintendency, photos in ~/Desktop/cronulla, notes attached".</li>
+    <li>It edits only <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">content/</span>, opens a branch, and gives you a preview link.</li>
+    <li>Check the preview, then tell it to merge. Live in about a minute.</li>
+  </ol>
+  <p style="margin: 0 0 6px; font-size: 10.5pt; line-height: 1.7"><strong style="color: #2563EB">B — Claude GitHub app (from the phone, on site).</strong> Open the repo on github.com, create an issue describing the change ("new post — paste text below"), tag Claude. It commits to a branch; the preview link appears in the pull request; merging publishes.</p>
+  <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7"><strong style="color: #2563EB">C — Direct edit (30-second fixes).</strong> On github.com, open the content file, press the pencil icon, fix the typo, commit to a branch, merge. No AI involved.</p>
+
+  <!-- 5 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">5 · The sandbox — nothing goes live by accident</h2>
+  <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">Every branch automatically gets its own private preview site on Cloudflare Pages (<span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">branch-name.defex-website.pages.dev</span>). That preview IS the sandbox: the full site, with your change applied, at a link only you have. The public site changes only when you merge to <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">main</span>. Made a mistake anyway? Every change is a commit — reverting it restores the site exactly, in seconds.</p>
+
+  <!-- 6 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">6 · LinkedIn posts</h2>
+  <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">Write once, publish twice — with the site as the source of truth. Draft the post as a content file (dictated notes are fine; AI writes it in the DEFEX voice), merge it, and a GitHub Action pushes the finished text and link to LinkedIn through a scheduler (Buffer or Typefully). Full automatic import FROM LinkedIn is restricted by their API; if you post there first, paste the text into a GitHub issue titled "new post" and the AI does the rest — a two-minute job.</p>
+
+  <!-- 7 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">7 · Guardrails the AI always obeys</h2>
+  <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7">These live in the repo's CLAUDE.md, so every AI edit respects them automatically:</p>
+  <ul style="margin: 0 0 24px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
+    <li>Never claim professional indemnity insurance.</li>
+    <li>ABN stays as the placeholder until the real number is confirmed.</li>
+    <li>Service area is exactly "Sydney metro, occasionally Greater NSW."</li>
+    <li>Australian English, no exclamation marks, no emoji, one accent colour.</li>
+    <li>Projects stay general — no addresses or party names; testimonials only with written permission.</li>
+  </ul>
+
+  <!-- 8 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">8 · Quick reference</h2>
+  <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 0 0 8px">
+    <thead>
+      <tr>
+        <th style="text-align: left; background: #EFF4FE; color: #6E84A8; font-weight: 600; letter-spacing: 0.06em; font-size: 8.5pt; padding: 8px 12px; border: 1px solid #D7E3FB; width: 42%">I WANT TO…</th>
+        <th style="text-align: left; background: #EFF4FE; color: #6E84A8; font-weight: 600; letter-spacing: 0.06em; font-size: 8.5pt; padding: 8px 12px; border: 1px solid #D7E3FB">DO THIS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Fix a typo or change wording</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Method C (pencil icon on the content file) or one line to Claude Code</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Add or update a project</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Claude Code: give it title, tags, photos and rough notes — it does the rest</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Publish a new post</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Draft in a GitHub issue or Claude Code; merge; the Action shares it to LinkedIn</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Change hours / phone / ABN</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Edit <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 8.5pt">content/site.json</span> — one field, every page updates</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Delete something</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Delete the content file (or ask Claude Code to); preview, then merge</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Try a change without going live</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Any branch = automatic private preview site; merge only when happy</td></tr>
+      <tr><td style="padding: 8px 12px; border: 1px solid #E4E7EC">Undo a mistake</td><td style="padding: 8px 12px; border: 1px solid #E4E7EC; line-height: 1.6">Revert the commit on GitHub — the site restores exactly, in seconds</td></tr>
+    </tbody>
+  </table>
+
+</x-import>
+
+</x-dc>
+</body>
+</html>
