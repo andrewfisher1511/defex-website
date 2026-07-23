@@ -45,7 +45,31 @@
   <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">That is the folder Claude Code reads when you say "build the site from the handoff". Everything it needs is inside: the README build brief, the four specs, all eight page prototypes, logos, photos and app screenshots. Commit it to the repo so it is versioned with the code it describes.</p>
 
   <!-- 2 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">2 · Editing now, in the design workspace</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">2 · First-time setup — commit the folder and run Claude Code</h2>
+  <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7"><strong>Install once</strong> (skip anything already installed):</p>
+  <ul style="margin: 0 0 14px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
+    <li><strong>Git</strong> — git-scm.com → download for Windows → accept the defaults.</li>
+    <li><strong>Node.js</strong> — nodejs.org → LTS version → accept the defaults.</li>
+    <li><strong>Claude Code</strong> — open Terminal (or PowerShell) and run: <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt; background: #EFF4FE; padding: 2px 6px; border-radius: 4px">npm install -g @anthropic-ai/claude-code</span></li>
+  </ul>
+  <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7"><strong>Commit the handoff folder</strong> — after unzipping it into the repo, run these four lines in Terminal, one at a time:</p>
+  <div style="margin: 0 0 10px; padding: 14px 18px; background: #1A1A2E; border-radius: 6px; font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt; line-height: 2; color: #FFFFFF">
+    <span style="display: block">cd C:\Users\andre\Documents\defex-website</span>
+    <span style="display: block">git add "design_handoff_defex_website"</span>
+    <span style="display: block">git commit -m "Add rev2 design handoff package"</span>
+    <span style="display: block">git push</span>
+  </div>
+  <p style="margin: 0 0 14px; font-size: 10pt; line-height: 1.7; color: #5C6B7F">Line by line: <em>cd</em> moves into the repo folder · <em>git add</em> stages the new folder · <em>git commit</em> records it with a message · <em>git push</em> sends it to GitHub. Prefer buttons over commands? GitHub Desktop (desktop.github.com) does the same: open the repo, the folder appears under Changes, type the summary, press <strong>Commit to main</strong>, then <strong>Push origin</strong>.</p>
+  <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7"><strong>Run Claude Code</strong> — from the same Terminal, still inside the repo:</p>
+  <div style="margin: 0 0 10px; padding: 14px 18px; background: #1A1A2E; border-radius: 6px; font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt; line-height: 2; color: #FFFFFF">
+    <span style="display: block">claude</span>
+  </div>
+  <p style="margin: 0 0 10px; font-size: 10.5pt; line-height: 1.7">The first run opens a browser window to sign in with your Anthropic account. Once you see the prompt, paste:</p>
+  <p style="margin: 0 0 14px; padding: 12px 16px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 6px; font-size: 10pt; line-height: 1.7; color: #1A1A2E">Build the website rev2 from design_handoff_defex_website. Start with README.md, follow all four specs, and structure a content/ folder from day one per content-editing-spec.md. Work on a branch and give me the preview URL before merging anything.</p>
+  <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">Claude Code will propose a plan and ask permission before running commands — read the plan, approve, and check the preview URL it hands back before anything is merged. To stop at any time, type <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">/exit</span>.</p>
+
+  <!-- 3 -->
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">3 · Editing now, in the design workspace</h2>
   <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7">While the site is still a set of prototypes in the DEFEX-Brand workspace:</p>
   <ul style="margin: 0 0 24px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
     <li><strong>Text</strong> — click any headline, paragraph or label in the preview and type. It saves in place.</li>
@@ -55,7 +79,7 @@
   </ul>
 
   <!-- 3 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">3 · Editing the built site — the one rule</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">4 · Editing the built site — the one rule</h2>
   <p style="margin: 0 0 10px; font-size: 10.5pt; line-height: 1.7"><strong>All words, projects, posts and settings live in a <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">content/</span> folder, separate from the code.</strong> The build must be structured this way from day one (it is specified in the handoff README):</p>
   <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 0 0 24px">
     <thead>
@@ -73,7 +97,7 @@
   </table>
 
   <!-- 4 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">4 · The three ways to make an edit</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">5 · The three ways to make an edit</h2>
   <p style="margin: 0 0 6px; font-size: 10.5pt; line-height: 1.7"><strong style="color: #2563EB">A — Claude Code (at the desk, best for anything).</strong></p>
   <ol style="margin: 0 0 14px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
     <li>Open a terminal in the <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">defex-website</span> folder and run <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">claude</span>.</li>
@@ -85,15 +109,15 @@
   <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7"><strong style="color: #2563EB">C — Direct edit (30-second fixes).</strong> On github.com, open the content file, press the pencil icon, fix the typo, commit to a branch, merge. No AI involved.</p>
 
   <!-- 5 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">5 · The sandbox — nothing goes live by accident</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">6 · The sandbox — nothing goes live by accident</h2>
   <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">Every branch automatically gets its own private preview site on Cloudflare Pages (<span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">branch-name.defex-website.pages.dev</span>). That preview IS the sandbox: the full site, with your change applied, at a link only you have. The public site changes only when you merge to <span style="font-family: 'SF Mono', Consolas, monospace; font-size: 9.5pt">main</span>. Made a mistake anyway? Every change is a commit — reverting it restores the site exactly, in seconds.</p>
 
   <!-- 6 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">6 · LinkedIn posts</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">7 · LinkedIn posts</h2>
   <p style="margin: 0 0 24px; font-size: 10.5pt; line-height: 1.7">Write once, publish twice — with the site as the source of truth. Draft the post as a content file (dictated notes are fine; AI writes it in the DEFEX voice), merge it, and a GitHub Action pushes the finished text and link to LinkedIn through a scheduler (Buffer or Typefully). Full automatic import FROM LinkedIn is restricted by their API; if you post there first, paste the text into a GitHub issue titled "new post" and the AI does the rest — a two-minute job.</p>
 
   <!-- 7 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">7 · Guardrails the AI always obeys</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">8 · Guardrails the AI always obeys</h2>
   <p style="margin: 0 0 8px; font-size: 10.5pt; line-height: 1.7">These live in the repo's CLAUDE.md, so every AI edit respects them automatically:</p>
   <ul style="margin: 0 0 24px; padding-left: 20px; font-size: 10.5pt; line-height: 1.8">
     <li>Never claim professional indemnity insurance.</li>
@@ -104,7 +128,7 @@
   </ul>
 
   <!-- 8 -->
-  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">8 · Quick reference</h2>
+  <h2 style="margin: 0 0 12px; font-size: 13pt; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB; padding-bottom: 6px">9 · Quick reference</h2>
   <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 0 0 8px">
     <thead>
       <tr>

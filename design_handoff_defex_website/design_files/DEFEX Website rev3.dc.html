@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/styles.css">
+  <link rel="stylesheet" href="tokens/colors.css">
+  <script src="_ds/defex-design-system-5c16457e-bb0c-4d3c-b1cb-7344f1c42348/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #FFFFFF; color: #1C222B; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: #2563EB; text-decoration: none; }
+    a:hover { color: #1D4ED8; }
+    ::selection { background: #2563EB; color: #FFFFFF; }
+  </style>
+</helmet>
+
+<div style="min-width: 1100px">
+
+  <!-- Scroll progress -->
+  <div ref="{{ progressRef }}" style="position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: #2563EB; z-index: 300"></div>
+
+  <!-- Nav -->
+  <nav ref="{{ navRef }}" data-screen-label="Nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(228,231,236,0)">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 32px; height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 32px">
+      <a href="#top" aria-label="DEFEX Engineering home" style="display: flex; align-items: center; min-height: 44px">
+        <img src="assets/defex-lockup-horizontal-navy.png" alt="DEFEX Engineering" style="height: 68px; display: block">
+      </a>
+      <div style="display: flex; align-items: center; gap: 2px">
+        <a href="#top" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Home</a>
+        <a href="#practice" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Services</a>
+        <a href="#practice" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Projects</a>
+        <a href="#process" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 500; color: #44505F; border-radius: 8px; border-bottom: 2px solid transparent; transition: all 0.2s ease" style-hover="color: #1A1A2E; background: #F2F4F7" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">DEFEX App</a>
+        <a href="#top" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 14px; font-weight: 600; color: #1A1A2E; border-bottom: 2px solid #2563EB" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">About</a>
+        <a href="#contact" style="display: inline-flex; align-items: center; min-height: 44px; margin-left: 14px; padding: 0 20px; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #2563EB; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #2563EB; outline-offset: 2px">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" ref="{{ heroRef }}" data-screen-label="Hero" style="position: relative; height: 760px; overflow: hidden; background: #1A1A2E">
+    <div ref="{{ heroWrapRef }}" style="position: absolute; top: -90px; bottom: -90px; left: 0; right: 0; will-change: transform">
+      <img ref="{{ heroImgRef }}" src="assets/hero-architecture.jpg" alt="Architectural concrete facade" style="width: 100%; height: 100%; object-fit: cover; display: block; will-change: transform">
+    </div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(155deg, rgba(26,26,46,0.92) 0%, rgba(26,26,46,0.62) 48%, rgba(37,99,235,0.42) 100%)"></div>
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 0 96px">
+      <div style="max-width: 1400px; margin: 0 auto; padding: 0 32px">
+        <div data-hero-seq="0" style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px">
+          <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #C9CFD8; white-space: nowrap">ABOUT</span>
+        </div>
+        <h1 data-hero-seq="1" style="margin: 0 0 28px; max-width: 1100px; font-size: 92px; font-weight: 300; line-height: 1.02; letter-spacing: -0.02em; text-transform: uppercase; color: #FFFFFF; text-wrap: balance">A deliberately small practice.</h1>
+        <p data-hero-seq="2" style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.6; font-weight: 400; color: rgba(255,255,255,0.78)">Remedial consulting engineers. Sydney metro, occasionally Greater NSW.</p>
+      </div>
+    </div>
+    <sc-if value="{{ showScrollCue }}" hint-placeholder-val="{{ true }}">
+      <div style="position: absolute; right: 40px; bottom: 96px; display: flex; flex-direction: column; align-items: center; gap: 14px">
+        <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.3em; color: rgba(255,255,255,0.6); writing-mode: vertical-rl">SCROLL</span>
+        <span style="display: block; width: 1px; height: 56px; background: rgba(255,255,255,0.35)"></span>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- The practice -->
+  <section id="practice" data-screen-label="The practice" style="background: #FFFFFF; padding: 120px 32px">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 96px; align-items: start">
+      <div>
+        <div data-reveal style="display: flex; align-items: center; gap: 16px; margin-bottom: 40px">
+          <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">THE PRACTICE</span>
+        </div>
+        <p data-reveal data-delay="80" style="margin: 0 0 32px; max-width: 62ch; font-size: 24px; font-weight: 300; line-height: 1.55; color: #1A1A2E; text-wrap: pretty">DEFEX Engineering is a Sydney remedial consulting practice led by Andrew Fisher — BEng(Civil), MIEAust, CPEng, a NSW Registered Professional Engineer and NSW Registered Design Practitioner.</p>
+        <p data-reveal data-delay="160" style="margin: 0 0 28px; max-width: 65ch; font-size: 18px; line-height: 1.75; color: #1C222B; text-wrap: pretty">The practice is built on a simple structural choice: <strong style="font-weight: 600; color: #1A1A2E">the engineer who inspects the building is the engineer who writes the report</strong>, prepares the design and superintends the works. Nothing is handed down a chain, and accountability never blurs.</p>
+        <p data-reveal data-delay="240" style="margin: 0; max-width: 65ch; font-size: 18px; line-height: 1.75; color: #1C222B; text-wrap: pretty">That model is made viable by DEFEX, the in-house platform that carries every engagement from site capture to issued document — so a small practice can deliver documentation with the speed and consistency of a much larger one, without diluting who stands behind it.</p>
+      </div>
+      <aside data-reveal data-delay="200" style="position: sticky; top: 104px; display: flex; flex-direction: column; gap: 16px">
+        <div style="background: #1A1A2E; border-radius: 16px; padding: 36px 32px">
+          <span style="display: block; width: 40px; height: 2px; background: #2563EB; margin-bottom: 24px"></span>
+          <p style="margin: 0; font-size: 26px; font-weight: 300; line-height: 1.4; color: #FFFFFF; text-wrap: balance">The engineer you meet is the engineer who signs.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 16px 20px; min-height: 44px">
+          <i data-lucide="award" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0"></i>
+          <span style="font-size: 14px; font-weight: 600; color: #1A1A2E">BEng(Civil), MIEAust, CPEng</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 16px 20px; min-height: 44px">
+          <i data-lucide="shield-check" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0"></i>
+          <span style="font-size: 14px; font-weight: 600; color: #1A1A2E">NSW Registered Professional Engineer</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #EFF4FE; border: 1px solid #D7E3FB; border-radius: 12px; padding: 16px 20px; min-height: 44px">
+          <i data-lucide="pencil-ruler" style="width: 20px; height: 20px; color: #2563EB; flex-shrink: 0"></i>
+          <span style="font-size: 14px; font-weight: 600; color: #1A1A2E">NSW Registered Design Practitioner</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" data-screen-label="How engagements run" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 120px 32px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div data-reveal style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px">
+        <span style="display: block; width: 48px; height: 2px; background: #2563EB"></span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.32em; color: #5C6B7F; white-space: nowrap">PROCESS</span>
+      </div>
+      <h2 data-reveal data-delay="80" style="margin: 0 0 64px; font-size: 37px; font-weight: 600; letter-spacing: -0.02em; color: #1A1A2E">How engagements run</h2>
+      <ol ref="{{ processRef }}" style="list-style: none; margin: 0; padding: 0 0 0 64px; position: relative">
+        <span style="position: absolute; left: 24px; top: 8px; bottom: 8px; width: 2px; background: #E4E7EC"></span>
+        <span ref="{{ lineRef }}" style="position: absolute; left: 24px; top: 8px; width: 2px; height: 0%; max-height: calc(100% - 16px); background: #2563EB; transition: height 0.15s linear"></span>
+        <li data-reveal style="display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 40px; align-items: baseline; padding: 44px 0; border-bottom: 1px solid #E4E7EC">
+          <span style="font-size: 64px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">01</span>
+          <div>
+            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #1A1A2E">Contact</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #5C6B7F; max-width: 60ch">Describe the building and the symptoms.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="80" style="display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 40px; align-items: baseline; padding: 44px 0; border-bottom: 1px solid #E4E7EC">
+          <span style="font-size: 64px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">02</span>
+          <div>
+            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #1A1A2E">Proposal</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #5C6B7F; max-width: 60ch">A written scope and fee, in plain terms.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="160" style="display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 40px; align-items: baseline; padding: 44px 0; border-bottom: 1px solid #E4E7EC">
+          <span style="font-size: 64px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">03</span>
+          <div>
+            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #1A1A2E">Investigation and reporting</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #5C6B7F; max-width: 60ch">Photo-evidenced, standards-keyed.</p>
+          </div>
+        </li>
+        <li data-reveal data-delay="240" style="display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 40px; align-items: baseline; padding: 44px 0">
+          <span style="font-size: 64px; font-weight: 300; line-height: 1; color: #2563EB; font-variant-numeric: tabular-nums">04</span>
+          <div>
+            <h3 style="margin: 0 0 8px; font-size: 20px; font-weight: 600; color: #1A1A2E">Design and delivery</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #5C6B7F; max-width: 60ch">Where rectification proceeds, through to completion.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" data-screen-label="CTA" style="position: relative; background: #1A1A2E; padding: 128px 32px; overflow: hidden">
+    <img src="assets/defex-mark-white.svg" alt="" aria-hidden="true" style="position: absolute; right: -70px; top: 50%; transform: translateY(-50%) rotate(8deg); width: 460px; opacity: 0.05; pointer-events: none">
+    <div style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 64px; position: relative">
+      <div data-reveal>
+        <h2 style="margin: 0 0 20px; font-size: 52px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; color: #FFFFFF; text-wrap: balance">Talk to the engineer directly.</h2>
+        <p style="margin: 0; font-size: 15px; color: #C9CFD8; display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <a href="tel:+61432261722" style="color: #C9CFD8; font-variant-numeric: tabular-nums" style-hover="color: #FFFFFF">0432 261 722</a>
+          <span style="color: #5C6B7F">·</span>
+          <a href="mailto:andrew@defex.engineering" style="color: #C9CFD8" style-hover="color: #FFFFFF">andrew@defex.engineering</a>
+        </p>
+      </div>
+      <a data-reveal data-delay="120" href="mailto:andrew@defex.engineering" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 16px 30px; background: #2563EB; color: #FFFFFF; font-size: 15px; font-weight: 600; border-radius: 8px; white-space: nowrap; transition: all 0.2s ease" style-hover="background: #1D4ED8; color: #FFFFFF; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.35)" style-active="transform: scale(0.97)" style-focus="outline: 2px solid #FFFFFF; outline-offset: 2px">Contact DEFEX <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i></a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer data-screen-label="Footer" style="background: #F9FAFB; border-top: 1px solid #E4E7EC; padding: 72px 32px 40px">
+    <div style="max-width: 1400px; margin: 0 auto">
+      <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 64px; padding-bottom: 48px">
+        <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start">
+          <img src="assets/defex-lockup-horizontal-navy.png" alt="DEFEX Engineering" style="height: 52px; display: block">
+          <p style="margin: 0; font-size: 15px; font-weight: 600; color: #1A1A2E">Defects Resolved.</p>
+          <p style="margin: 0; font-size: 14px; color: #5C6B7F; display: flex; gap: 10px; align-items: center">
+            <a href="tel:+61432261722" style="color: #5C6B7F; font-variant-numeric: tabular-nums" style-hover="color: #2563EB">0432 261 722</a>
+            <span>·</span>
+            <a href="mailto:andrew@defex.engineering" style="color: #5C6B7F" style-hover="color: #2563EB">andrew@defex.engineering</a>
+          </p>
+          <p style="margin: 0; font-size: 14px; color: #5C6B7F">PO Box 148, Gymea NSW 2227 · ABN 31 700 169 580</p>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">SITE</p>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <a href="#top" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Services</a>
+            <a href="#top" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Projects</a>
+            <a href="#top" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">DEFEX App</a>
+            <a href="#top" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">About</a>
+            <a href="#contact" style="font-size: 14px; color: #44505F" style-hover="color: #2563EB">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p style="margin: 0 0 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; color: #98A2B3">PRACTICE</p>
+          <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #5C6B7F">Remedial consulting engineers.<br>Sydney metro, occasionally Greater NSW.</p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #E4E7EC; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap">
+        <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap">
+          <p style="margin: 0; font-size: 13px; color: #98A2B3">Andrew Fisher — BEng(Civil), MIEAust, CPEng</p>
+          <a href="https://verify.licence.nsw.gov.au/details/Professional%20Engineer/53509" target="_blank" rel="noopener" title="Verify on the NSW Government register" style="display: inline-flex; align-items: center; gap: 5px; min-height: 44px; font-size: 13px; color: #98A2B3; text-decoration: underline; text-decoration-color: #C9CFD8; text-underline-offset: 3px; white-space: nowrap; transition: color 0.2s ease" style-hover="color: #2563EB; text-decoration-color: #2563EB"><i data-lucide="badge-check" style="width: 13px; height: 13px; color: #2563EB"></i>NSW Professional Engineer</a>
+          <a href="https://verify.licence.nsw.gov.au/details/Design%20Practitioner/53511" target="_blank" rel="noopener" title="Verify on the NSW Government register" style="display: inline-flex; align-items: center; gap: 5px; min-height: 44px; font-size: 13px; color: #98A2B3; text-decoration: underline; text-decoration-color: #C9CFD8; text-underline-offset: 3px; white-space: nowrap; transition: color 0.2s ease" style-hover="color: #2563EB; text-decoration-color: #2563EB"><i data-lucide="badge-check" style="width: 13px; height: 13px; color: #2563EB"></i>NSW Design Practitioner</a>
+          <a href="#top" title="Andrew Fisher — resume (link your CV here)" style="display: inline-flex; align-items: center; gap: 5px; min-height: 44px; font-size: 13px; color: #98A2B3; text-decoration: underline; text-decoration-color: #C9CFD8; text-underline-offset: 3px; white-space: nowrap; transition: color 0.2s ease" style-hover="color: #2563EB; text-decoration-color: #2563EB"><i data-lucide="file-text" style="width: 13px; height: 13px; color: #2563EB"></i>Resume</a>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #98A2B3; display: flex; gap: 16px; align-items: center; white-space: nowrap">
+          <span>© DEFEX Engineering Pty Ltd 2026. All rights reserved.</span>
+          <a href="DEFEX Privacy Policy.dc.html" style="color: #98A2B3" style-hover="color: #2563EB">Privacy</a>
+          <a href="DEFEX Terms of Use.dc.html" style="color: #98A2B3" style-hover="color: #2563EB">Terms</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;heroImage&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Architectural hero&quot;, &quot;options&quot;: [&quot;Architectural hero&quot;, &quot;Project 1&quot;, &quot;Project 2&quot;, &quot;Project 3&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;showScrollCue&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;motion&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot; }
+}">
+class Component extends DCLogic {
+  progressRef = React.createRef();
+  navRef = React.createRef();
+  heroRef = React.createRef();
+  heroWrapRef = React.createRef();
+  heroImgRef = React.createRef();
+  processRef = React.createRef();
+  lineRef = React.createRef();
+
+  heroSrcFor() {
+    const map = {
+      'Architectural hero': 'assets/hero-architecture.jpg',
+      'Project 1': 'assets/project-1.jpg',
+      'Project 2': 'assets/project-2.jpg',
+      'Project 3': 'assets/project-3.jpg'
+    };
+    return map[this.props.heroImage ?? 'Architectural hero'] || 'assets/hero-architecture.jpg';
+  }
+
+  syncHeroSrc() {
+    const img = this.heroImgRef.current;
+    const want = this.heroSrcFor();
+    if (img && !img.getAttribute('src').endsWith(want)) img.setAttribute('src', want);
+  }
+
+  renderVals() {
+    return {
+      showScrollCue: this.props.showScrollCue ?? true,
+      progressRef: this.progressRef,
+      navRef: this.navRef,
+      heroRef: this.heroRef,
+      heroWrapRef: this.heroWrapRef,
+      heroImgRef: this.heroImgRef,
+      processRef: this.processRef,
+      lineRef: this.lineRef
+    };
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.motionOn = (this.props.motion ?? true) && !this.reduced;
+    this.renderIcons();
+    this.syncHeroSrc();
+
+    this.onScroll = () => this.applyScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    this.applyScroll();
+
+    if (this.motionOn) {
+      this.setupReveals();
+      this.heroIntro();
+    }
+  }
+
+  componentDidUpdate() { this.renderIcons(); this.syncHeroSrc(); }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    if (this.io) this.io.disconnect();
+  }
+
+  renderIcons() {
+    const go = () => window.lucide && window.lucide.createIcons();
+    if (window.lucide) go(); else setTimeout(go, 700);
+  }
+
+  applyScroll() {
+    const y = window.scrollY || 0;
+    const doc = document.documentElement;
+    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+
+    if (this.progressRef.current) {
+      this.progressRef.current.style.width = (Math.min(1, y / max) * 100).toFixed(2) + '%';
+    }
+    if (this.navRef.current) {
+      const on = y > 8;
+      this.navRef.current.style.borderBottomColor = on ? 'rgba(228,231,236,1)' : 'rgba(228,231,236,0)';
+      this.navRef.current.style.boxShadow = on ? '0 1px 8px rgba(16,24,40,0.05)' : 'none';
+    }
+    if (this.motionOn && this.heroWrapRef.current && this.heroRef.current) {
+      const h = this.heroRef.current.offsetHeight || 1;
+      const p = Math.min(1, y / h);
+      this.heroWrapRef.current.style.transform = 'translateY(' + (p * 90).toFixed(1) + 'px)';
+    }
+    if (this.lineRef.current && this.processRef.current) {
+      const r = this.processRef.current.getBoundingClientRect();
+      const focal = window.innerHeight * 0.72;
+      const p = Math.max(0, Math.min(1, (focal - r.top) / r.height));
+      this.lineRef.current.style.height = (p * 100).toFixed(1) + '%';
+    }
+  }
+
+  setupReveals() {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    els.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+    });
+    this.io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+        el.style.transition = 'opacity 0.7s ' + ease + ' ' + delay + 'ms, transform 0.7s ' + ease + ' ' + delay + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        this.io.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => this.io.observe(el));
+  }
+
+  heroIntro() {
+    const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+    document.querySelectorAll('[data-hero-seq]').forEach(el => {
+      const i = parseInt(el.getAttribute('data-hero-seq'), 10) || 0;
+      el.animate(
+        [{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 750, delay: 150 + i * 140, easing: ease, fill: 'both' }
+      );
+    });
+    if (this.heroImgRef.current) {
+      this.heroImgRef.current.animate(
+        [{ transform: 'scale(1.06)' }, { transform: 'scale(1)' }],
+        { duration: 6000, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' }
+      );
+    }
+  }
+}
+
+</script>
+</body>
+</html>
