@@ -1,7 +1,6 @@
-"use client";
-
 import Image from "next/image";
 import { PrivatePreviewSignInButton } from "./PrivatePreviewSignInButton";
+import { SignOutButton } from "./SignOutButton";
 
 export type GateAuthState =
   | { status: "signed-out" }
@@ -10,21 +9,21 @@ export type GateAuthState =
 
 interface ComingSoonGateProps {
   authState?: GateAuthState;
-  onSignIn?: () => void;
-  onSignOut?: () => void;
-  onEnterWorkspace?: () => void;
+  /** Where an admitted user goes (Part A5). */
+  workspaceHref?: string;
 }
 
 /**
  * Full-screen private-preview gate — design_files/Defex-website-preview.dc.html,
- * option 1a (photographic). Auth is stubbed until Phase 5 wires
- * @supabase/ssr — see onSignIn/onSignOut/onEnterWorkspace.
+ * option 1a (photographic).
+ *
+ * A server component: the state is decided from the verified session
+ * (@/lib/auth/dal) rather than fetched in the browser, so the gate never
+ * flashes the wrong state. Only the sign-in button is a client component.
  */
 export function ComingSoonGate({
   authState = { status: "signed-out" },
-  onSignIn,
-  onSignOut,
-  onEnterWorkspace,
+  workspaceHref = "/app",
 }: ComingSoonGateProps) {
   const eyebrow = "PRIVATE PREVIEW";
 
@@ -78,7 +77,7 @@ export function ComingSoonGate({
             <p className="mb-8 max-w-[480px] text-[15px] leading-relaxed text-white/72 sm:mb-10 sm:text-base">
               If you have been invited, you can sign in below.
             </p>
-            <PrivatePreviewSignInButton label="Sign in to private preview" onClick={onSignIn} />
+            <PrivatePreviewSignInButton label="Sign in to private preview" />
           </>
         )}
 
@@ -97,13 +96,9 @@ export function ComingSoonGate({
             <p className="mb-2 text-[15px] leading-relaxed text-white/72 sm:text-base">
               Signed in as {authState.email}
             </p>
-            <button
-              type="button"
-              onClick={onSignOut ?? (() => console.log("[ComingSoonGate] sign-out clicked (stub)"))}
-              className="mt-6 min-h-11 text-[14px] font-medium text-white/72 underline decoration-concrete underline-offset-4 transition-colors duration-200 hover:text-white sm:mt-8"
-            >
-              Sign out
-            </button>
+            <div className="mt-6 sm:mt-8">
+              <SignOutButton />
+            </div>
           </>
         )}
 
@@ -113,7 +108,15 @@ export function ComingSoonGate({
             <p className="mb-8 text-[15px] leading-relaxed text-white/72 sm:mb-10">
               Signed in as {authState.email}
             </p>
-            <PrivatePreviewSignInButton label="Enter DEFEX workspace" onClick={onEnterWorkspace} />
+            <a
+              href={workspaceHref}
+              className="inline-flex min-h-[52px] w-full max-w-[320px] items-center justify-center rounded-control bg-blue-electric px-6 font-sans text-base font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-blue-electric-hover active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#93B4F8] sm:w-auto sm:max-w-none sm:px-8 sm:text-[15px]"
+            >
+              Enter DEFEX workspace
+            </a>
+            <div className="mt-6">
+              <SignOutButton className="min-h-11 text-[13px] font-medium text-white/60 underline decoration-concrete underline-offset-4 transition-colors duration-200 hover:text-white" />
+            </div>
           </>
         )}
       </div>

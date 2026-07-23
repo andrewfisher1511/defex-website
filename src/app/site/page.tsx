@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { requireAdmitted } from "@/lib/auth/dal";
 import { ScrollProgressBar } from "@/components/site/ScrollProgressBar";
 import { SiteNav } from "@/components/site/SiteNav";
 import { Hero } from "@/components/site/Hero";
@@ -12,11 +13,16 @@ export const metadata: Metadata = {
 };
 
 /**
- * Temporary route for the rev3 main site (DEFEX Website rev3.dc.html).
- * Phase 5 middleware will decide gate vs. main site at "/" based on
- * session + role; this page moves there once that's wired.
+ * The rev3 main site (DEFEX Website rev3.dc.html).
+ *
+ * Served under `/` — the proxy rewrites there for an admitted viewer. A
+ * direct request to `/site` is redirected back to `/` so the site has one
+ * canonical URL and one guarded entry point. The guard below is the
+ * independent page-level check, in case the proxy is ever bypassed.
  */
-export default function MainSitePage() {
+export default async function MainSitePage() {
+  await requireAdmitted();
+
   return (
     <>
       <ScrollProgressBar />
