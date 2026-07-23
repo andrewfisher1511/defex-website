@@ -1,3 +1,5 @@
+import { ComingSoonGate } from "@/components/gate/ComingSoonGate";
+
 export default function HomePage() {
-  return null; // Private-preview gate — built in Phase 1
+  return <ComingSoonGate />;
 }
