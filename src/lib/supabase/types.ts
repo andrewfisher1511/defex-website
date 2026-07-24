@@ -1,11 +1,14 @@
 /**
- * Hand-written to match supabase/migrations/20260723120000_part_a3_access_tiers.sql.
- * Regenerate from the live project once it exists:
+ * Hand-written to match supabase/migrations/*.sql. Regenerate from the live
+ * project once one exists as the source of truth:
  *   npx supabase gen types typescript --project-id <ref> > src/lib/supabase/types.ts
  */
 
 /** Part A3: `create type app_role as enum ('owner','paid','free','trial')`. */
 export type AppRole = "owner" | "paid" | "free" | "trial";
+
+/** 20260724090000_leads_and_events.sql: `create type lead_source as enum (...)`. */
+export type LeadSource = "dbp_guide" | "quiz_email" | "contact_form";
 
 /**
  * The access ladder from Part A3, most privileged first. Access control in
@@ -65,16 +68,78 @@ export interface Database {
         };
         Relationships: [];
       };
-    };
-    Views: Record<never, never>;
-    Functions: {
-      is_owner: {
-        Args: Record<PropertyKey, never>;
-        Returns: boolean;
+      leads: {
+        Row: {
+          id: string;
+          source: LeadSource;
+          name: string | null;
+          email: string;
+          phone: string | null;
+          topic: string | null;
+          message: string | null;
+          score: number | null;
+          missed: unknown | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          source: LeadSource;
+          name?: string | null;
+          email: string;
+          phone?: string | null;
+          topic?: string | null;
+          message?: string | null;
+          score?: number | null;
+          missed?: unknown | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          source?: LeadSource;
+          name?: string | null;
+          email?: string;
+          phone?: string | null;
+          topic?: string | null;
+          message?: string | null;
+          score?: number | null;
+          missed?: unknown | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      events: {
+        Row: {
+          id: string;
+          event_type: "quiz_completed";
+          score: number | null;
+          missed: unknown | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          event_type: "quiz_completed";
+          score?: number | null;
+          missed?: unknown | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          event_type?: "quiz_completed";
+          score?: number | null;
+          missed?: unknown | null;
+          created_at?: string;
+        };
+        Relationships: [];
       };
     };
+    Views: Record<never, never>;
+    // public.is_owner() (20260723120100) was moved into a non-exposed
+    // `private` schema by 20260723120200 — app code never calls it via RPC,
+    // only RLS policies reference it, so there is nothing to type here.
+    Functions: Record<never, never>;
     Enums: {
       app_role: AppRole;
+      lead_source: LeadSource;
     };
     CompositeTypes: Record<never, never>;
   };

@@ -12,8 +12,10 @@ interface DbpGuideGateProps {
 /**
  * Name + email gate in front of the plain-English guide —
  * DEFEX DBP Hub.dc.html's "Guide" screen, gateLocked/gateOpen states.
- * Lead write is stubbed (console.log) until Phase 6 wires Resend/Supabase;
- * source matches README: 'dbp_guide'.
+ * Posts to /api/dbp/guide (source: 'dbp_guide' per the README component
+ * map) — the guide unlocks on valid client-side input regardless of that
+ * call's outcome, since it's free content; only the lead + delivery email
+ * depend on the request succeeding.
  */
 export function DbpGuideGate({ gated = true, children }: DbpGuideGateProps) {
   const [name, setName] = useState("");
@@ -33,9 +35,16 @@ export function DbpGuideGate({ gated = true, children }: DbpGuideGateProps) {
       setError(true);
       return;
     }
-    console.log("[DbpGuideGate] lead stub:", { source: "dbp_guide", name, email });
     setError(false);
     setOpen(true);
+
+    fetch("/api/dbp/guide", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email }),
+    }).catch((err) => {
+      console.error("[DbpGuideGate] lead submission failed:", err);
+    });
   };
 
   return (

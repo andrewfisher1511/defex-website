@@ -39,6 +39,13 @@ function optionStyle(index: number, correct: number, picked: number | null): Opt
  * The 3-minute check — DEFEX DBP Hub.dc.html's "Quiz" screen. One question
  * at a time; scoring, bands and missed-question assists match the source
  * script's renderVals() exactly (progress-bar math included).
+ *
+ * Two backend touchpoints, per README "Quiz data": completion always posts
+ * an anonymous event (score + missed question indices, no identity); the
+ * optional results email additionally posts the same to /api/dbp/quiz-email,
+ * which is what actually writes the identified lead and sends the email —
+ * the band title/blurb and assist text going into that email are derived
+ * server-side from score+missed, never trusted from the client.
  */
 export function DbpQuiz() {
   const [qIndex, setQIndex] = useState(0);
@@ -47,6 +54,8 @@ export function DbpQuiz() {
   const [done, setDone] = useState(false);
   const [email, setEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+  const [emailPending, setEmailPending] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const question = DBP_QUESTIONS[qIndex];
   const answered = picked !== null;
@@ -62,6 +71,16 @@ export function DbpQuiz() {
       setMissed(newMissed);
       setDone(true);
       setPicked(null);
+
+      // README "Quiz data": log a completion event, anonymous by default —
+      // no email or name is ever part of this request.
+      fetch("/api/dbp/quiz-completed", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ score: TOTAL - newMissed.length, missed: newMissed }),
+      }).catch((err) => {
+        console.error("[DbpQuiz] completion event failed:", err);
+      });
     } else {
       setMissed(newMissed);
       setQIndex(qIndex + 1);
@@ -70,14 +89,33 @@ export function DbpQuiz() {
   };
 
   const handleRestart = () => {
+    // Matches the source script's restartQuiz() exactly: email/emailSent
+    // are deliberately left as-is across a retake.
     setQIndex(0);
     setPicked(null);
     setMissed([]);
     setDone(false);
   };
 
-  const handleSendEmail = () => {
-    if (email.includes("@")) setEmailSent(true);
+  const handleSendEmail = async () => {
+    if (!email.includes("@") || emailPending) return;
+
+    setEmailPending(true);
+    setEmailError(false);
+    try {
+      const res = await fetch("/api/dbp/quiz-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, score: TOTAL - missed.length, missed }),
+      });
+      if (!res.ok) throw new Error(`quiz-email responded ${res.status}`);
+      setEmailSent(true);
+    } catch (err) {
+      console.error("[DbpQuiz] results email failed:", err);
+      setEmailError(true);
+    } finally {
+      setEmailPending(false);
+    }
   };
 
   if (!done) {
@@ -204,16 +242,23 @@ export function DbpQuiz() {
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   placeholder="you@example.com"
-                  className="min-h-[50px] min-w-[240px] flex-1 rounded-control border border-concrete bg-white px-4 font-sans text-base text-navy-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-electric focus-visible:outline-offset-1"
+                  disabled={emailPending}
+                  className="min-h-[50px] min-w-[240px] flex-1 rounded-control border border-concrete bg-white px-4 font-sans text-base text-navy-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-electric focus-visible:outline-offset-1 disabled:opacity-70"
                 />
                 <button
                   type="button"
                   onClick={handleSendEmail}
-                  className="min-h-[50px] rounded-control bg-blue-electric px-[26px] font-sans text-[15px] font-semibold text-white transition-all duration-200 hover:bg-blue-electric-hover active:scale-[0.97]"
+                  disabled={emailPending}
+                  className="min-h-[50px] rounded-control bg-blue-electric px-[26px] font-sans text-[15px] font-semibold text-white transition-all duration-200 hover:bg-blue-electric-hover active:scale-[0.97] disabled:cursor-wait disabled:opacity-80"
                 >
-                  Email me the guide
+                  {emailPending ? "Sending…" : "Email me the guide"}
                 </button>
               </div>
+              {emailError && (
+                <p className="m-0 mt-2.5 text-[13.5px] text-error-deep">
+                  Something went wrong sending that — please try again, or email andrew@defex.engineering.
+                </p>
+              )}
             </>
           ) : (
             <>
