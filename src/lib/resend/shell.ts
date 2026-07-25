@@ -58,7 +58,7 @@ export function emailShell({ preheader, bodyHtml }: EmailShellInput): string {
         <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#FFFFFF;border-radius:12px;overflow:hidden;border:1px solid #E4E7EC;">
           <tr>
             <td style="background:#1A1A2E;padding:28px 32px;">
-              <img src="${logo}" alt="DEFEX Engineering" height="32" style="display:block;height:32px;width:auto;border:0;">
+              <img src="${logo}" alt="DEFEX Engineering" height="38" style="display:block;height:38px;width:auto;border:0;">
             </td>
           </tr>
           <tr>
