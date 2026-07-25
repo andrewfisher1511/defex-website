@@ -17,12 +17,20 @@ import "server-only";
 const FONT_STACK =
   "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
-function siteOrigin(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL || "https://defex.engineering";
-}
+/**
+ * Canonical public origin for anything embedded IN an email — images, right
+ * now. Deliberately NOT NEXT_PUBLIC_SITE_URL: that can be
+ * http://localhost:3000 or a Vercel preview URL depending on where the
+ * sending code runs, and an email sent from either is read later, by
+ * someone else, on a machine that can't reach either. The logo has to
+ * resolve from any inbox, at any time, regardless of which environment
+ * generated the email — so this is pinned to the one origin that's always
+ * real: the live domain.
+ */
+const EMAIL_ASSET_ORIGIN = "https://defex.engineering";
 
 export function emailAssetUrl(path: string): string {
-  return new URL(path, siteOrigin()).toString();
+  return new URL(path, EMAIL_ASSET_ORIGIN).toString();
 }
 
 interface EmailShellInput {
