@@ -7,6 +7,36 @@ export type GateAuthState =
   | { status: "signed-in-not-admitted"; email: string }
   | { status: "signed-in-admitted"; email: string };
 
+/**
+ * Status-mode config for the gate's eyebrow/headline/sign-in copy. Kept as
+ * a live enum with both values, not deleted, so this can flip back to
+ * "private-preview" later without re-threading copy. Code constant rather
+ * than an env var — same pattern as showDefectMap/gateGuide elsewhere in
+ * this repo — since nothing about it is deployment-environment-specific.
+ * If this ever needs to change without a redeploy, promote it to an env
+ * var at that point (e.g. NEXT_PUBLIC_GATE_STATUS_MODE); it is not one now.
+ */
+type GateStatusMode = "coming-soon" | "private-preview";
+
+/** Default and only mode for now — private-preview is unused. */
+const GATE_STATUS_MODE: GateStatusMode = "coming-soon";
+
+const STATUS_COPY: Record<
+  GateStatusMode,
+  { eyebrow: string; headline: string; signInLabel: string }
+> = {
+  "coming-soon": {
+    eyebrow: "COMING SOON",
+    headline: "Our new engineering website and workspace is coming soon.",
+    signInLabel: "Enter DEFEX workspace",
+  },
+  "private-preview": {
+    eyebrow: "PRIVATE PREVIEW",
+    headline: "DEFEX is currently in private preview.",
+    signInLabel: "Sign in to private preview",
+  },
+};
+
 interface ComingSoonGateProps {
   authState?: GateAuthState;
   /** Where an admitted user goes (Part A5). */
@@ -14,8 +44,8 @@ interface ComingSoonGateProps {
 }
 
 /**
- * Full-screen private-preview gate — design_files/Defex-website-preview.dc.html,
- * option 1a (photographic).
+ * Full-screen gate — design_files/Defex-website-preview.dc.html, option 1a
+ * (photographic).
  *
  * A server component: the state is decided from the verified session
  * (@/lib/auth/dal) rather than fetched in the browser, so the gate never
@@ -25,7 +55,7 @@ export function ComingSoonGate({
   authState = { status: "signed-out" },
   workspaceHref = "/app",
 }: ComingSoonGateProps) {
-  const eyebrow = "PRIVATE PREVIEW";
+  const { eyebrow, headline, signInLabel } = STATUS_COPY[GATE_STATUS_MODE];
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-navy-ink">
@@ -72,12 +102,12 @@ export function ComingSoonGate({
               <span className="block h-0.5 w-6 bg-blue-electric sm:w-10" />
             </div>
             <h1 className="mb-3 max-w-full text-[26px] font-light leading-[1.25] tracking-[-0.01em] text-white sm:mb-3.5 sm:max-w-[720px] sm:text-[40px] sm:leading-[1.15] sm:tracking-[-0.02em]">
-              DEFEX is currently in private preview.
+              {headline}
             </h1>
             <p className="mb-8 max-w-[480px] text-[15px] leading-relaxed text-white/72 sm:mb-10 sm:text-base">
-              If you have been invited, you can sign in below.
+              Sign in below to get started.
             </p>
-            <PrivatePreviewSignInButton label="Sign in to private preview" />
+            <PrivatePreviewSignInButton label={signInLabel} />
           </>
         )}
 
@@ -91,10 +121,11 @@ export function ComingSoonGate({
               <span className="block h-0.5 w-6 bg-blue-electric sm:w-10" />
             </div>
             <h1 className="mb-3 max-w-full text-[26px] font-light leading-[1.25] tracking-[-0.01em] text-white sm:mb-3.5 sm:max-w-[720px] sm:text-[40px] sm:leading-[1.15] sm:tracking-[-0.02em]">
-              This preview is invite-only.
+              Thanks for signing in.
             </h1>
             <p className="mb-2 text-[15px] leading-relaxed text-white/72 sm:text-base">
-              Signed in as {authState.email}
+              Signed in as {authState.email}. We&apos;ll let you know when your workspace access is
+              ready.
             </p>
             <div className="mt-6 sm:mt-8">
               <SignOutButton />

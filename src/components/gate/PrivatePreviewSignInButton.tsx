@@ -21,7 +21,7 @@ interface PrivatePreviewSignInButtonProps {
  * URL Configuration (Part A2.2) or Supabase refuses the redirect.
  */
 export function PrivatePreviewSignInButton({
-  label = "Sign in to private preview",
+  label = "Enter DEFEX workspace",
   next = "/",
   fullWidthOnMobile = true,
 }: PrivatePreviewSignInButtonProps) {
