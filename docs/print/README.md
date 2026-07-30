@@ -8,29 +8,25 @@ the live vCard QR that replaces the placeholder on the business-card back.
 
 - `andrew-fisher.vcf` — the payload, and the source of truth. Regenerate the QR
   if this changes.
-- `vcard-qr.svg` — the code itself. Vector, navy `#1A1A2E` on white, zero quiet-zone
-  margin built in (the card layout supplies the quiet zone — see below).
+- `vcard-qr.svg` — the code itself. Vector, navy `#1A1A2E` on white, sized in real
+  units (`width="15mm" height="15mm"`) so placement cannot rescale it by accident.
 
-Verified: rasterised at 13 mm / 1200 dpi and decoded back to a byte-identical vCard.
+Verified: rasterised at 15 mm / 1200 dpi and decoded back to a byte-identical vCard.
 
-**Placement.** 13 × 13 mm as specced, on the shared Navy back.
+**Placement. 15 × 15 mm** on the shared Navy back — *not* the 13 mm in the original
+spec. The code is 57 modules square, so 13 mm would put each module at 0.228 mm,
+under the ~0.25 mm floor usually quoted for reliable phone scanning. On 350 gsm
+uncoated matte that matters: ink spreads and adjacent dark modules can bridge.
+At 15 mm each module is **0.263 mm**, clear of the floor. The extra 2 mm costs
+nothing but card-back space.
 
-**One thing to raise with the printer.** The code is 57 modules square, so at
-13 mm each module is **0.228 mm**. The usual floor for reliable phone scanning is
-0.25 mm, and 350 gsm uncoated matte has real dot gain — ink spreads and adjacent
-dark modules can bridge. It will very likely scan fine, but there is no margin in it.
-Two ways to buy margin, in order of preference:
+Do not shrink the payload to claw back modules — it is already trimmed to name,
+org, title, mobile, email and site.
 
-1. **Print it at 15 × 15 mm** → 0.263 mm per module, comfortably over the floor.
-   Costs 2 mm of card back and nothing else.
-2. Keep 13 mm and ask the printer to confirm they can hold 0.228 mm on this stock.
-
-Do not shrink the payload further to gain modules — it is already trimmed to
-name, org, title, mobile, email and site.
-
-**Quiet zone.** The QR needs 4 modules of clear white on every side (≈0.9 mm at
-13 mm, ≈1.05 mm at 15 mm). The SVG has no built-in margin, so the card layout must
-provide it. Nothing — rule, mark or caption — may encroach.
+**Quiet zone.** The QR needs 4 modules of clear white on every side — **1.05 mm**
+at this size, so the total reserved footprint is **17.11 mm square**. The SVG has
+no built-in margin, so the card layout must provide it. Nothing — rule, mark or
+caption — may encroach.
 
 ## Everything else
 
