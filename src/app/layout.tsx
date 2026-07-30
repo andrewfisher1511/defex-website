@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DEFEX Engineering",
+  title: "DEFEX Engineering — Defects Resolved.",
   description:
     "Remedial engineering consultancy, Sydney. Defects Resolved.",
 };

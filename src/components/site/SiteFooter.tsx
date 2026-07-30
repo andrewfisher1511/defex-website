@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BadgeCheck } from "lucide-react";
+import { DefexLockup } from "@/components/brand/DefexLockup";
 
 const SITE_LINKS = [
   { href: "#top", label: "Services" },
@@ -10,14 +10,20 @@ const SITE_LINKS = [
   { href: "#contact", label: "Contact" },
 ];
 
+/**
+ * TRUST-01 credentials strip — order locked by Brand Kit v4:
+ * Andrew Fisher · BEng(Civil) · MIEAust · NSW Registered Professional
+ * Engineer · NSW Registered Design Practitioner. The two registrations
+ * link to the NSW Government verification register.
+ */
 const CREDENTIAL_LINKS = [
   {
     href: "https://verify.licence.nsw.gov.au/details/Professional%20Engineer/53509",
-    label: "NSW Professional Engineer",
+    label: "NSW Registered Professional Engineer",
   },
   {
     href: "https://verify.licence.nsw.gov.au/details/Design%20Practitioner/53511",
-    label: "NSW Design Practitioner",
+    label: "NSW Registered Design Practitioner",
   },
 ];
 
@@ -32,13 +38,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-12 pb-12 min-[1100px]:grid-cols-[1.5fr_1fr_1.2fr] min-[1100px]:gap-16">
           <div className="flex flex-col items-start gap-4">
-            <Image
-              src="/assets/defex-lockup-horizontal-navy.png"
-              alt="DEFEX Engineering"
-              width={245}
-              height={52}
-              className="h-[52px] w-auto"
-            />
+            <DefexLockup size={28} tone="light" />
             <p className="m-0 text-[15px] font-semibold text-navy-ink">Defects Resolved.</p>
             <p className="m-0 flex items-center gap-2.5 text-sm text-steel">
               <a href="tel:+61432261722" className="tabular-nums text-steel transition-colors hover:text-blue-electric">
@@ -78,20 +78,27 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col items-start gap-6 border-t border-hairline pt-6 min-[1100px]:flex-row min-[1100px]:items-center min-[1100px]:justify-between min-[1100px]:gap-8">
-          <div className="flex flex-wrap items-center gap-[18px]">
-            <p className="m-0 text-[13px] text-grey-400">Andrew Fisher — BEng(Civil), MIEAust, CPEng</p>
-            {CREDENTIAL_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener"
-                title="Verify on the NSW Government register"
-                className="inline-flex min-h-11 items-center gap-[5px] whitespace-nowrap text-[13px] text-grey-400 underline decoration-concrete underline-offset-[3px] transition-colors duration-200 hover:text-blue-electric hover:decoration-blue-electric"
-              >
-                <BadgeCheck className="h-[13px] w-[13px] text-blue-electric" strokeWidth={2} />
-                {link.label}
-              </a>
+          <div className="flex flex-wrap items-center gap-x-[10px] gap-y-1 text-[13px] text-steel">
+            <span>Andrew Fisher</span>
+            <span aria-hidden="true">·</span>
+            <span>BEng(Civil)</span>
+            <span aria-hidden="true">·</span>
+            <span>MIEAust</span>
+            <span aria-hidden="true">·</span>
+            {CREDENTIAL_LINKS.map((link, i) => (
+              <span key={link.label} className="inline-flex items-center gap-x-[10px]">
+                {i > 0 && <span aria-hidden="true">·</span>}
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener"
+                  title="Verify on the NSW Government register"
+                  className="inline-flex min-h-11 items-center gap-[5px] whitespace-nowrap text-steel underline decoration-concrete underline-offset-[3px] transition-colors duration-200 hover:text-blue-electric hover:decoration-blue-electric"
+                >
+                  <BadgeCheck className="h-[13px] w-[13px] text-blue-electric" strokeWidth={2} />
+                  {link.label}
+                </a>
+              </span>
             ))}
           </div>
           <p className="m-0 flex flex-wrap items-center gap-4 whitespace-nowrap text-[13px] text-grey-400">

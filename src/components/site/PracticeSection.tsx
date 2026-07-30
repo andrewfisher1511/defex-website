@@ -2,7 +2,7 @@ import { Award, ShieldCheck, PencilRuler } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const CREDENTIAL_CHIPS = [
-  { Icon: Award, label: "BEng(Civil), MIEAust, CPEng" },
+  { Icon: Award, label: "BEng(Civil), MIEAust" },
   { Icon: ShieldCheck, label: "NSW Registered Professional Engineer" },
   { Icon: PencilRuler, label: "NSW Registered Design Practitioner" },
 ];
@@ -20,7 +20,7 @@ export function PracticeSection() {
           </Reveal>
           <Reveal as="p" delay={80} className="mb-8 max-w-[62ch] text-2xl font-light leading-[1.55] text-navy-ink">
             DEFEX Engineering is a Sydney remedial consulting practice led by Andrew Fisher — BEng(Civil),
-            MIEAust, CPEng, a NSW Registered Professional Engineer and NSW Registered Design Practitioner.
+            MIEAust, a NSW Registered Professional Engineer and NSW Registered Design Practitioner.
           </Reveal>
           <Reveal as="p" delay={160} className="mb-7 max-w-[65ch] text-lg leading-[1.75] text-ink-body">
             The practice is built on a simple structural choice:{" "}

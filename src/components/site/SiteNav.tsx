@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { DefexLockup } from "@/components/brand/DefexLockup";
 import { MobileNavDrawer, type MobileNavLink } from "./MobileNavDrawer";
 
 const NAV_LINKS: MobileNavLink[] = [
@@ -47,13 +47,7 @@ export function SiteNav() {
         {/* Desktop >=900px */}
         <div className="mx-auto hidden h-[84px] max-w-[1400px] items-center justify-between gap-8 px-8 min-[900px]:flex">
           <a href="#top" aria-label="DEFEX Engineering home" className="flex min-h-11 items-center">
-            <Image
-              src="/assets/defex-lockup-horizontal-navy.png"
-              alt="DEFEX Engineering"
-              width={320}
-              height={68}
-              className="h-[68px] w-auto"
-            />
+            <DefexLockup size={30} tone="light" />
           </a>
           <div className="flex items-center gap-0.5">
             {NAV_LINKS.map((link) => (
@@ -82,13 +76,7 @@ export function SiteNav() {
         {/* Mobile <900px */}
         <div className="flex h-16 items-center justify-between px-6 min-[900px]:hidden">
           <a href="#top" aria-label="DEFEX Engineering home" className="flex min-h-11 items-center">
-            <Image
-              src="/assets/defex-lockup-horizontal-navy.png"
-              alt="DEFEX Engineering"
-              width={140}
-              height={30}
-              className="h-[30px] w-auto"
-            />
+            <DefexLockup size={18} tone="light" />
           </a>
           <button
             ref={menuButtonRef}

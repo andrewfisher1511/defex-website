@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { DefexLockup } from "@/components/brand/DefexLockup";
 
 export const metadata: Metadata = {
   title: "Contact — DEFEX Engineering",
@@ -20,13 +20,7 @@ export default function ContactPage() {
       <nav className="border-b border-hairline bg-white/92 backdrop-blur">
         <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-8 px-8">
           <Link href="/" aria-label="DEFEX Engineering home" className="flex min-h-11 items-center">
-            <Image
-              src="/assets/defex-lockup-horizontal-navy.png"
-              alt="DEFEX Engineering"
-              width={220}
-              height={46}
-              className="h-[46px] w-auto"
-            />
+            <DefexLockup size={22} tone="light" />
           </Link>
           <Link
             href="/"

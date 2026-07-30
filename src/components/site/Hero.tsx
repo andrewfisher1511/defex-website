@@ -2,15 +2,18 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { EASE_ENTRANCE, prefersReducedMotion } from "@/lib/motion";
+import { ResolveMark } from "@/components/brand/ResolveMark";
 
 /**
- * Hero — DEFEX Website rev3.dc.html, "Hero" screen. Parallax translate on
- * the image wrap (up to 90px over one hero-height of scroll), staggered
- * entrance on the eyebrow/H1/sub (750ms, 140ms apart) and a slow 6s image
- * scale-in on mount. mobile-nav-spec.md: hero shrinks to ~560px below
- * 1100px, H1 via clamp, SCROLL cue hidden. All motion skipped under
- * prefers-reduced-motion.
+ * Hero — Rev 4 (brand kit v4 handoff: "replace the hero with the Rev 4
+ * lockup + resolve hero animation"). Keeps the rev3 shell — parallax
+ * translate on the image wrap (up to 90px over one hero-height of scroll),
+ * staggered entrance on the text column (750ms, 140ms apart), slow 6s
+ * image scale-in, hero shrinks to ~560px below 1100px per mobile-nav-spec.
+ * The "resolve" mark plays its 2.5s reveal alongside; its tagline carries
+ * the brand line. All motion skipped under prefers-reduced-motion.
  */
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -63,7 +66,7 @@ export function Hero() {
     <header
       id="top"
       ref={heroRef}
-      className="relative h-[560px] overflow-hidden bg-navy-ink min-[1100px]:h-[760px]"
+      className="relative h-[640px] overflow-hidden bg-navy-ink min-[1100px]:h-[760px]"
     >
       <div ref={wrapRef} className="absolute inset-x-0 -top-[90px] -bottom-[90px] will-change-transform">
         <Image
@@ -83,6 +86,11 @@ export function Hero() {
             "linear-gradient(155deg, rgba(26,26,46,0.92) 0%, rgba(26,26,46,0.62) 48%, rgba(37,99,235,0.42) 100%)",
         }}
       />
+      <ResolveMark
+        tone="navy"
+        tagline="Defects Resolved."
+        className="absolute left-1/2 top-[96px] w-[96px] -translate-x-1/2 min-[1100px]:left-auto min-[1100px]:right-[110px] min-[1100px]:top-1/2 min-[1100px]:w-[240px] min-[1100px]:translate-x-0 min-[1100px]:-translate-y-1/2"
+      />
       <div className="absolute inset-x-0 bottom-0 pb-16 min-[1100px]:pb-24">
         <div className="mx-auto max-w-[1400px] px-6 min-[1100px]:px-8">
           <div
@@ -100,7 +108,7 @@ export function Hero() {
             ref={(el) => {
               seqRefs.current[1] = el;
             }}
-            className="mb-5 max-w-[1100px] text-[clamp(2.5rem,11vw,4.75rem)] font-light uppercase leading-[1.02] tracking-[-0.02em] text-white min-[1100px]:mb-7 min-[1100px]:text-[92px]"
+            className="mb-5 max-w-[820px] text-[clamp(2.5rem,11vw,4.75rem)] font-light uppercase leading-[1.02] tracking-[-0.02em] text-white min-[1100px]:mb-7 min-[1100px]:text-[80px]"
           >
             A deliberately small practice.
           </h1>
@@ -112,6 +120,15 @@ export function Hero() {
           >
             Remedial consulting engineers. Sydney metro, occasionally Greater NSW.
           </p>
+          <a
+            ref={(el) => {
+              seqRefs.current[3] = el;
+            }}
+            href="#contact"
+            className="mt-8 inline-flex min-h-11 items-center gap-2.5 whitespace-nowrap rounded-control bg-blue-electric px-[30px] py-4 text-[15px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-electric-hover hover:shadow-blue-lift active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+          >
+            Talk to the engineer <ArrowRight className="h-4 w-4" strokeWidth={2} />
+          </a>
         </div>
       </div>
       <div className="absolute bottom-24 right-10 z-10 hidden min-[1100px]:flex flex-col items-center gap-3.5">

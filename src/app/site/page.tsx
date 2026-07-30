@@ -9,7 +9,7 @@ import { CtaSection } from "@/components/site/CtaSection";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "DEFEX Engineering — A deliberately small practice",
+  title: "DEFEX Engineering — Defects Resolved.",
 };
 
 /**

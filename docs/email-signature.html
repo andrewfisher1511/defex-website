@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<title>DEFEX email signature — Rev 4 (install-ready)</title>
+<!--
+  Install-ready copy of design_handoff_brand_kit_v4/templates/email-signature.html
+  with the image reference pointed at the hosted mark on the live domain
+  (never attach the image — attachments break threading and trip spam scores).
+
+  The mark is served from https://defex.engineering/assets/defex-mark-navy.png
+  (192 px source, displayed at 48 px). This resolves once the rev4-brand branch
+  is deployed.
+
+  Install (Outlook / new Outlook): Settings -> Accounts -> Signatures -> new
+  signature -> open this file in a browser, select the signature block, copy,
+  paste. Set as default for new messages. Use the reply signature (bottom)
+  for replies/forwards.
+-->
+</head>
+<body style="background:#fff;padding:28px;font-family:Inter,Helvetica,Arial,sans-serif">
+
+  <p style="font:600 12px Inter,Helvetica,Arial,sans-serif;color:#98A2B3">PREFERRED — hosted logo (new messages)</p>
+  <table cellpadding="0" cellspacing="0" style="font-family:Inter,Helvetica,Arial,sans-serif;border-collapse:collapse">
+    <tr>
+      <td style="vertical-align:top;padding-right:14px"><img src="https://defex.engineering/assets/defex-mark-navy.png" alt="DEFEX" width="48" height="48" style="display:block;border:0"></td>
+      <td style="border-left:1px solid #E4E7EC;padding-left:14px">
+        <div style="font-size:16px;font-weight:700;color:#1A1A2E">Andrew Fisher</div>
+        <div style="font-size:12.5px;font-weight:600;color:#2563EB;margin-top:1px">Principal Engineer | Director &mdash; DEFEX Engineering</div>
+        <div style="font-size:11.5px;color:#5C6B7F;margin-top:4px">BEng(Civil) &middot; MIEAust<br>NSW Registered Professional Engineer &middot; NSW Registered Design Practitioner</div>
+        <div style="font-size:12.5px;margin-top:10px;color:#1C222B">0432 261 722&nbsp;&nbsp;<a href="mailto:andrew@defex.engineering" style="color:#2563EB;text-decoration:none">andrew@defex.engineering</a>&nbsp;&nbsp;<a href="https://www.defex.engineering" style="color:#2563EB;text-decoration:none">www.defex.engineering</a></div>
+        <div style="font-size:10.5px;color:#98A2B3;margin-top:8px">PO Box 148, Gymea NSW 2227 &middot; ABN 31 700 169 580</div>
+      </td>
+    </tr>
+  </table>
+
+  <p style="font:600 12px Inter,Helvetica,Arial,sans-serif;color:#98A2B3;margin-top:36px">FALLBACK — text only</p>
+  <table cellpadding="0" cellspacing="0" style="font-family:Inter,Helvetica,Arial,sans-serif;border-collapse:collapse">
+    <tr>
+      <td style="width:3px;background:#2563EB;border-radius:2px"></td>
+      <td style="padding-left:16px">
+        <div style="font-size:16px;font-weight:700;color:#1A1A2E">Andrew Fisher</div>
+        <div style="font-size:12.5px;font-weight:600;color:#2563EB;margin-top:1px">Principal Engineer | Director &mdash; DEFEX Engineering</div>
+        <div style="font-size:11.5px;color:#5C6B7F;margin-top:4px">BEng(Civil) &middot; MIEAust<br>NSW Registered Professional Engineer &middot; NSW Registered Design Practitioner</div>
+        <div style="font-size:12.5px;margin-top:10px;color:#1C222B">0432 261 722&nbsp;&nbsp;<a href="mailto:andrew@defex.engineering" style="color:#2563EB;text-decoration:none">andrew@defex.engineering</a>&nbsp;&nbsp;<a href="https://www.defex.engineering" style="color:#2563EB;text-decoration:none">www.defex.engineering</a></div>
+        <div style="font-size:10.5px;color:#98A2B3;margin-top:8px">PO Box 148, Gymea NSW 2227 &middot; ABN 31 700 169 580</div>
+      </td>
+    </tr>
+  </table>
+
+  <p style="font:600 12px Inter,Helvetica,Arial,sans-serif;color:#98A2B3;margin-top:36px">REPLIES / FORWARDS — name, title, mobile only</p>
+  <table cellpadding="0" cellspacing="0" style="font-family:Inter,Helvetica,Arial,sans-serif;border-collapse:collapse">
+    <tr>
+      <td>
+        <div style="font-size:14px;font-weight:700;color:#1A1A2E">Andrew Fisher</div>
+        <div style="font-size:12px;font-weight:600;color:#2563EB">Principal Engineer | Director &mdash; DEFEX Engineering</div>
+        <div style="font-size:12px;margin-top:4px;color:#1C222B">0432 261 722</div>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

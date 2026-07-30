@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { DefexLockup } from "@/components/brand/DefexLockup";
 
 interface LegalPageShellProps {
   eyebrow: string;
@@ -30,13 +30,7 @@ export function LegalPageShell({
             aria-label="DEFEX Engineering home"
             className="flex min-h-11 items-center"
           >
-            <Image
-              src="/assets/defex-lockup-horizontal-navy.png"
-              alt="DEFEX Engineering"
-              width={220}
-              height={46}
-              className="h-[46px] w-auto"
-            />
+            <DefexLockup size={22} tone="light" />
           </Link>
           <Link
             href="/"

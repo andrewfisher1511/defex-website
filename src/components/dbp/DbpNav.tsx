@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { DefexLockup } from "@/components/brand/DefexLockup";
 
 /** Sticky nav for /dbp-act — DEFEX DBP Hub.dc.html's own "Nav" screen. */
 export function DbpNav() {
@@ -7,13 +7,12 @@ export function DbpNav() {
     <nav className="sticky top-0 z-[100] border-b border-hairline bg-white/92 backdrop-blur-md">
       <div className="mx-auto flex h-[84px] max-w-[1400px] items-center justify-between gap-8 px-6 min-[900px]:px-8">
         <Link href="/site" aria-label="DEFEX Engineering home" className="flex min-h-11 items-center">
-          <Image
-            src="/assets/defex-lockup-horizontal-navy.png"
-            alt="DEFEX Engineering"
-            width={320}
-            height={68}
-            className="h-12 w-auto min-[900px]:h-[68px]"
-          />
+          <span className="min-[900px]:hidden">
+            <DefexLockup size={21} tone="light" />
+          </span>
+          <span className="hidden min-[900px]:inline-flex">
+            <DefexLockup size={30} tone="light" />
+          </span>
         </Link>
         <div className="flex items-center gap-3 min-[900px]:gap-5">
           <a

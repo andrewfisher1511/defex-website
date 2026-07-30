@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { DefexWordmark } from "@/components/brand/DefexLockup";
+import { ResolveMark } from "@/components/brand/ResolveMark";
 import { PrivatePreviewSignInButton } from "./PrivatePreviewSignInButton";
 import { SignOutButton } from "./SignOutButton";
 
@@ -83,14 +85,25 @@ export function ComingSoonGate({
       />
 
       <div className="relative flex min-h-screen flex-col items-center justify-center px-6 py-8 text-center sm:px-16 sm:py-16">
-        <Image
-          src="/assets/defex-lockup-stacked-white.png"
-          alt="DEFEX Engineering"
-          width={440}
-          height={150}
-          priority
-          className="mb-9 h-[150px] w-auto sm:mb-12 sm:h-[220px]"
-        />
+        {/* Rev 4 stacked lockup with "the resolve" — the mark animates in
+            (~2.5s) and the wordmark fades up as the diamond lands; reduced
+            motion renders the static lockup. */}
+        <div
+          role="img"
+          aria-label="DEFEX Engineering"
+          className="mb-9 flex flex-col items-center sm:mb-12"
+        >
+          <ResolveMark tone="navy" size={104} className="sm:hidden" />
+          <ResolveMark tone="navy" size={148} className="hidden sm:block" />
+          <div className="dfx-fade-up mt-5 sm:mt-7">
+            <span className="sm:hidden">
+              <DefexWordmark size={40} tone="navy" />
+            </span>
+            <span className="hidden sm:inline-flex">
+              <DefexWordmark size={56} tone="navy" />
+            </span>
+          </div>
+        </div>
 
         {authState.status === "signed-out" && (
           <>
