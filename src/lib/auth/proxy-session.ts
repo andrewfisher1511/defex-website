@@ -3,6 +3,7 @@ import type { NextRequest, NextResponse } from "next/server";
 import { supabaseAnonKey, supabaseUrl } from "@/lib/supabase/env";
 import { isAppRole, type Database } from "@/lib/supabase/types";
 import { ANONYMOUS_VIEWER, type Viewer } from "./viewer";
+import { isAllowedEmail } from "./allowlist";
 
 interface CookieToSet {
   name: string;
@@ -60,6 +61,16 @@ export async function readProxySession(request: NextRequest): Promise<ProxySessi
 
   if (userError || !user) {
     return { viewer: ANONYMOUS_VIEWER, applyCookies };
+  }
+
+  // Not on the allowlist: never admitted, whatever profiles.role says. The
+  // callback signs such accounts out, so this only catches a session that
+  // predates the allowlist — it lands on the gate, where it can sign out.
+  if (!isAllowedEmail(user.email)) {
+    return {
+      viewer: { email: user.email ?? null, role: null, hasSession: true },
+      applyCookies,
+    };
   }
 
   const { data, error } = await supabase

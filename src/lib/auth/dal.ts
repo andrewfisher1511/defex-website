@@ -4,6 +4,7 @@ import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ANONYMOUS_VIEWER, type Viewer } from "./viewer";
+import { isAllowedEmail } from "./allowlist";
 import { isAppRole } from "@/lib/supabase/types";
 import { GATE_ROUTE, isAdmitted } from "./access";
 import { isSitePublic } from "./launch";
@@ -31,6 +32,12 @@ export const getViewer = cache(async (): Promise<Viewer> => {
 
   if (userError || !user) {
     return ANONYMOUS_VIEWER;
+  }
+
+  // Same rule as the proxy, re-applied here because the proxy is an
+  // optimistic check only: not on the allowlist means never admitted.
+  if (!isAllowedEmail(user.email)) {
+    return { email: user.email ?? null, role: null, hasSession: true };
   }
 
   const { data, error } = await supabase

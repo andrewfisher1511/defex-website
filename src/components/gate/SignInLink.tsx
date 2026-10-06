@@ -3,28 +3,31 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { siteUrl } from "@/lib/supabase/env";
+import { SIGN_IN_ALLOWLIST } from "@/lib/auth/allowlist";
 
-interface PrivatePreviewSignInButtonProps {
-  label?: string;
+interface SignInLinkProps {
   /** Where to land after the callback. Same-origin path only. */
   next?: string;
-  fullWidthOnMobile?: boolean;
 }
 
 /**
+ * The owner's quiet way in from the landing page: a text link, not a button,
+ * because the public cannot sign in (allowlist.ts) and a prominent call to
+ * action would be a dead end for every visitor.
+ *
  * Google sign-in (Launch Pack A5):
  *   supabase.auth.signInWithOAuth({ provider: 'google',
  *                                   options: { redirectTo: siteUrl } })
  *
  * redirectTo points at our own /auth/callback, which exchanges the code for
- * a session. The origin must be listed under Supabase -> Authentication ->
- * URL Configuration (Part A2.2) or Supabase refuses the redirect.
+ * a session and refuses any account not on the allowlist. The origin must be
+ * listed under Supabase -> Authentication -> URL Configuration (Part A2.2) or
+ * Supabase refuses the redirect.
+ *
+ * `login_hint` pre-selects the one permitted account in Google's account
+ * chooser. It is a convenience only, never the control: the callback is.
  */
-export function PrivatePreviewSignInButton({
-  label = "Enter DEFEX workspace",
-  next = "/",
-  fullWidthOnMobile = true,
-}: PrivatePreviewSignInButtonProps) {
+export function SignInLink({ next = "/" }: SignInLinkProps) {
   const [pending, setPending] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -38,7 +41,10 @@ export function PrivatePreviewSignInButton({
 
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        options: { redirectTo: redirectTo.toString() },
+        options: {
+          redirectTo: redirectTo.toString(),
+          queryParams: { login_hint: SIGN_IN_ALLOWLIST[0] },
+        },
       });
 
       if (error) {
@@ -55,20 +61,18 @@ export function PrivatePreviewSignInButton({
   };
 
   return (
-    <div className={fullWidthOnMobile ? "flex w-full flex-col items-center" : "flex flex-col items-center"}>
+    <div className="flex flex-col items-start md:items-end">
       <button
         type="button"
         onClick={handleSignIn}
         disabled={pending}
-        className={`min-h-[52px] ${
-          fullWidthOnMobile ? "w-full max-w-[320px] sm:w-auto sm:max-w-none" : ""
-        } px-6 sm:px-8 bg-blue-electric text-white font-sans text-base sm:text-[15px] font-semibold rounded-control border-none cursor-pointer transition-all duration-200 ease-in-out hover:bg-blue-electric-hover hover:-translate-y-px active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#93B4F8] disabled:cursor-wait disabled:opacity-80 disabled:hover:translate-y-0`}
+        className="inline-flex min-h-11 min-w-11 cursor-pointer items-center whitespace-nowrap rounded-control text-[13px] font-medium text-white/70 underline decoration-white/30 underline-offset-4 transition-colors duration-150 hover:text-white hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-electric disabled:cursor-wait"
       >
-        {pending ? "Redirecting to Google…" : label}
+        {pending ? "Opening Google…" : "Sign in"}
       </button>
       {failed && (
-        <p className="mt-3 max-w-[320px] text-[13px] leading-relaxed text-white/72">
-          Sign-in could not start. Please try again, or email andrew@defex.engineering.
+        <p role="status" className="max-w-[280px] text-[13px] leading-relaxed text-white/80 md:text-right">
+          Sign-in could not start. Please try again.
         </p>
       )}
     </div>
